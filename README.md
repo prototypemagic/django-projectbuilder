@@ -21,9 +21,9 @@ ProtoType Magic's Django Project Builder
     }
 
     PROJECT_NAME = raw_input()  # Will be different for Django
-    #BASE_PATH    = '/home/ubuntu/django_projects/'
-    BASE_PATH    = '/home/steve/dpc/proto/'
-    PROJECT_ROOT = BASE_PATH + PROJECT_NAME
+    #BASE_PATH    = '/home/ubuntu/django_projects/'    #
+    BASE_PATH    = '/home/steve/dpc/proto/'            # Why not use os.path?
+    PROJECT_ROOT = BASE_PATH + PROJECT_NAME            #
 
     # Make virtualenv
     ###status, output = commands.getstatusoutput()
