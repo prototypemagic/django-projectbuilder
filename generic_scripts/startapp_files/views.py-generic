@@ -1,0 +1,28 @@
+from django import forms
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core import serializers
+from django.core.context_processors import csrf
+from django.core.mail import send_mail
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render_to_response, get_object_or_404, render
+from django.template import loader, RequestContext
+from django.views.decorators.csrf import csrf_exempt
+
+from %(PROJECT_NAME)s_site.%(PROJECT_NAME)s.models import *
+from %(PROJECT_NAME)s_site.%(PROJECT_NAME)s.model_forms import *
+
+from celery.decorators import task
+
+
+
+
+
+
+
+
+
+
+
