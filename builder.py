@@ -27,6 +27,7 @@ pathify = {
     'cms_settings.py':   'cms_settings/',
     'django.wsgi':       'apache/',
     '__init__.py':       '',
+    'manage.py':         '',
     'model_forms.py':    '%(PROJECT_NAME)s/',
     'models.py':         '%(PROJECT_NAME)s/',
     'requirements.txt':  '',
