@@ -106,10 +106,10 @@ for filename in generic_files:
 
 print "Running 'pip install -r requirements.txt'. This could take a while..."
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && '
-cmd += 'cd %(PROJECT_NAME)s && pip install -r requirements.txt"' % \
+cmd += 'workon %(PROJECT_NAME)s && cd %(PROJECT_NAME)s && pip install -r requirements.txt"' % \
     replacement_values
 status, output = commands.getstatusoutput(cmd)
 print 
 print output
 print
-print "Done! Now run 'cd %(PROJECT_NAME)s && workon %(PROJECT_NAME)s and get to work!" % replacement_values
+print "Done! Now run 'cd %(PROJECT_NAME)s && workon %(PROJECT_NAME)s'.\nGet to work!" % replacement_values
