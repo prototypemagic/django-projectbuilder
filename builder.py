@@ -10,7 +10,7 @@
 GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 
 #import pbs
-import commands, pbs, os, random, string, sys
+import commands, os, random, string, sys
 
 USAGE = '%s /path/to/new/project_name' % (sys.argv[0])
 FUTURE_USAGE = USAGE + ' [--cms] [--zinnia]'
@@ -49,6 +49,7 @@ BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
 # Make virtualenv
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
+print "Making virtualenv..."
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh'
 cmd += ' && mkvirtualenv %s --no-site-packages"' % (PROJECT_NAME)
 commands.getstatusoutput(cmd)
@@ -69,7 +70,7 @@ replacement_values = {
 }
 
 # Make directories
-# FIXME Add more dirs to this list
+print "Creating directories..."
 for dir_name in ['', 'media', 'static', 'templates', 'apache', 'extra_settings',
                  '%(PROJECT_NAME)s']:
     os.mkdir(PROJECT_PATH + dir_name % replacement_values)
@@ -78,6 +79,7 @@ for dir_name in ['', 'media', 'static', 'templates', 'apache', 'extra_settings',
 generic_files = [x for x in os.listdir(GENERIC_SCRIPTS_PATH)
                  if x.endswith('-generic')]
 
+print "Creating files..."
 for filename in generic_files:
     # Grab *-generic filenames
     f_read = open(GENERIC_SCRIPTS_PATH + filename, 'r')
@@ -96,3 +98,10 @@ for filename in generic_files:
         new_contents = contents
     f_write.write(new_contents)
     f_write.close()
+
+
+print "Running 'pip install -r requirements.txt'. This could take a while..."
+cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon "'
+cmd += '"%(PROJECT_NAME)s && cd %(PROJECT_NAME)s && pip install -r requirements.txt"' % \
+    {'PROJECT_NAME': PROJECT_NAME}
+commands.getstatusoutput(cmd)
