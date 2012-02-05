@@ -22,21 +22,20 @@ if len(sys.argv) < 2:
 # FIXME Every file in generic_scripts and *-generic should be listed
 # here... or we can copy entire directories
 pathify = {
-    # 'urls_dev.py':       '',
-    'cms_settings.py':   'extra_settings/',
-    'django.wsgi':       'apache/',
-    '__init__.py':       '',
-    '__init__.py':       'extra_settings/',
-    'manage.py':         '',
-    'model_forms.py':    '%(PROJECT_NAME)s/',
-    'models.py':         '%(PROJECT_NAME)s/',
-    'requirements.txt':  '',
-    'settings.py':       '',
-    'settings_local.py': '',
-    'tests.py':          '%(PROJECT_NAME)s/',
-    'urls.py':           '',
-    'views.py':          '%(PROJECT_NAME)s/',
-    'zinnia_settings.py':'extra_settings/',
+    '.gitignore':        ['%(PROJECT_NAME)s/'],
+    '__init__.py':       ['%(PROJECT_NAME)s/', 'extra_settings/'],
+    'cms_settings.py':   ['extra_settings/'],
+    'django.wsgi':       ['apache/'],
+    'manage.py':         [''],
+    'model_forms.py':    ['%(PROJECT_NAME)s/'],
+    'models.py':         ['%(PROJECT_NAME)s/'],
+    'requirements.txt':  [''],
+    'settings.py':       [''],
+    'settings_local.py': [''],
+    'tests.py':          ['%(PROJECT_NAME)s/'],
+    'urls.py':           [''],
+    'views.py':          ['%(PROJECT_NAME)s/'],
+    'zinnia_settings.py':['extra_settings/'],
 }
 weird_files = ['manage.py']
 
@@ -92,16 +91,18 @@ for filename in generic_files:
 
     # Replace %(SECRET_KEY)s, etc with new value for new project
     new_filename = filename.replace('-generic', '')
-    # Path names include '%(PROJECT_NAME)s', etc
-    file_path = pathify[new_filename] % replacement_values
-    f_write = open(PROJECT_PATH + file_path + new_filename, 'a')
-    #print "File:", new_filename
-    if new_filename not in weird_files:
-        new_contents = contents % replacement_values
-    else:
-        new_contents = contents
-    f_write.write(new_contents)
-    f_write.close()
+    # Loop through list of locations new_filename should be placed
+    for dir in pathify[new_filename]:
+        # Path names include '%(PROJECT_NAME)s', etc
+        file_path = dir % replacement_values
+        f_write = open(PROJECT_PATH + file_path + new_filename, 'a')
+
+        if new_filename not in weird_files:
+            new_contents = contents % replacement_values
+        else:
+            new_contents = contents
+        f_write.write(new_contents)
+        f_write.close()
 
 
 print "Running 'pip install -r requirements.txt'. This could take a while..."
