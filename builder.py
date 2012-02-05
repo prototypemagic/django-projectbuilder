@@ -47,15 +47,18 @@ PROJECT_PATH = sys.argv[1].rstrip('/') + '/'
 PROJECT_NAME = PROJECT_PATH.split('/')[-2]
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
-# Make virtualenv
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
 print "Making virtualenv..."
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh'
 cmd += ' && mkvirtualenv %s --no-site-packages"' % (PROJECT_NAME)
-commands.getstatusoutput(cmd)
+status, output = commands.getstatusoutput(cmd)
+print 
+print output
+print 
 
-#(pbs.which('virtualenvwrapper.sh'), ))
-##VIRTUALENV_PATH = HOME_DIR + '.virtualenvs/' + PROJECT_NAME
+# TODO
+# vewrapper = pbs.which('virtualenvwrapper.sh')
+# vewrapper("")
 
 SECRET_KEY = ''.join([ random.choice(string.printable[:94].replace("'", ""))
                        for _ in range(50) ])
@@ -69,7 +72,7 @@ replacement_values = {
     'SECRET_KEY':       SECRET_KEY,
 }
 
-# Make directories
+
 print "Creating directories..."
 for dir_name in ['', 'media', 'static', 'templates', 'apache', 'extra_settings',
                  '%(PROJECT_NAME)s']:
@@ -78,6 +81,7 @@ for dir_name in ['', 'media', 'static', 'templates', 'apache', 'extra_settings',
 
 generic_files = [x for x in os.listdir(GENERIC_SCRIPTS_PATH)
                  if x.endswith('-generic')]
+
 
 print "Creating files..."
 for filename in generic_files:
@@ -101,7 +105,11 @@ for filename in generic_files:
 
 
 print "Running 'pip install -r requirements.txt'. This could take a while..."
-cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon "'
-cmd += '"%(PROJECT_NAME)s && cd %(PROJECT_NAME)s && pip install -r requirements.txt"' % \
-    {'PROJECT_NAME': PROJECT_NAME}
-commands.getstatusoutput(cmd)
+cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && '
+cmd += 'cd %(PROJECT_NAME)s && pip install -r requirements.txt"' % \
+    replacement_values
+status, output = commands.getstatusoutput(cmd)
+print 
+print output
+print
+print "Done! Now run 'cd %(PROJECT_NAME)s && workon %(PROJECT_NAME)s and get to work!" % replacement_values
