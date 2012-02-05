@@ -43,7 +43,7 @@ HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
 # Trailing / may be included or excluded
 PROJECT_PATH = sys.argv[1].rstrip('/') + '_site/'
-PROJECT_NAME = PROJECT_PATH.split('/')[-2]
+PROJECT_NAME = PROJECT_PATH.split('/')[-2].split('_')[0] # Before the '_site/'
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
@@ -69,6 +69,7 @@ replacement_values = {
     'PROJECT_PASSWORD': PROJECT_PASSWORD,
     'BASE_PATH':        BASE_PATH,
     'SECRET_KEY':       SECRET_KEY,
+    'PROJECT_PATH':     PROJECT_PATH,
 }
 
 
@@ -107,10 +108,10 @@ for filename in generic_files:
 
 print "Running 'pip install -r requirements.txt'. This could take a while..."
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && '
-cmd += 'workon %(PROJECT_NAME)s && cd %(PROJECT_NAME)s && pip install -r requirements.txt"' % \
+cmd += 'workon %(PROJECT_NAME)s && cd %(PROJECT_PATH)s && pip install -r requirements.txt"' % \
     replacement_values
 status, output = commands.getstatusoutput(cmd)
 print 
 print output
 print
-print "Done! Now run 'cd %(PROJECT_NAME)s && workon %(PROJECT_NAME)s'.\nGet to work!" % replacement_values
+print "Done! Now run 'cd %(PROJECT_PATH)s && workon %(PROJECT_NAME)s'.\nGet to work!" % replacement_values
