@@ -11,7 +11,7 @@ PROJECT_NAME=$1
 
 echo "Creating $PROJECT_NAME directory and sub-directores"
 mkdir $PROJECT_NAME
-mkdir $PROJECT_NAME/${PROJECT_NAME}_site
+#mkdir $PROJECT_NAME/${PROJECT_NAME}_site  # <-- cd to $PROJECT_NAME then run builder.py
 git init --bare $PROJECT_NAME/bare
 rm $PROJECT_NAME/bare/hooks/*
 

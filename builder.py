@@ -42,7 +42,7 @@ weird_files = ['manage.py']
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
 # Trailing / may be included or excluded
-PROJECT_PATH = sys.argv[1].rstrip('/') + '/'
+PROJECT_PATH = sys.argv[1].rstrip('/') + '_site/'
 PROJECT_NAME = PROJECT_PATH.split('/')[-2]
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
