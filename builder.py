@@ -9,7 +9,6 @@
 # FIXME This shouldn't be hard-coded
 GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 
-from fabric.api import local
 #import pbs
 import commands, pbs, os, random, string, sys
 
@@ -38,29 +37,28 @@ pathify = {
     'views.py':          '%(PROJECT_NAME)s/',
     'zinnia_settings.py':'cms_settings/',
 }
+weird_files = ['manage.py']
 
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
 # Trailing / may be included or excluded
 PROJECT_PATH = sys.argv[1].rstrip('/') + '/'
-print sys.argv[1]
-print PROJECT_PATH
 PROJECT_NAME = PROJECT_PATH.split('/')[-2]
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
 # Make virtualenv
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
-try:
-    local('bash -c "source /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv %s --no-site-packages"' % (PROJECT_NAME))
-      #(pbs.which('virtualenvwrapper.sh'), ))
-except:
-    print "virtualenv probably created..."
+cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh'
+cmd += ' && mkvirtualenv %s --no-site-packages"' % (PROJECT_NAME)
+commands.getstatusoutput(cmd)
 
-      #(pbs.which('virtualenvwrapper.sh'), ))
+#(pbs.which('virtualenvwrapper.sh'), ))
 ##VIRTUALENV_PATH = HOME_DIR + '.virtualenvs/' + PROJECT_NAME
 
-SECRET_KEY = ''.join([ random.choice(string.printable[:94].replace("'", "")) for _ in range(50) ])
-PROJECT_PASSWORD = ''.join([ random.choice(string.printable[:67].replace("'", "")) for _ in range(30) ])
+SECRET_KEY = ''.join([ random.choice(string.printable[:94].replace("'", ""))
+                       for _ in range(50) ])
+PROJECT_PASSWORD = ''.join([ random.choice(string.printable[:67].replace("'", ""))
+                             for _ in range(30) ])
 
 replacement_values = {
     'PROJECT_NAME':     PROJECT_NAME,
@@ -90,6 +88,10 @@ for filename in generic_files:
     # Path names include '%(PROJECT_NAME)s', etc
     file_path = pathify[new_filename] % replacement_values
     f_write = open(PROJECT_PATH + file_path + new_filename, 'a')
-    new_contents = contents % replacement_values
+    #print "File:", new_filename
+    if new_filename not in weird_files:
+        new_contents = contents % replacement_values
+    else:
+        new_contents = contents
     f_write.write(new_contents)
     f_write.close()
