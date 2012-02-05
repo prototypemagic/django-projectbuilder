@@ -8,7 +8,7 @@
 
 # FIXME This shouldn't be hard-coded
 # FIXME Hardcode it for now!
-GENERIC_SCRIPTS_PATH = ''
+GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 
 from fabric.api import local
 #import pbs
@@ -25,15 +25,19 @@ if len(sys.argv) < 2:
 # here... or we can copy entire directories
 pathify = {
     # 'urls_dev.py':       '',
+    'cms_settings.py':   'cms_settings/',
     'django.wsgi':       'apache/',
+    '__init__.py':       '',
     'model_forms.py':    '%(PROJECT_NAME)s/',
     'models.py':         '%(PROJECT_NAME)s/',
     'requirements.txt':  '',
     'settings.py':       '',
     'settings_local.py': '',
+    'tests.py':          '%(PROJECT_NAME)s/%(PROJECT_NAME)s/',
     'urls.py':           '',
     'views.py':          '%(PROJECT_NAME)s/%(PROJECT_NAME)s/',
     'views.py':          '%(PROJECT_NAME)s/',
+    'zinnia_settings.py':'cms_settings/',
 }
 
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
