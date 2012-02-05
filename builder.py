@@ -32,9 +32,8 @@ pathify = {
     'requirements.txt':  '',
     'settings.py':       '',
     'settings_local.py': '',
-    'tests.py':          '%(PROJECT_NAME)s/%(PROJECT_NAME)s/',
+    'tests.py':          '%(PROJECT_NAME)s/',
     'urls.py':           '',
-    'views.py':          '%(PROJECT_NAME)s/%(PROJECT_NAME)s/',
     'views.py':          '%(PROJECT_NAME)s/',
     'zinnia_settings.py':'cms_settings/',
 }
