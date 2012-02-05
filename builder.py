@@ -23,9 +23,10 @@ if len(sys.argv) < 2:
 # here... or we can copy entire directories
 pathify = {
     # 'urls_dev.py':       '',
-    'cms_settings.py':   'cms_settings/',
+    'cms_settings.py':   'extra_settings/',
     'django.wsgi':       'apache/',
     '__init__.py':       '',
+    '__init__.py':       'extra_settings/',
     'manage.py':         '',
     'model_forms.py':    '%(PROJECT_NAME)s/',
     'models.py':         '%(PROJECT_NAME)s/',
@@ -35,7 +36,7 @@ pathify = {
     'tests.py':          '%(PROJECT_NAME)s/',
     'urls.py':           '',
     'views.py':          '%(PROJECT_NAME)s/',
-    'zinnia_settings.py':'cms_settings/',
+    'zinnia_settings.py':'extra_settings/',
 }
 weird_files = ['manage.py']
 
@@ -69,7 +70,7 @@ replacement_values = {
 
 # Make directories
 # FIXME Add more dirs to this list
-for dir_name in ['', 'media', 'static', 'templates', 'apache', 'cms_settings',
+for dir_name in ['', 'media', 'static', 'templates', 'apache', 'extra_settings',
                  '%(PROJECT_NAME)s']:
     os.mkdir(PROJECT_PATH + dir_name % replacement_values)
 
