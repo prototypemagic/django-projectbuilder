@@ -16,10 +16,11 @@ if len(sys.argv) < 2:
 new_host = '''<VirtualHost *:80>
 ServerName %(PROJECT_NAME)s.prototypemagic.com
 WSGIScriptAlias / /home/ubuntu/django_projects/%(PROJECT_NAME)s/%(PROJECT_NAME)s_site/apache/django.wsgi
-Alias /admin_media/ /usr/local/lib/python2.6/dist-packages/django/contrib/admin/media/
+
+Alias /admin_media/ /home/ubuntu/.virtualenvs/%(PROJECT_NAME)s/lib/python2.7/site-packages/django/contrib/admin/media/
 Alias /media/ /home/ubuntu/django_projects/%(PROJECT_NAME)s/%(PROJECT_NAME)s_site/media/
 
-<Directory /usr/local/lib/python2.6/dist-packages/django/contrib/admin/media>
+<Directory /home/ubuntu/.virtualenvs/%(PROJECT_NAME)s/lib/python2.7/site-packages/django/contrib/admin/media>
 Order allow,deny
 Allow from all
 </Directory>
@@ -28,7 +29,16 @@ Allow from all
 Order allow,deny
 Allow from all
 </Directory>
-</VirtualHost>
-''' % {'PROJECT_NAME': sys.argv[1]}
+
+<Directory /home/ubuntu/django_projects/%(PROJECT_NAME)s/%(PROJECT_NAME)s_site/apache>
+Order deny,allow
+Allow from all
+</Directory>
+
+# Logging
+CustomLog /home/ubuntu/django_projects/%(PROJECT_NAME)s/%(PROJECT_NAME)s_site/apache/access_log combined
+ErrorLog /home/ubuntu/django_projects/%(PROJECT_NAME)s/%(PROJECT_NAME)s_site/apache/error_log
+
+</VirtualHost>''' % {'PROJECT_NAME': sys.argv[1]}
 
 print new_host
