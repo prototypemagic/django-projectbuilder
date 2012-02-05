@@ -23,7 +23,7 @@ if len(sys.argv) < 2:
 # here... or we can copy entire directories
 pathify = {
     '.gitignore':        ['%(PROJECT_NAME)s/'],
-    '__init__.py':       ['%(PROJECT_NAME)s/', 'extra_settings/'],
+    '__init__.py':       ['', '%(PROJECT_NAME)s/', 'extra_settings/'],
     'cms_settings.py':   ['extra_settings/'],
     'django.wsgi':       ['apache/'],
     'manage.py':         [''],
