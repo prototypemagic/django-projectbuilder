@@ -6,10 +6,10 @@
 # hosting svn repository.
 
 import os
-THIS_DIR = os.path.dirname(__file__)
+PROJECT_PATH = os.path.dirname(__file__)
 
-DEBUG = True #TODO set to off for live, staging and preview
-TEMPLATE_DEBUG = True # Recommended by Sentry
+DEBUG = True  #TODO set to off for live, staging and preview
+TEMPLATE_DEBUG = True  # Recommended by Sentry
 
 #TODO: replace localhost with the domain name of the site
 DEFAULT_FROM_EMAIL = 'noreply@prototypemagic.com'
@@ -23,7 +23,7 @@ EMAIL_HOST_PASSWORD = ""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(THIS_DIR, 'db.sql'),                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(PROJECT_PATH, 'db.sql'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.

@@ -2,7 +2,17 @@
 # Steve Phillips / elimisteve
 # 2012.01.28
 
-import commands, os, random, string, sys
+#
+# Requires fabric, virtualenv, and virtualenvwrapper
+#
+
+# FIXME This shouldn't be hard-coded
+# FIXME Hardcode it for now!
+GENERIC_SCRIPTS_PATH = ''
+
+from fabric.api import local
+#import pbs
+import commands, pbs, os, random, string, sys
 
 USAGE = '%s /path/to/new/project_name' % (sys.argv[0])
 FUTURE_USAGE = USAGE + ' [--cms] [--zinnia]'
@@ -11,6 +21,8 @@ if len(sys.argv) < 2:
     print USAGE
     sys.exit(0)
 
+# FIXME Every file in generic_scripts and *-generic should be listed
+# here... or we can copy entire directories
 pathify = {
     # 'urls_dev.py':       '',
     'django.wsgi':       'apache/',
@@ -24,23 +36,24 @@ pathify = {
     'views.py':          '%(PROJECT_NAME)s/',
 }
 
-HOME_DIR = os.path.expandvars('$HOME').rsplit('/') + '/'
+HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
 # Trailing / may be included or excluded
 PROJECT_PATH = sys.argv[1].rstrip('/') + '/'
 BASE_PATH, PROJECT_NAME = [path[:-1], path[-1] for path in PROJECT_PATH.split('/')[:-1]]
 BASE_PATH = '/'.join(BASE_PATH)
+
 # Make virtualenv
-###status, output = commands.getstatusoutput()
-VIRTUALENV_PATH = HOME_DIR + '.virtualenvs/' + PROJECT_NAME
+# FIXME Shouldn't assume the location of virtualenvwrapper.sh
+local('bash -c "source /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv %s"' %
+      (PROJECT_NAME))
+      #(pbs.which('virtualenvwrapper.sh'), ))
+##VIRTUALENV_PATH = HOME_DIR + '.virtualenvs/' + PROJECT_NAME
 
 # Make directories
-for dir_name in ['', 'media', 'static', 'templates']:
+# FIXME Add more dirs to this list
+for dir_name in ['', 'media', 'static', 'templates', 'apache']:
     os.mkdir(PROJECT_PATH + dir_name)
-os.mkdir(PROJECT_PATH + 'apache')
-
-# FIXME This shouldn't be hard-coded
-GENERIC_SCRIPTS_PATH = 
 
 SECRET_KEY = ''.join([ random.choice(string.printable[:94].replace("'", "")) for _ in range(50) ])
 
@@ -51,7 +64,8 @@ replacement_values = {
     'SECRET_KEY':       SECRET_KEY,
 }
 
-generic_files = [x for x in os.listdir(GENERIC_SCRIPTS_PATH) if x.endswith('-generic')]
+generic_files = [x for x in os.listdir(GENERIC_SCRIPTS_PATH)
+                 if x.endswith('-generic')]
 
 for filename in generic_files:
     # Grab *-generic filenames
@@ -61,7 +75,9 @@ for filename in generic_files:
 
     # Replace %(SECRET_KEY)s, etc with new value for new project
     new_filename = filename.replace('-generic', '')
-    f_write = open(PROJECT_PATH + pathify[new_filename], 'w')
+    # Path names include '%(PROJECT_NAME)s', etc
+    file_path = pathify[new_filename] % replacement_values
+    f_write = open(PROJECT_PATH + , 'w')
     new_contents = contents % replacement_values
     f_write.write(new_contents)
     f_write.close()
