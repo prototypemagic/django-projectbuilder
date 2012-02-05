@@ -8,10 +8,12 @@ South==0.7.3
 akismet==0.2.0
 amqplib==1.0.2
 anyjson==0.3.1
+celery==2.4.6
 cmsplugin-contact==0.9.8
 django-admin-tools==0.4.0
 django-bitly==0.6
 django-blog-zinnia==0.9
+django-celery==2.4.2
 django-classy-tags==0.3.4.1
 django-cms==2.2
 django-debug-toolbar==0.8.5
@@ -19,6 +21,7 @@ django-indexer==0.3.0
 django-kombu==0.9.4
 django-mptt==0.5.2
 django-paging==0.2.4
+django-picklefield==0.1.9
 django-sekizai==0.5
 django-tagging==0.3.1
 django-taggit==0.9.3
@@ -32,6 +35,7 @@ lockfile==0.9.1
 pycrypto==2.3
 pyparsing==1.5.6
 python-daemon==1.6
+python-dateutil==1.5
 raven==1.0.4
 sentry==2.0.0-RC6
 simplejson==2.3.2

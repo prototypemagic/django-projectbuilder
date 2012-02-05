@@ -22,17 +22,11 @@ CMS_MIDDLE_CLASSES = (
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.media.PlaceholderMediaMiddleware',
-)
-
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'cms.context_processors.media',
-    'sekizai.context_processors.sekizai',
 )
 
 CMS_TEMPLATES = (
-    ('cms_template.html', 'Main'),
+    ('template.html', 'Main'),
 )
 
-CMS_PERMISSIONS = True
+CMS_MODERATOR = False
+CMS_PERMISSION = True
