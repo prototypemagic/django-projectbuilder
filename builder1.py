@@ -56,7 +56,7 @@ local('bash -c "source /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv %s"' 
 
 # Make directories
 # FIXME Add more dirs to this list
-for dir_name in ['', 'media', 'static', 'templates', 'apache']:
+for dir_name in ['', 'media', 'static', 'templates', 'apache', 'cms_settings']:
     os.mkdir(PROJECT_PATH + dir_name)
 
 SECRET_KEY = ''.join([ random.choice(string.printable[:94].replace("'", "")) for _ in range(50) ])
