@@ -1,5 +1,4 @@
 #!/bin/sh
-GIT_WORK_TREE=/home/ubuntu/django_projects/PROJECT_NAME/PROJECT_NAME_site
-git checkout -f
+GIT_WORK_TREE=/home/ubuntu/django_projects/PROJECT_NAME/PROJECT_NAME_site git checkout -f
 sudo apache2ctl graceful
 #git push redmine master
