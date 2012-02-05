@@ -122,7 +122,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 
 
-ROOT_URLCONF = '%(PROJECT_NAME)s.urls'
+ROOT_URLCONF = '%(PROJECT_NAME)s_site.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, 'templates/'),
@@ -140,7 +140,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'cms',
-	'sentry',
+    'sentry',
     'raven.contrib.django',
     'djcelery',
     'south',
@@ -199,7 +199,7 @@ except ImportError:
     sys.stderr.write( "CMS Settings not being used\n" )
 
 else:
-    try:    
+    try:
         INSTALLED_APPS = INSTALLED_APPS + CMS_INSTALLED_APPS
         MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + CMS_MIDDLE_CLASSES
         try:

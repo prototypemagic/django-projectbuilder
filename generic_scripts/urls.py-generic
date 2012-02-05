@@ -5,11 +5,7 @@ from django.conf import settings
 
 admin.autodiscover()
 
-
-
 urlpatterns = patterns('', 
-
- 
  
     #Admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
