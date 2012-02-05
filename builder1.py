@@ -7,7 +7,6 @@
 #
 
 # FIXME This shouldn't be hard-coded
-# FIXME Hardcode it for now!
 GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 
 from fabric.api import local
@@ -49,7 +48,7 @@ BASE_PATH = '/'.join(BASE_PATH)
 
 # Make virtualenv
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
-local('bash -c "source /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv %s"' %
+local('bash -c "source /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv %s --no-site-packages"' %
       (PROJECT_NAME))
       #(pbs.which('virtualenvwrapper.sh'), ))
 ##VIRTUALENV_PATH = HOME_DIR + '.virtualenvs/' + PROJECT_NAME
