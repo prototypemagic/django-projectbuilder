@@ -3,11 +3,11 @@ ProtoType Magic's Django Project Builder
 
 ## Usage
 
-After cloning this repo, cd into it then run
+After cloning this repo, `cd` into it, then run
 
     bash gitbuilder.sh /path/to/new_project
 
-to create the "top-level" directory and bare git repo for the about-to-exist Django project.  Then run
+to create the "top-level" directory and bare git repo for the about-to-exist Django project.  Then, run
 
     python builder.sh /path/to/new_project/new_project
 
