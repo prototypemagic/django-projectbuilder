@@ -9,24 +9,25 @@ admin.autodiscover()
 
 urlpatterns = patterns('', 
 
- 
- 
     #Admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
 
     #Static Links
 #    url(r'^', TemplateView.as_view(template_name='home.html'), name='home'),
-#    url(r'^portfolio/', TemplateView.as_view(template_name='portfolio.html'), name='portfolio'),
-#    url(r'^home/', TemplateView.as_view(template_name='home.html'), name='home'),
     
     #Blog
 #    url(r'^blog/', include('zinnia.urls'), name='blog'),
 #    url(r'^comments/', include('django.contrib.comments.urls')),
+)
 
- 
-    #CMS
-#    url(r'^', include('cms.urls')),
+#urlpatterns += patterns('%(PROJECT_NAME)s.%(PROJECT_NAME)s.views',
+#   url(r'^%(PROJECT_NAME)s/$', '%(PROJECT_NAME)s_view', name='%(PROJECT_NAME)s'),
+#)
+
+# Django CMS
+urlpatterns += patterns('',
+    url(r'^', include('cms.urls')),
 )
 
 if settings.DEBUG:

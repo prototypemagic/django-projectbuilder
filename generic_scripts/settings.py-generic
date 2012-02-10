@@ -41,7 +41,7 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+#USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
@@ -69,7 +69,7 @@ STATIC_URL = '/static/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/admin_media/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -127,6 +127,21 @@ ROOT_URLCONF = '%(PROJECT_NAME)s.urls'
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, 'templates/'),
 )
+CMS_TEMPLATES = (
+    ('template.html', 'Main'),
+)
+
+#Zinnia Stuff
+#Markdown
+#ZINNIA_MARKUP_LANGUAGE = 'markdown'
+#ZINNIA_MARKDOWN_EXTENSIONS = 'extra,codehilite'
+
+
+
+
+# Uncomment any apps you want to use. We will not
+# install all apps by default, but all of the 
+# commented apps are one's we "should" be using.
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -139,12 +154,28 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'cms',
-	'sentry',
+#	'sentry',
+#    'djcelery',
+    'mptt',
+    'menus',
+    'sekizai',
     'raven.contrib.django',
-    'djcelery',
     'south',
     'taggit',
+    #####
+    #Django CMS Stuff
+    ##### 
+    'cms',
+    'cms.plugins.file',
+    'cms.plugins.link',
+    'cms.plugins.picture',
+    'cms.plugins.text',
+    'cms.plugins.video',
+    ####
+    #For Zinnia'
+    ####
+#   'zinnia',
+#   'django_bitly',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -170,7 +201,9 @@ LOGGING = {
     }
 }
 
+####
 # import local settings overriding the defaults
+####
 try:
     from settings_local import *
 except ImportError:
@@ -187,25 +220,25 @@ else:
         pass
 
 # Trying to import Django-CMS and Zinnia
-try:
-    from extra_settings.cms_settings import *
-    try:
-        from extra_settings.zinnia_settings import *
-    except ImportError:
-        import sys
-        sys.stderr.write( "Zinnia Settings not being used\n" )
-except ImportError:
-    import sys
-    sys.stderr.write( "CMS Settings not being used\n" )
+#try:
+#    from extra_settings.cms_settings import *
+#    try:
+#        from extra_settings.zinnia_settings import *
+#    except ImportError:
+#        import sys
+#        sys.stderr.write( "Zinnia Settings not being used\n" )
+#except ImportError:
+#    import sys
+#    sys.stderr.write( "CMS Settings not being used\n" )
 
-else:
-    try:    
-        INSTALLED_APPS = INSTALLED_APPS + CMS_INSTALLED_APPS
-        MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + CMS_MIDDLE_CLASSES
-        try:
-            ZINNIA_INSTALLED_APPS = ()
-            INSTALLED_APPS = INSTALLED_APPS + ZINNIA_INSTALLED_APPS
-        except NameError:
-            pass
-    except NameError:
-        pass
+#else:
+#    try:
+#        INSTALLED_APPS = INSTALLED_APPS + CMS_INSTALLED_APPS
+#        MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + CMS_MIDDLE_CLASSES
+#        try:
+#            ZINNIA_INSTALLED_APPS = ()
+#            INSTALLED_APPS = INSTALLED_APPS + ZINNIA_INSTALLED_APPS
+#        except NameError:
+#            pass
+#    except NameError:
+#        pass
