@@ -154,16 +154,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-<<<<<<< HEAD
 #	'sentry',
 #    'djcelery',
     'mptt',
     'menus',
     'sekizai',
-=======
     'cms',
-    'sentry',
->>>>>>> 6aaff329563ba17fa142e2dee9091439a011687f
     'raven.contrib.django',
     'south',
     'taggit',
@@ -225,7 +221,6 @@ else:
         pass
 
 # Trying to import Django-CMS and Zinnia
-<<<<<<< HEAD
 #try:
 #    from extra_settings.cms_settings import *
 #    try:
@@ -248,27 +243,3 @@ else:
 #            pass
 #    except NameError:
 #        pass
-=======
-try:
-    from extra_settings.cms_settings import *
-    try:
-        from extra_settings.zinnia_settings import *
-    except ImportError:
-        import sys
-        sys.stderr.write( "Zinnia Settings not being used\n" )
-except ImportError:
-    import sys
-    sys.stderr.write( "CMS Settings not being used\n" )
-
-else:
-    try:
-        INSTALLED_APPS = INSTALLED_APPS + CMS_INSTALLED_APPS
-        MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + CMS_MIDDLE_CLASSES
-        try:
-            ZINNIA_INSTALLED_APPS = ()
-            INSTALLED_APPS = INSTALLED_APPS + ZINNIA_INSTALLED_APPS
-        except NameError:
-            pass
-    except NameError:
-        pass
->>>>>>> 6aaff329563ba17fa142e2dee9091439a011687f
