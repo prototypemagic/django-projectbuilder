@@ -6,11 +6,7 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('', 
-<<<<<<< HEAD
-
-=======
- 
->>>>>>> 6aaff329563ba17fa142e2dee9091439a011687f
+    
     #Admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
