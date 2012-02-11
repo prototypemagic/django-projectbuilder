@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load cms_tags sekizai_tags %}
-{% load i18n%}
+{% load i18n %}
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
@@ -33,12 +33,11 @@
     <script defer src="/media/js/script.js"></script>
     {% endblock %} 
     {% block javascript %}{% endblock %}
-    {% block  extra_head %}
+    {% block extra_head %}
     {% endblock %}
 </head>
 
 <body class="body">
-    {% spaceless %}
     <div id="base">
         <header id="banner">
         <h1 id="banner"><a href="/">insert_title</a></h1>
@@ -74,7 +73,6 @@
         <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
         <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
     <![endif]-->
-{% endspaceless %}
 </body>
 
 </html>
