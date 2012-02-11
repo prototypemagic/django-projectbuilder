@@ -17,4 +17,5 @@ fi
 # Generate new Apache config
 python proto-new-virtualhost-subdomain.py $PROJECT_NAME > /etc/apache2/sites-available/$PROJECT_NAME
 # Create symlink from sites-available to sites-enabled
-cd /etc/apache2/sites-available/ && ln -s $PROJECT_NAME ../sites-enabled/$PROJECT_NAME
+a2ensite $PROJECT_NAME
+#cd /etc/apache2/sites-available/ && ln -s $PROJECT_NAME ../sites-enabled/$PROJECT_NAME
