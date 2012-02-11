@@ -10,7 +10,7 @@
 GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 
 #import pbs
-import commands, os, random, string, sys
+import commands, os, random, shutil, string, sys
 
 USAGE = '%s /path/to/new/project_name' % (sys.argv[0])
 #FUTURE_USAGE = USAGE + ' [--cms] [--zinnia]'
@@ -51,9 +51,9 @@ print "Making virtualenv..."
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh'
 cmd += ' && mkvirtualenv %s --no-site-packages"' % (PROJECT_NAME)
 status, output = commands.getstatusoutput(cmd)
-print 
+print
 print output
-print 
+print
 
 # TODO
 # vewrapper = pbs.which('virtualenvwrapper.sh')
@@ -74,7 +74,7 @@ replacement_values = {
 
 
 print "Creating directories..."
-for dir_name in ['', 'media', 'static', 'templates', 'apache', 'extra_settings',
+for dir_name in ['', 'static', 'apache', 'extra_settings',
                  '%(PROJECT_NAME)s']:
     os.mkdir(PROJECT_PATH + dir_name % replacement_values)
 
@@ -106,12 +106,19 @@ for filename in generic_files:
         f_write.close()
 
 
+print "Copying directories..."
+generic_dirs = ['media', 'templates']
+for dirname in generic_dirs:
+    # cp -r media-generic $PROJECT_PATH/media && cp -r templates-generic ...
+    ### FIXME: Assumes script is being run from the directory it's in
+    shutil.copytree(dirname + '-generic', PROJECT_PATH + dirname)
+
 print "Running 'pip install -r requirements.txt'. This could take a while..."
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && '
 cmd += 'workon %(PROJECT_NAME)s && cd %(PROJECT_PATH)s && pip install -r requirements.txt"' % \
     replacement_values
 status, output = commands.getstatusoutput(cmd)
-print 
+print
 print output
 print
 print "Done! Now run  \n\n    cd %(PROJECT_PATH)s && workon %(PROJECT_NAME)s\n\nGet to work!" % replacement_values
