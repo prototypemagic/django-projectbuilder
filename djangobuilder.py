@@ -13,7 +13,7 @@ GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 import commands, os, random, string, sys
 
 USAGE = '%s /path/to/new/project_name' % (sys.argv[0])
-FUTURE_USAGE = USAGE + ' [--cms] [--zinnia]'
+#FUTURE_USAGE = USAGE + ' [--cms] [--zinnia]'
 
 if len(sys.argv) < 2:
     print USAGE
@@ -114,4 +114,4 @@ status, output = commands.getstatusoutput(cmd)
 print 
 print output
 print
-print "Done! Now run 'cd %(PROJECT_PATH)s && workon %(PROJECT_NAME)s'.\nGet to work!" % replacement_values
+print "Done! Now run  \n\n    cd %(PROJECT_PATH)s && workon %(PROJECT_NAME)s\n\nGet to work!" % replacement_values
