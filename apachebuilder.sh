@@ -20,4 +20,4 @@ python proto-new-virtualhost-subdomain.py $PROJECT_NAME > /etc/apache2/sites-ava
 a2ensite $PROJECT_NAME 2>&1 | grep -v .
 #cd /etc/apache2/sites-available/ && ln -s $PROJECT_NAME ../sites-enabled/$PROJECT_NAME
 echo
-echo "Push to $PROJECT_NAME/bare/, then restart apache"
+echo "Push to $PROJECT_NAME/bare/, edit DNS by creating a new A-record (so the internet can see your new subdomain), then restart Apache."
