@@ -24,7 +24,7 @@ for file in $PROJECT_NAME/bare/hooks/*; do
     sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" $file
 done
 
-echo "If you're on a server, run 'sudo apachebuilder.sh $PROJECT_NAME' to create and install an Apache config file, as well as set up sites-enabled and sites-available."
+echo -e "If you're on a server, run\n\n    sudo bash -c \"./apachebuilder.sh promotionefx\"\n\nto create and install an Apache config file, as well as set up sites-enabled and sites-available."
 echo
-echo "On your local dev machine, run 'python djangobuilder.py $PROJECT_NAME', then push to (the probably remote) $PROJECT_NAME/bare/ directory"
+echo -e "On your local dev machine, run\n\n    python djangobuilder.py $PROJECT_NAME\n\nthen push to (the probably remote) $PROJECT_NAME/bare/ directory"
 #echo "Run proto-new-virtualhost-subdomain.py to manually create a new Apache config file."
