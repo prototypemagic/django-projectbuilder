@@ -140,7 +140,7 @@ CMS_TEMPLATES = (
 
 
 # Uncomment any apps you want to use. We will not
-# install all apps by default, but all of the 
+# install all apps by default, but all of the
 # commented apps are one's we "should" be using.
 
 INSTALLED_APPS = (
@@ -154,8 +154,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-#	'sentry',
-#    'djcelery',
+    # 'sentry',
+    # 'djcelery',
     'mptt',
     'menus',
     'sekizai',
@@ -163,9 +163,11 @@ INSTALLED_APPS = (
     'raven.contrib.django',
     'south',
     'taggit',
+    '%(PROJECT_NAME)s',
+
     #####
-    #Django CMS Stuff
-    ##### 
+    # Django CMS
+    #####
     'cms',
     'cms.plugins.file',
     'cms.plugins.link',
@@ -173,10 +175,10 @@ INSTALLED_APPS = (
     'cms.plugins.text',
     'cms.plugins.video',
     ####
-    #For Zinnia'
+    # Zinnia
     ####
-#   'zinnia',
-#   'django_bitly',
+    # 'zinnia',
+    # 'django_bitly',
 )
 
 # A sample logging configuration. The only tangible logging
