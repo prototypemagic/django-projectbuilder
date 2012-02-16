@@ -10,7 +10,7 @@
 GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 
 #import pbs
-import commands, os, random, shutil, string, sys
+import commands, os, random, shutil, string, sys, argparse
 
 USAGE = '%s /path/to/new/project_name' % (sys.argv[0])
 #FUTURE_USAGE = USAGE + ' [--cms] [--zinnia]'
@@ -19,12 +19,33 @@ if len(sys.argv) < 2:
     print USAGE
     sys.exit(0)
 
+# These are the arguements for the builder
+# We can extent the arguements as we want to add
+# more diversity
+parser = argparse.ArgumentParser(description='''ProtoType Magic presents Django Project Builder
+                                             and so much more...''')
+
+# This makes it so we don't derp and use --zinnia and --cms
+cms_options = parser.add_mutually_exclusive_group()
+cms_options.add_argument('--zinnia', action='store_true', default=False,
+                         help='''This will include Zinnia (along with Django-CMS)
+                         and all the needed files and required packages.''',
+                         dest='zinnia'
+                         )
+cms_options.add_argument('--cms', action='store_true', default=False,
+                         help='''This will include Django-CMS along with all
+                         typically used packages.''', dest='cms'
+                         )
+# This allows for ease of checking whether
+# either --zinnia or --cms was used
+arguments = parser.parse_args()
+
+
 # FIXME Every file in generic_scripts and *-generic should be listed
 # here... or we can copy entire directories
 pathify = {
     '.gitignore':        ['%(PROJECT_NAME)s/'],
     '__init__.py':       ['', '%(PROJECT_NAME)s/', 'extra_settings/'],
-    'cms_settings.py':   ['extra_settings/'],
     'django.wsgi':       ['apache/'],
     'manage.py':         [''],
     'model_forms.py':    ['%(PROJECT_NAME)s/'],
@@ -35,9 +56,13 @@ pathify = {
     'tests.py':          ['%(PROJECT_NAME)s/'],
     'urls.py':           [''],
     'views.py':          ['%(PROJECT_NAME)s/'],
-    'zinnia_settings.py':['extra_settings/'],
 }
 weird_files = ['manage.py']
+
+if arguments.cms == True:
+    pathify.update({'cms_settings.py' : [''],})
+elif arguments.zinnia == True:
+    pathify.update({'zinnia_settings.py' : [''],})
 
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
