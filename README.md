@@ -40,20 +40,20 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 
 ## SBHX Presentation-inspired TODO
 
-* djangobuilder.py: 'git init $PROJECT_NAME' instead of 'mkdir $PROJECT_NAME'
+* djangobuilder.py: `git init %(PROJECT_NAME)s` instead of `mkdir %(PROJECT_NAME)s`
 
-* djangobuilder.py: Create initial commit on client
+* djangobuilder.py: `bash -c "git add . && git commit -m 'First commit'"` on client
 
-* djangobuilder.py: fix bug preventing .gitignore-generic from being copied
+* djangobuilder.py: When running first migration on newly-created project (on user's dev box), use http://www.arthurkoziel.com/2008/09/04/automatical-superuser-creation-django to automate superuser creation
 
-* djangobuilder.py: When running migration on newly-created project (on user's dev box), use http://www.arthurkoziel.com/2008/09/04/automatical-superuser-creation-django/ to automate superuser creation
+* djangobuilder.py: fix bug preventing .gitignore-generic from being copied into new repo
+
+* gitbuilder.sh: fix $PROJECT_NAME and $PROJECT_NAME/${PROJECT_NAME}_site permissions
 
 * Create postgresbuilder.sh for automatic Postgres user creation, credentials included
 
-* gitbuilder.sh: chmod 777 $PROJECT_NAME and $PROJECT_NAME/${PROJECT_NAME}_site :-\
+* Create route53builder.py to automatically create new subdomain [NOTE: I'll use the script Jay wrote for Cazooz]
 
 * Integrate Bootstrap
 
 * Integrate LessCSS
-
-* Create route53builder.py to automatically create new subdomain [NOTE: I'll use the script Jay wrote for Cazooz]
