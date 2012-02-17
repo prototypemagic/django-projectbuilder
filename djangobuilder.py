@@ -112,6 +112,16 @@ for dir_name in ['', 'static', 'apache', 'extra_settings',
 generic_files = [x for x in os.listdir(GENERIC_SCRIPTS_PATH)
                  if x.endswith('-generic')]
 
+#This adds cms_settings/zinnia_settings
+#to generic_files.
+##FIXME shouldn't be hard coded
+#if arguments.cms == True or arguments.zinnia == True:
+#    extra_files = [x for x in os.listdir('extra_settings/')
+#                      if x.startswith('cms')]
+#if arguments.zinnia == True:
+#    extra_files += [x for x in os.listdir('extra_settings/')
+#                      if x.startswith('zinnia')]
+
 
 print "Creating files..."
 for filename in generic_files:
