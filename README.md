@@ -40,8 +40,6 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 
 ## SBHX Presentation-inspired TODO
 
-* djangobuilder.py: `git init %(PROJECT_NAME)s` instead of `mkdir %(PROJECT_NAME)s`
-
 * djangobuilder.py: `bash -c "git add . && git commit -m 'First commit'"` on client
 
 * djangobuilder.py: When running first migration on newly-created project (on user's dev box), use http://www.arthurkoziel.com/2008/09/04/automatical-superuser-creation-django to automate superuser creation
