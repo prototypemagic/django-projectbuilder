@@ -46,8 +46,6 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 
 * djangobuilder.py: fix bug preventing .gitignore-generic from being copied into new repo
 
-* gitbuilder.sh: fix $PROJECT_NAME and $PROJECT_NAME/${PROJECT_NAME}_site permissions
-
 * Create postgresbuilder.sh for automatic Postgres user creation, credentials included
 
 * Create route53builder.py to automatically create new subdomain [NOTE: I'll use the script Jay wrote for Cazooz]
