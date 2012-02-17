@@ -33,7 +33,7 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 
 * Database rollbacks: create timestamped SQL dump before migrations, then rollback with a post-receive commit?
 
-* Code rollbacks: use Fabric? Or will `git revert master~2..master` do?
+* Code rollbacks: use Fabric? Or is `git revert master~2..master` good enough?
 
 * Add to and tidy up CREDITS.md
 
