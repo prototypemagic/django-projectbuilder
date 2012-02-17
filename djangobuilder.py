@@ -12,7 +12,7 @@ GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 #import pbs
 import commands, os, random, shutil, string, sys, argparse
 
-USAGE = '%s /path/to/new/project_name' % (sys.argv[0])
+USAGE = '%s --path /path/to/new/project_name [--cms] [--zinnia]' % (sys.argv[0])
 #FUTURE_USAGE = USAGE + ' [--cms] [--zinnia]'
 
 if len(sys.argv) < 2:
@@ -24,8 +24,10 @@ if len(sys.argv) < 2:
 # more diversity
 parser = argparse.ArgumentParser(description='''ProtoType Magic presents
                                   Django Project Builder and so much more...''',
-                                  version='0.0.4')
-
+                                  version='djangbuilder.py 0.2.3')
+parser.add_argument('--path', action='store', dest='path',
+                    help='''Use this to direct Django Project Builder
+                    to where the project should be made''')
 # This makes it so we don't derp and use --zinnia and --cms
 cms_options = parser.add_mutually_exclusive_group()
 cms_options.add_argument('--zinnia', action='store_true', default=False,
@@ -70,7 +72,7 @@ if arguments.zinnia == True:
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
 # Trailing / may be included or excluded
-PROJECT_PATH = sys.argv[1].rstrip('/') + '_site/'
+PROJECT_PATH = arguments.path.rstrip('/') + '_site/'
 PROJECT_NAME = PROJECT_PATH.split('/')[-2].split('_')[0] # Before the '_site/'
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
