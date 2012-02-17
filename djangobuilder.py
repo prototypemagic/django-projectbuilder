@@ -122,8 +122,15 @@ print "Running 'pip install -r requirements.txt'. This could take a while..."
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && '
 cmd += 'workon %(PROJECT_NAME)s && cd %(PROJECT_PATH)s && pip install -r requirements.txt"' % \
     replacement_values
-status, output = commands.getstatusoutput(cmd)
+_, output = commands.getstatusoutput(cmd)
 print
 print output
 print
-print "Done! Now run  \n\n    cd %(PROJECT_PATH)s && workon %(PROJECT_NAME)s\n\nGet to work!" % replacement_values
+
+cmd = 'bash -c "cd %s && git add . && git commit -m \"First commit\""' % PROJECT_PATH
+_, output = commands.getstatusoutput(cmd)
+print '\n', output, '\n'
+
+print "Done! Now run\n\n"
+print "    cd %(PROJECT_PATH)s && workon %(PROJECT_NAME)s && " % replacement_values,
+print "python manage.py syncdb\n\nNow get to work!"
