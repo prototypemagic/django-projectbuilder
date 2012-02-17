@@ -74,7 +74,12 @@ replacement_values = {
 
 
 print "Creating directories..."
-for dir_name in ['', 'static', 'apache', 'extra_settings',
+
+cmd = 'bash -c "git init %s"' % PROJECT_PATH
+_, output = commands.getstatusoutput(cmd)
+print '\n', output, '\n'
+
+for dir_name in ['static', 'apache', 'extra_settings',
                  '%(PROJECT_NAME)s']:
     os.mkdir(PROJECT_PATH + dir_name % replacement_values)
 
