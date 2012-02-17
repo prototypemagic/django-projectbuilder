@@ -10,3 +10,5 @@ Credits and Attributions
 * Zinnia
 
 * Django CMS
+
+* Many others
