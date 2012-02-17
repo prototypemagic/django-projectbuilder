@@ -12,7 +12,7 @@ GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 #import pbs
 import commands, os, random, shutil, string, sys, argparse
 
-USAGE = '%s --path /path/to/new/project_name [--cms] [--zinnia]' % (sys.argv[0])
+USAGE = 'usage: %s [-h] [-v] [--path PATH] [--cms | --zinnia]' % (sys.argv[0])
 #FUTURE_USAGE = USAGE + ' [--cms] [--zinnia]'
 
 if len(sys.argv) < 2:
@@ -30,14 +30,14 @@ parser.add_argument('--path', action='store', dest='path',
                     to where the project should be made''')
 # This makes it so we don't derp and use --zinnia and --cms
 cms_options = parser.add_mutually_exclusive_group()
+cms_options.add_argument('--cms', action='store_true', default=False,
+                         help='''This will include Django-CMS along with all
+                         typically used packages.''', dest='cms'
+                         )
 cms_options.add_argument('--zinnia', action='store_true', default=False,
                          help='''This will include Zinnia (along with Django-CMS)
                          and all the needed files and required packages.''',
                          dest='zinnia'
-                         )
-cms_options.add_argument('--cms', action='store_true', default=False,
-                         help='''This will include Django-CMS along with all
-                         typically used packages.''', dest='cms'
                          )
 # This allows for ease of checking whether
 # either --zinnia or --cms was used
