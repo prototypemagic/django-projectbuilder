@@ -22,8 +22,9 @@ if len(sys.argv) < 2:
 # These are the arguements for the builder
 # We can extent the arguements as we want to add
 # more diversity
-parser = argparse.ArgumentParser(description='''ProtoType Magic presents Django Project Builder
-                                             and so much more...''')
+parser = argparse.ArgumentParser(description='''ProtoType Magic presents
+                                  Django Project Builder and so much more...''',
+                                  version='0.0.4')
 
 # This makes it so we don't derp and use --zinnia and --cms
 cms_options = parser.add_mutually_exclusive_group()
@@ -59,9 +60,11 @@ pathify = {
 }
 weird_files = ['manage.py']
 
-if arguments.cms == True:
+#These will check whether the user used --zinnia or --cms and
+#if so will add the needed settings.
+if arguments.cms == True or arguments.zinnia == True:
     pathify.update({'cms_settings.py' : [''],})
-elif arguments.zinnia == True:
+if arguments.zinnia == True:
     pathify.update({'zinnia_settings.py' : [''],})
 
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
