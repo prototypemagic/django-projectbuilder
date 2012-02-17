@@ -12,8 +12,10 @@ PROJECT_NAME=$1
 echo "Creating $PROJECT_NAME directory and sub-directories"
 echo
 mkdir $PROJECT_NAME
+chmod 777 $PROJECT_NAME  # FIXME
 # Code is checked out to here as per bare/hooks/post-receive
 mkdir $PROJECT_NAME/${PROJECT_NAME}_site
+chmod 777 $PROJECT_NAME/${PROJECT_NAME}_site  # FIXME
 git init --bare $PROJECT_NAME/bare
 # Delete default hooks
 rm $PROJECT_NAME/bare/hooks/*
