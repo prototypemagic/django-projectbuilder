@@ -37,6 +37,7 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 
 * Add to and tidy up CREDITS.md
 
+* Start using Django Compressor
 
 ## SBHX Presentation-inspired TODO
 
