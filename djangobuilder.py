@@ -224,7 +224,7 @@ if arguments.zinnia:
 
 # Run 'cpvirtualenv PROJECT_NAME default' ?
 if ask_to_copy_default_virtualenv:
-    q = "'cpvirtualenv %s default' to speed this up next time?" % PROJECT_NAME
+    q = "Create a default virtualenv to speed this up next time? " % PROJECT_NAME
     answer = raw_input(q)
     if answer and answer.lower()[0] == 'y':
         print "Copying virtualenv..."
