@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# Steve Phillips / elimisteve
-# 2012.01.28
 
 #
 # Requires fabric, virtualenv, and virtualenvwrapper
@@ -56,6 +54,7 @@ pathify = {
     'requirements.txt':  [''],
     'settings.py':       [''],
     'settings_local.py': [''],
+    'settings_local.py-local': [''],
     'tests.py':          ['%(PROJECT_NAME)s/'],
     'urls.py':           [''],
     'views.py':          ['%(PROJECT_NAME)s/'],
@@ -80,8 +79,8 @@ BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
 # TODO Make this faster, possibly by using cpvirtualenv?
 print "Making virtualenv..."
-cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh'
-cmd += ' && mkvirtualenv %s --no-site-packages"' % (PROJECT_NAME)
+cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && '
+cmd += 'cpvirtualenv default %s"' % (PROJECT_NAME)
 status, output = commands.getstatusoutput(cmd)
 print
 print output
@@ -106,9 +105,9 @@ replacement_values = {
 }
 
 # Doing it this way so DPB can add 'extra_settings' on the fly.
-needed_dirs = ['', 'static', 'apache', 'PROJECT_NAME)s']
+needed_dirs = ['', 'static', 'apache', '%(PROJECT_NAME)s']
 
-if arguments.cms == True or arguments.zinnia == True:
+if arguments.cms or arguments.zinnia:
     needed_dirs += ['extra_settings']
 
 print "Creating directories..."
@@ -119,16 +118,10 @@ for dir_name in needed_dirs:
 generic_files = [x for x in os.listdir(GENERIC_SCRIPTS_PATH)
                  if x.endswith('-needed')]
 
-#This adds cms_settings/zinnia_settings
-#to generic_files.
-##FIXME shouldn't be hard coded
-if arguments.cms == True or arguments.zinnia == True:
-    generic_files = [x for x in os.listdir('extra_settings/')
-                      if x.startswith('cms')]
-if arguments.zinnia == True:
-    generic_files += [x for x in os.listdir('extra_settings/')
-                      if x.startswith('zinnia')]
-
+if arguments.cms or arguments.zinnia:
+    generic_files.remove('urls.py-needed')
+    generic_files += [x for x in os.listdir(GENERIC_SCRIPTS_PATH)
+                 if x.endswith('-cms')]
 
 print "Creating files..."
 for filename in generic_files:
@@ -140,6 +133,8 @@ for filename in generic_files:
     # Replace %(SECRET_KEY)s, etc with new value for new project
     if filename.endswith('-needed'):
         new_filename = filename.replace('-needed', '')
+    if filename.endswith('-cms'):
+        new_filename = filename.replace('-cms', '')
     # Loop through list of locations new_filename should be placed
     for dir in pathify[new_filename]:
         # Path names include '%(PROJECT_NAME)s', etc
@@ -154,6 +149,15 @@ for filename in generic_files:
         f_write.close()
 
 
+#This adds cms_settings/zinnia_settings
+##FIXME shouldn't be hard coded
+if arguments.cms == True or arguments.zinnia == True:
+    shutil.copy( 'extra_settings/cms_settings.py',
+                PROJECT_PATH + 'extra_settings/')
+if arguments.zinnia == True:
+    shutil.copy( 'extra_settings/zinnia_settings.py',
+                PROJECT_PATH + 'extra_settings/')
+
 print "Copying directories..."
 generic_dirs = ['media', 'templates']
 for dirname in generic_dirs:
@@ -161,17 +165,19 @@ for dirname in generic_dirs:
     ### FIXME: Assumes script is being run from the directory it's in
     shutil.copytree(dirname + '-generic', PROJECT_PATH + dirname)
 
-print "Running 'pip install -r requirements.txt'. This could take a while..."
-cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && '
-cmd += 'workon %(PROJECT_NAME)s && cd %(PROJECT_PATH)s && pip install -r requirements.txt" ' % \
-     replacement_values
-if arguments.zinnia == True or arguments.cms == True:
-    cmd += '&& pip install django-cms'
-if arguments.zinnia = True:
-    cmd += ' && pip install django-blog-zinnia'
+if arguments.zinnia or arguments.cms:
+    print "Installing Django-CMS..."
+    cmd = 'bash -c "pip install django-cms'
+
+if arguments.zinnia:
+    print "Installing Zinnia..."
+    cmd += ' && pip install django-blog-zinnia"'
+else:
+    cmd += '"'
 
 status, output = commands.getstatusoutput(cmd)
-print
+print '\n'
 print output
-print
+print '\n'
+
 print "Done! Now run  \n\n    cd %(PROJECT_PATH)s && workon %(PROJECT_NAME)s\n\nGet to work!" % replacement_values

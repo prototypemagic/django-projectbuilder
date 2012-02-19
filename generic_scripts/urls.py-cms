@@ -14,12 +14,21 @@ urlpatterns = patterns('',
     #Static Links
 #    url(r'^', TemplateView.as_view(template_name='home.html'), name='home'),
     
+    #Blog
+#    url(r'^blog/', include('zinnia.urls'), name='blog'),
+#    url(r'^comments/', include('django.contrib.comments.urls')),
 )
 
 #urlpatterns += patterns('%(PROJECT_NAME)s_site.%(PROJECT_NAME)s.views',
 #   url(r'^%(PROJECT_NAME)s/$', '%(PROJECT_NAME)s_view', name='%(PROJECT_NAME)s'),
 #)
 
+# Django CMS
+## This must always be on the bottom so as not to override everything
+## (such as /admin/)
+urlpatterns += patterns('',
+    url(r'^', include('cms.urls')),
+)
 
 if settings.DEBUG:
     urlpatterns = patterns('',
