@@ -217,7 +217,7 @@ if arguments.zinnia:
     print "Installing Zinnia..."
     cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon %s' \
         % PROJECT_NAME
-    cmd += ' pip install django-blog-zinnia"'
+    cmd += ' && pip install django-blog-zinnia"'
     _, output = commands.getstatusoutput(cmd)
     print '\n', output, '\n'
 
