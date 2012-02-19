@@ -189,7 +189,7 @@ ask_to_copy_default_virtualenv = False
 if os.path.exists(virtualenv_dir + 'default'):
     print "Copying 'default' virtualenv to %s..." % PROJECT_NAME
     cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh &&'
-    cmd += ' cpvirtualenv default %s"' % PROJECT_NAME
+    cmd += ' cpvirtualenv default %s --no-site-packages"' % PROJECT_NAME
 else:
     print "Running 'pip install -r requirements.txt'. This could take a while..."
     ask_to_copy_default_virtualenv = True
@@ -229,7 +229,7 @@ if ask_to_copy_default_virtualenv:
     if answer and answer.lower()[0] == 'y':
         print "Copying virtualenv..."
         cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon '
-        cmd += '%(PROJECT_NAME)s && cpvirtualenv %(PROJECT_NAME)s default"' % \
+        cmd += '%(PROJECT_NAME)s && cpvirtualenv %(PROJECT_NAME)s default --no-site-packages"' % \
             replacement_values
         _, output = commands.getstatusoutput(cmd)
         print '\n', output, '\n'
