@@ -102,9 +102,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
+#    'cms.middleware.page.CurrentPageMiddleware',
+#    'cms.middleware.user.CurrentUserMiddleware',
+#    'cms.middleware.toolbar.ToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -116,8 +116,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
-    'cms.context_processors.media',
-    'sekizai.context_processors.sekizai',
+#    'cms.context_processors.media',
+#    'sekizai.context_processors.sekizai',
 )
 
 
@@ -127,9 +127,9 @@ ROOT_URLCONF = '%(PROJECT_NAME)s_site.urls'
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, 'templates/'),
 )
-CMS_TEMPLATES = (
-    ('template.html', 'Main'),
-)
+#CMS_TEMPLATES = (
+#    ('template.html', 'Main'),
+#)
 
 #Zinnia Stuff
 #Markdown
@@ -159,7 +159,6 @@ INSTALLED_APPS = (
     'mptt',
     'menus',
     'sekizai',
-    'cms',
     'raven.contrib.django',
     'south',
     'taggit',
@@ -168,12 +167,12 @@ INSTALLED_APPS = (
     #####
     # Django CMS
     #####
-    'cms',
-    'cms.plugins.file',
-    'cms.plugins.link',
-    'cms.plugins.picture',
-    'cms.plugins.text',
-    'cms.plugins.video',
+    #'cms',
+    #'cms.plugins.file',
+    #'cms.plugins.link',
+    #'cms.plugins.picture',
+    #'cms.plugins.text',
+    #'cms.plugins.video',
     ####
     # Zinnia
     ####
@@ -223,25 +222,25 @@ else:
         pass
 
 # Trying to import Django-CMS and Zinnia
-#try:
-#    from extra_settings.cms_settings import *
-#    try:
-#        from extra_settings.zinnia_settings import *
-#    except ImportError:
-#        import sys
-#        sys.stderr.write( "Zinnia Settings not being used\n" )
-#except ImportError:
-#    import sys
-#    sys.stderr.write( "CMS Settings not being used\n" )
+try:
+    from extra_settings.cms_settings import *
+    try:
+        from extra_settings.zinnia_settings import *
+    except ImportError:
+        import sys
+        sys.stderr.write( "Zinnia Settings not being used\n" )
+except ImportError:
+    import sys
+    sys.stderr.write( "CMS Settings not being used\n" )
 
-#else:
-#    try:
-#        INSTALLED_APPS = INSTALLED_APPS + CMS_INSTALLED_APPS
-#        MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + CMS_MIDDLE_CLASSES
-#        try:
-#            ZINNIA_INSTALLED_APPS = ()
-#            INSTALLED_APPS = INSTALLED_APPS + ZINNIA_INSTALLED_APPS
-#        except NameError:
-#            pass
-#    except NameError:
-#        pass
+else:
+    try:
+        INSTALLED_APPS = INSTALLED_APPS + CMS_INSTALLED_APPS
+        MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + CMS_MIDDLE_CLASSES
+        try:
+            ZINNIA_INSTALLED_APPS = ()
+            INSTALLED_APPS = INSTALLED_APPS + ZINNIA_INSTALLED_APPS
+        except NameError:
+            pass
+    except NameError:
+        pass

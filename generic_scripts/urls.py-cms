@@ -24,6 +24,8 @@ urlpatterns = patterns('',
 #)
 
 # Django CMS
+## This must always be on the bottom so as not to override everything
+## (such as /admin/)
 urlpatterns += patterns('',
     url(r'^', include('cms.urls')),
 )
