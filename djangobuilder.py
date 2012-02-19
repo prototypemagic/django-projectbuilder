@@ -48,7 +48,7 @@ arguments = parser.parse_args()
 # here... or we can copy entire directories
 pathify = {
     '.gitignore':        ['%(PROJECT_NAME)s/'],
-    '__init__.py':       ['', '%(PROJECT_NAME)s/', 'extra_settings/'],
+    '__init__.py':       ['', '%(PROJECT_NAME)s/'],
     'django.wsgi':       ['apache/'],
     'manage.py':         [''],
     'model_forms.py':    ['%(PROJECT_NAME)s/'],
@@ -66,6 +66,7 @@ weird_files = ['manage.py']
 #if so will add the needed settings.
 if arguments.cms == True or arguments.zinnia == True:
     pathify.update({'cms_settings.py' : [''],})
+    pathify.update({'__init__.py': ['', '%(PROJECT_NAME)s/', 'extra_settings/'],})
 if arguments.zinnia == True:
     pathify.update({'zinnia_settings.py' : [''],})
 
@@ -77,6 +78,7 @@ PROJECT_NAME = PROJECT_PATH.split('/')[-2].split('_')[0] # Before the '_site/'
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
+# TODO Make this faster, possibly by using cpvirtualenv?
 print "Making virtualenv..."
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh'
 cmd += ' && mkvirtualenv %s --no-site-packages"' % (PROJECT_NAME)
@@ -94,6 +96,7 @@ SECRET_KEY = ''.join([ random.choice(string.printable[:94].replace("'", ""))
 PROJECT_PASSWORD = ''.join([ random.choice(string.printable[:67].replace("'", ""))
                              for _ in range(30) ])
 
+# FIXME What does this do exactly?
 replacement_values = {
     'PROJECT_NAME':     PROJECT_NAME,
     'PROJECT_PASSWORD': PROJECT_PASSWORD,
@@ -102,10 +105,14 @@ replacement_values = {
     'PROJECT_PATH':     PROJECT_PATH,
 }
 
+# Doing it this way so DPB can add 'extra_settings' on the fly.
+needed_dirs = ['', 'static', 'apache', 'PROJECT_NAME)s']:
+
+if arguments.cms == True or arguments.zinnia == True:
+    needed_dirs += ['extra_settings']
 
 print "Creating directories..."
-for dir_name in ['', 'static', 'apache', 'extra_settings',
-                 '%(PROJECT_NAME)s']:
+for dir_name in needed_dirs:
     os.mkdir(PROJECT_PATH + dir_name % replacement_values)
 
 
