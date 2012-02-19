@@ -20,6 +20,10 @@ git init --bare $PROJECT_NAME/bare
 # Delete default hooks
 rm $PROJECT_NAME/bare/hooks/*
 
+# FIXME Assuming makes an ass, out of _you_
+# Assumes 'default' virtualenv exists
+(source /usr/local/bin/virtualenvwrapper.sh && cpvirtualenv default $PROJECT_NAME)
+
 # Put our custom hooks in place
 cp hooks/* $PROJECT_NAME/bare/hooks/
 for file in $PROJECT_NAME/bare/hooks/*; do
