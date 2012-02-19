@@ -1,1 +1,0 @@
-django-cms==2.2

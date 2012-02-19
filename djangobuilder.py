@@ -106,7 +106,7 @@ replacement_values = {
 }
 
 # Doing it this way so DPB can add 'extra_settings' on the fly.
-needed_dirs = ['', 'static', 'apache', 'PROJECT_NAME)s']:
+needed_dirs = ['', 'static', 'apache', 'PROJECT_NAME)s']
 
 if arguments.cms == True or arguments.zinnia == True:
     needed_dirs += ['extra_settings']
@@ -163,8 +163,13 @@ for dirname in generic_dirs:
 
 print "Running 'pip install -r requirements.txt'. This could take a while..."
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && '
-cmd += 'workon %(PROJECT_NAME)s && cd %(PROJECT_PATH)s && pip install -r requirements.txt"' % \
-    replacement_values
+cmd += 'workon %(PROJECT_NAME)s && cd %(PROJECT_PATH)s && pip install -r requirements.txt" ' % \
+     replacement_values
+if arguments.zinnia == True or arguments.cms == True:
+    cmd += '&& pip install django-cms'
+if arguments.zinnia = True:
+    cmd += ' && pip install django-blog-zinnia'
+
 status, output = commands.getstatusoutput(cmd)
 print
 print output
