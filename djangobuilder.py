@@ -63,10 +63,10 @@ weird_files = ['manage.py']
 
 #These will check whether the user used --zinnia or --cms and
 #if so will add the needed settings.
-if arguments.cms == True or arguments.zinnia == True:
+if arguments.cms or arguments.zinnia:
     pathify.update({'cms_settings.py' : [''],})
     pathify.update({'__init__.py': ['', '%(PROJECT_NAME)s/', 'extra_settings/'],})
-if arguments.zinnia == True:
+if arguments.zinnia:
     pathify.update({'zinnia_settings.py' : [''],})
 
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
