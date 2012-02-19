@@ -157,8 +157,6 @@ INSTALLED_APPS = (
     # 'sentry',
     # 'djcelery',
     'mptt',
-    'menus',
-    'sekizai',
     'raven.contrib.django',
     'south',
     'taggit',
