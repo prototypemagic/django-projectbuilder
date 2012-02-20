@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load cms_tags sekizai_tags %}
+{% load i18n %}
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
@@ -15,6 +17,7 @@
     {# TODO: <link rel="apple-touch-icon" href="/media/images/apple-touch-icon.png" /> #}
     <link rel="stylesheet" href="/media/css/style.css" />
     {% block css %}{% endblock %}
+    {% render_block "css" %}
    <!--[if gte IE 9]>
   <style type="text/css">
     .gradient {
@@ -35,6 +38,7 @@
 </head>
 
 <body class="body">
+    {% cms_toolbar %}
     <div id="base">
         <header id="banner">
         <h1 id="banner"><a href="/">insert_title</a></h1>
@@ -48,6 +52,7 @@
         </header>
         
         <div id="main" role="main">
+            {% placeholder base_content %}
             {% block content %}{% endblock %}
         </div>
         
@@ -58,6 +63,7 @@
 
     
     
+    {% render_block "js" %}
     <script> // Change UA-XXXXX-X to be your site's ID
     window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
     Modernizr.load({

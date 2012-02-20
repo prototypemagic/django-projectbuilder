@@ -166,42 +166,46 @@ if arguments.zinnia:
     shutil.copy('extra_settings/zinnia_settings.py',
                 PROJECT_PATH + 'extra_settings/')
 
+
 print "Copying directories..."
+
 generic_dirs = ['media', 'templates']
+
 for dirname in generic_dirs:
     # cp -r media-generic $PROJECT_PATH/media && cp -r templates-generic ...
     ### FIXME: Assumes script is being run from the directory it's in
-    shutil.copytree(dirname + '-generic', PROJECT_PATH + dirname)
+    if arguments.zinnia or arguments.cms:
+        shutil.copytree(dirname + '-cms', PROJECT_PATH + dirname)
+    else:
+        shutil.copytree(dirname + '-generic', PROJECT_PATH + dirname)
 
-## Big Picture:
-# If 'default' virtualenv exists, run 'cpvirtualenv default PROJECT_NAME'
-# else, run the full 'pip install -r requirements.txt'
 
-# Detect directory of virtualenvs so we can search for one named 'default'
-if os.environ.get('WORKON_HOME', ''):
-    virtualenv_dir = os.environ['WORKON_HOME'].rstrip('/') + '/'
-else:
-    virtualenv_dir = os.environ['HOME'].rstrip('/') + '/.virtualenvs/'
+## Making the virtualenv here
 
-# If 'default' virtualenv exists...
+print "Making virtualenv..."
 cmd = ''
-ask_to_copy_default_virtualenv = False
-if os.path.exists(virtualenv_dir + 'default'):
-    print "Copying 'default' virtualenv to %s..." % PROJECT_NAME
-    cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh &&'
-    cmd += ' cpvirtualenv default %s --no-site-packages"' % PROJECT_NAME
-else:
-    print "Running 'pip install -r requirements.txt'. This could take a while..."
-    ask_to_copy_default_virtualenv = True
-    # FIXME Shouldn't assume the location of virtualenvwrapper.sh
-    cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon'
-    cmd += ' %(PROJECT_NAME)s && cd %(PROJECT_PATH)s' % replacement_values
-    cmd += ' && pip install -r requirements.txt"'
+cmd = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh &&'
+cmd += ' mkvirtualenv %s --no-site-packages"' % PROJECT_NAME
 
 _, output = commands.getstatusoutput(cmd)
 print '\n', output, '\n'
 
-# Now virtualenv exists
+## The below part is made much fast with a small requirements.txt.
+## We have the opitions to include more packages, which in turn
+## will take long, but of course is needed. This allows for making
+## projects which need only the basic's, and ones that need a lot.
+
+cmd = ''
+print "Running 'pip install -r requirements.txt'. This could take a while..."
+# FIXME Shouldn't assume the location of virtualenvwrapper.sh
+cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon'
+cmd += ' %(PROJECT_NAME)s && cd %(PROJECT_PATH)s' % replacement_values
+cmd += ' && pip install -r requirements.txt"'
+
+_, output = commands.getstatusoutput(cmd)
+print '\n', output, '\n'
+
+#Now virtualenv exists
 
 cmd = ''
 if arguments.zinnia or arguments.cms:
@@ -223,16 +227,16 @@ if arguments.zinnia:
 
 
 # Run 'cpvirtualenv PROJECT_NAME default' ?
-if ask_to_copy_default_virtualenv:
-    q = "Create a default virtualenv to speed this up next time? " % PROJECT_NAME
-    answer = raw_input(q)
-    if answer and answer.lower()[0] == 'y':
-        print "Copying virtualenv..."
-        cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon '
-        cmd += '%(PROJECT_NAME)s && cpvirtualenv %(PROJECT_NAME)s default --no-site-packages"' % \
-            replacement_values
-        _, output = commands.getstatusoutput(cmd)
-        print '\n', output, '\n'
+#if ask_to_copy_default_virtualenv:
+#    q = "Create a default virtualenv to speed this up next time? " % PROJECT_NAME
+#    answer = raw_input(q)
+#    if answer and answer.lower()[0] == 'y':
+#        print "Copying virtualenv..."
+#        cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon '
+#        cmd += '%(PROJECT_NAME)s && cpvirtualenv %(PROJECT_NAME)s default --no-site-packages"' % \
+#            replacement_values
+#        _, output = commands.getstatusoutput(cmd)
+#        print '\n', output, '\n'
 
 print "Creating git repo..."
 cmd  = 'bash -c "cd %s &&' % PROJECT_PATH
