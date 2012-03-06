@@ -2,7 +2,7 @@ import os, site, sys
 
 # From http://jmoiron.net/blog/deploying-django-mod-wsgi-virtualenv/
 
-vepath = '/home/ubuntu/.virtualenvs/deannescott/lib/python2.7/site-packages'
+vepath = '/home/ubuntu/.virtualenvs/%(PROJECT_NAME)s/lib/python2.7/site-packages'
 
 prev_sys_path = list(sys.path)
 
