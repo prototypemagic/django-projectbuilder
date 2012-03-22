@@ -1,11 +1,8 @@
-
-
 CMS_INSTALLED_APPS = (
     'cms',
-    'mptt',
     'menus',
     'sekizai',
-    
+    'tagging',
     'cms.plugins.file',
     'cms.plugins.flash',
     'cms.plugins.googlemap',
