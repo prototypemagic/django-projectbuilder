@@ -46,7 +46,7 @@ arguments = parser.parse_args()
 # FIXME Every file in generic_scripts and *-needed should be listed
 # here... or we can copy entire directories
 pathify = {
-    '.gitignore':        ['%(PROJECT_NAME)s/'],
+    '.gitignore':        [''],
     '__init__.py':       ['', '%(PROJECT_NAME)s/'],
     'django.wsgi':       ['apache/'],
     'manage.py':         [''],
