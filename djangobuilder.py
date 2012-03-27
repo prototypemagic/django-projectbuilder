@@ -246,4 +246,4 @@ print '\n', output, '\n'
 
 print "Done! Now run\n"
 print "    cd %(PROJECT_PATH)s && workon %(PROJECT_NAME)s &&" % replacement_values,
-print "python manage.py syncdb\n\nNow get to work!"
+print "python manage.py syncdb\n\nGet to work!"
