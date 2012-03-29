@@ -56,8 +56,9 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 ## Front End Options
 (We will usually use Bootstrap, so these are all things that can come into
 play "underneath" bootstrap
+
 * ajvb's boilerplate style.css, which takes heavy influence from HTML5BP
-* HTML5BP
+* HTML5BP:
     *The older version
     *The newer version
 
