@@ -39,6 +39,7 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 
 * Start using Django Compressor
 
+
 ## SBHX Presentation-inspired TODO
 
 * djangobuilder.py: When running first migration on newly-created project (on user's dev box), use http://www.arthurkoziel.com/2008/09/04/automatical-superuser-creation-django to automate superuser creation
@@ -53,6 +54,7 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 
 * Integrate LessCSS
 
+
 ## Front End Options
 (We will usually use Bootstrap, so these are all things that can come into
 play "underneath" bootstrap
@@ -66,6 +68,6 @@ The plan is for there to be cmd line arg's for different options, where the
 typical will be Bootstrap + ajvb's custom style.css, which is a mixed of old
 and new H5BP, as well as his own default class's, bootstrap changes, etc. 
 
-###Later Changes to /media/
+### Later Changes to /media/
 Also there 'might' be other options for Zinnia, Django-CMS, etc. Not sure yet.
 
