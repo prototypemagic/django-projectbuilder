@@ -62,9 +62,9 @@ play "underneath" bootstrap.)
 
 * HTML5BP:
 
-    *The older version
+    * The older version
 
-    *The newer version
+    * The newer version
 
 The plan is for there to be cmd line arg's for different options, where the
 typical will be Bootstrap + ajvb's custom style.css, which is a mixed of old
