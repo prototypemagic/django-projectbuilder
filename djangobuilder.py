@@ -8,7 +8,14 @@
 GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 
 #import pbs
-import commands, os, random, shutil, string, sys, argparse
+import commands
+import os
+import random
+import shutil
+import string
+import sys
+import argparse
+
 
 USAGE = 'usage: %s [-h] [-v] [--path PATH] [--cms | --zinnia]' % (sys.argv[0])
 #FUTURE_USAGE = USAGE + ' [--cms] [--zinnia]'
@@ -158,6 +165,7 @@ for filename in generic_files:
 
 # Adds cms_settings/zinnia_settings
 # FIXME shouldn't be hard coded
+# (yeah this is kinda bad)
 if arguments.cms or arguments.zinnia:
     shutil.copy('extra_settings/cms_settings.py',
                 PROJECT_PATH + 'extra_settings/')
