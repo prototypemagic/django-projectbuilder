@@ -56,12 +56,16 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 
 
 ## Front End Options
+
 (We will usually use Bootstrap, so these are all things that can come into
-play "underneath" bootstrap
+play "underneath" bootstrap.)
 
 * ajvb's boilerplate style.css, which takes heavy influence from HTML5BP
+
 * HTML5BP:
+
     *The older version
+
     *The newer version
 
 The plan is for there to be cmd line arg's for different options, where the
@@ -69,5 +73,6 @@ typical will be Bootstrap + ajvb's custom style.css, which is a mixed of old
 and new H5BP, as well as his own default class's, bootstrap changes, etc. 
 
 ### Later Changes to /media/
+
 Also there 'might' be other options for Zinnia, Django-CMS, etc. Not sure yet.
 
