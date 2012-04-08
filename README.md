@@ -44,8 +44,6 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 
 * djangobuilder.py: When running first migration on newly-created project (on user's dev box), use http://www.arthurkoziel.com/2008/09/04/automatical-superuser-creation-django to automate superuser creation
 
-* djangobuilder.py: fix bug preventing .gitignore-generic from being copied into new repo
-
 * Create postgresbuilder.sh for automatic Postgres user creation, credentials included
 
 * Create route53builder.py to automatically create new subdomain [NOTE: I'll use the script Jay wrote for Cazooz]
