@@ -87,16 +87,15 @@ extra_files = []
 #if so will add the needed settings.
 if arguments.cms or arguments.zinnia:
     # Does this do anything? cms_settings.py isn't in generic_scripts/
-    pathify.update({'cms_settings.py' : [''],})
+    pathify.update({'cms_settings.py': [EXTRA_FILES_PATH]})
     extra_files.append('cms_settings.py')
-    pathify.update({'__init__.py': # This one makes sense
-                        ['', '%(PROJECT_NAME)s/', 'extra_settings/']})
+
 if arguments.zinnia:
     # Neither is zinnia_settings.py
-    pathify.update({'zinnia_settings.py' : [''],})
+    pathify.update({'zinnia_settings.py': [EXTRA_FILES_PATH]})
     extra_files.append('zinnia_settings.py')
 if not arguments.noswag:
-    pathify.update({'prepare-commit-msg' : ['.git/hooks/']})
+    pathify.update({'prepare-commit-msg': ['.git/hooks/']})
     extra_files.append('prepare-commit-msg')
     print "swag"
 
