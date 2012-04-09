@@ -4,7 +4,7 @@
 # Requires fabric, virtualenv, and virtualenvwrapper
 #
 
-# FIXME This shouldn't be hard-coded
+# TODO: Should this be hard-coded?
 GENERIC_SCRIPTS_PATH = 'generic_scripts/'
 
 #import pbs
@@ -17,38 +17,46 @@ import sys
 import argparse
 
 
-USAGE = 'usage: %s [-h] [-v] [--path PATH] [--cms | --zinnia]' % (sys.argv[0])
-#FUTURE_USAGE = USAGE + ' [--cms] [--zinnia]'
+USAGE = 'usage: %s --path PATH [-h] [-v] [--cms | --zinnia] --noswag' \
+    % (sys.argv[0])
 
 if len(sys.argv) < 2:
     print USAGE
     sys.exit(0)
 
-# These are the arguements for the builder
-# We can extent the arguements as we want to add
-# more diversity
+# These are the arguements for the builder.  We can extent the
+# arguments as we want to add more diversity
 parser = argparse.ArgumentParser(description='''ProtoType Magic presents
                                   Django Project Builder and so much more...''',
                                   version='djangbuilder.py 0.2.3')
 parser.add_argument('--path', action='store', dest='path',
                     help='''Use this to direct Django Project Builder
-                    to where the project should be made, including
-                    the project name at the end. e.g. /home/username/project_name''')
+                    to where the project should be made, including the
+                    project name at the end. e.g. /home/username/project_name'''
+                    )
+parser.add_argument('--noswag', action='store_true', default=False,
+                    help='''Stops appending " (swag)" to every commit message
+                    (swag)''',
+                    dest='noswag'
+                    )
+
 # This makes it so we don't derp and use --zinnia and --cms
 cms_options = parser.add_mutually_exclusive_group()
 cms_options.add_argument('--cms', action='store_true', default=False,
                          help='''This will include Django-CMS along with all
-                         typically used packages.''', dest='cms'
+                         typically used packages.''',
+                         dest='cms'
                          )
 cms_options.add_argument('--zinnia', action='store_true', default=False,
-                         help='''This will include Zinnia (along with Django-CMS)
-                         and all the needed files and required packages.''',
+                         help='''This will include Zinnia (along with
+                         Django-CMS) and all the needed files and
+                         required packages.''',
                          dest='zinnia'
                          )
-# This allows for ease of checking whether
-# either --zinnia or --cms was used
-arguments = parser.parse_args()
 
+# This allows for ease of checking whether either --zinnia or --cms
+# was used
+arguments = parser.parse_args()
 
 # FIXME Every file in generic_scripts and *-needed should be listed
 # here... or we can copy entire directories
@@ -157,6 +165,8 @@ for filename in generic_files:
 
         if new_filename not in weird_files:
             new_contents = contents % replacement_values
+        # TODO: What happens when we need string interpolations for
+        # weird files? .replace('%', '%%') ?
         else:
             new_contents = contents
         f_write.write(new_contents)
@@ -173,6 +183,12 @@ if arguments.cms or arguments.zinnia:
 if arguments.zinnia:
     shutil.copy('extra_settings/zinnia_settings.py',
                 PROJECT_PATH + 'extra_settings/')
+
+# TODO: Find a smart way to generalize this or something...
+if not arguments.noswag:
+    shutil.copy('devbox-hooks/prepare-commit-msg',
+                PROJECT_PATH + '.git/hooks/')
+    print "swag"
 
 
 print "Copying directories..."

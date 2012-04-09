@@ -1,0 +1,3 @@
+#!/bin/bash
+text=`cat .git/COMMIT_EDITMSG`
+echo "$text (swag)" > .git/COMMIT_EDITMSG
