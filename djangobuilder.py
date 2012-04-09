@@ -86,12 +86,10 @@ extra_files = []
 #These will check whether the user used --zinnia or --cms and
 #if so will add the needed settings.
 if arguments.cms or arguments.zinnia:
-    # Does this do anything? cms_settings.py isn't in generic_scripts/
     pathify.update({'cms_settings.py': [EXTRA_FILES_PATH]})
     extra_files.append('cms_settings.py')
 
 if arguments.zinnia:
-    # Neither is zinnia_settings.py
     pathify.update({'zinnia_settings.py': [EXTRA_FILES_PATH]})
     extra_files.append('zinnia_settings.py')
 if not arguments.noswag:
@@ -132,7 +130,7 @@ replacement_values = {
 needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s']
 
 if arguments.cms or arguments.zinnia:
-    needed_dirs += ['extra_settings']
+    needed_dirs.append('extra_settings')
 
 print "Creating directories..."
 
