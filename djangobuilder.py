@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
 #
-# Requires fabric, virtualenv, and virtualenvwrapper
+# Requires virtualenv and virtualenvwrapper
 #
 
-# TODO: Should this be hard-coded?
+# TODO: Should these be hard-coded?
 GENERIC_SCRIPTS_PATH = 'generic_scripts/'
+EXTRA_FILES_PATH     = 'extra_settings/'
 
 #import pbs
 import commands
@@ -76,13 +77,29 @@ pathify = {
     'views.py':          ['%(PROJECT_NAME)s/'],
 }
 
+# Files added conditionally, based upon which flags are given at the
+# command line when this file is run. Named as such because they're in
+# the extra_files/ directory.
+# TODO: Currently assumes all filenames in extra_files/ unique.
+extra_files = []
+
 #These will check whether the user used --zinnia or --cms and
 #if so will add the needed settings.
 if arguments.cms or arguments.zinnia:
+    # Does this do anything? cms_settings.py isn't in generic_scripts/
     pathify.update({'cms_settings.py' : [''],})
-    pathify.update({'__init__.py': ['', '%(PROJECT_NAME)s/', 'extra_settings/'],})
+    extra_files.append('cms_settings.py')
+    pathify.update({'__init__.py': # This one makes sense
+                        ['', '%(PROJECT_NAME)s/', 'extra_settings/']})
 if arguments.zinnia:
+    # Neither is zinnia_settings.py
     pathify.update({'zinnia_settings.py' : [''],})
+    extra_files.append('zinnia_settings.py')
+if not arguments.noswag:
+    pathify.update({'prepare-commit-msg' : ['.git/hooks/']})
+    extra_files.append('prepare-commit-msg')
+    print "swag"
+
 
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
@@ -90,8 +107,6 @@ HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 PROJECT_PATH = arguments.path.rstrip('/') + '_site/'
 PROJECT_NAME = PROJECT_PATH.split('/')[-2].split('_')[0] # Before the '_site/'
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
-
-# FIXME Shouldn't assume the location of virtualenvwrapper.sh
 
 # TODO
 # vewrapper = pbs.which('virtualenvwrapper.sh')
@@ -173,22 +188,13 @@ for filename in generic_files:
         f_write.close()
 
 
-# Adds cms_settings/zinnia_settings
-# FIXME shouldn't be hard coded
-# (yeah this is kinda bad)
-if arguments.cms or arguments.zinnia:
-    shutil.copy('extra_settings/cms_settings.py',
-                PROJECT_PATH + 'extra_settings/')
-
-if arguments.zinnia:
-    shutil.copy('extra_settings/zinnia_settings.py',
-                PROJECT_PATH + 'extra_settings/')
-
-# TODO: Find a smart way to generalize this or something...
-if not arguments.noswag:
-    shutil.copy('devbox-hooks/prepare-commit-msg',
-                PROJECT_PATH + '.git/hooks/')
-    print "swag"
+# TODO: Currently assumes all extra_files are copied verbatim, no
+# interpolation necessary
+for extra in extra_files:
+    # Currently handles {cms,zinnia}_settings.py, prepare-commit-msg
+    for destination in pathify[extra]:
+        shutil.copy(EXTRA_FILES_PATH + extra,
+                    PROJECT_PATH + destination % replacement_values)
 
 
 print "Copying directories..."
@@ -208,6 +214,7 @@ for dirname in generic_dirs:
 
 print "Making virtualenv..."
 cmd = ''
+# FIXME Shouldn't assume the location of virtualenvwrapper.sh
 cmd = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh &&'
 cmd += ' mkvirtualenv %s --no-site-packages"' % PROJECT_NAME
 
@@ -229,7 +236,7 @@ cmd += ' && pip install -r requirements.txt"'
 _, output = commands.getstatusoutput(cmd)
 print '\n', output, '\n'
 
-#Now virtualenv exists
+# Now virtualenv exists
 
 cmd = ''
 if arguments.zinnia or arguments.cms:
