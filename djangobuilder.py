@@ -29,15 +29,15 @@ if len(sys.argv) < 2:
 # arguments as we want to add more diversity
 parser = argparse.ArgumentParser(description='''ProtoType Magic presents
                                   Django Project Builder and so much more...''',
-                                  version='djangbuilder.py 0.2.3')
+                                  version='djangbuilder.py 0.5')
 parser.add_argument('--path', action='store', dest='path',
-                    help='''Use this to direct Django Project Builder
-                    to where the project should be made, including the
-                    project name at the end. e.g. /home/username/project_name'''
+                    help='''Specifies where the new Django project
+                    should be made, including the project name at the
+                    end (e.g. /home/username/code/project_name)'''
                     )
 parser.add_argument('--noswag', action='store_true', default=False,
-                    help='''Stops appending " (swag)" to every commit message
-                    (swag)''',
+                    help='''Prevents " (swag)" from being appended to
+                    every commit message, which is the default (swag)''',
                     dest='noswag'
                     )
 
