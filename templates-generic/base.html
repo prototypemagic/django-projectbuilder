@@ -3,18 +3,23 @@
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>insert_title</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}{% endblock %}" />
-    <meta name="author" content="{% block meta_author %}{% endblock %}" />
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
+    <meta name="author" content="PTM Technologies: elimisteve, smoochy, jaymottz, ajvb"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     {# TODO: <link rel="shortcut icon" href="/media/images/favicon.ico" /> #}
     {# TODO: <link rel="apple-touch-icon" href="/media/images/apple-touch-icon.png" /> #}
-    <link rel="stylesheet" href="/media/css/style.css" />
-    {% block css %}{% endblock %}
+    <link type="text/css" rel="stylesheet" href="/media/css/bootstrap.min.css" charset="utf-8">
+    <style>
+      body {
+        padding-top: 60px; /* to make the container go all the way to the bottom of the topbar (It should be 60px) */
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="/media/css/bootstrap-responsive.min.css" charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="/media/css/style.css" charset="utf-8"/>
    <!--[if gte IE 9]>
   <style type="text/css">
     .gradient {
@@ -22,53 +27,75 @@
     }
   </style>
     <![endif]-->
-   {% block javascript_library %}
-    <script src="/media/js/libs/modernizr-2.0.6.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../media/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
-    <script defer src="/media/js/plugins.js"></script>
-    <script defer src="/media/js/script.js"></script>
-    {% endblock %} 
-    {% block javascript %}{% endblock %}
-    {% block extra_head %}
-    {% endblock %}
+    {% block extra_head %}{% endblock %}
+    <script src="js/modernizr-2.5.3.min.js"></script>
 </head>
 
 <body class="body">
-    <div id="base">
-        <header id="banner">
-        <h1 id="banner"><a href="/">insert_title</a></h1>
-
-        <nav id="nav"><ul>
-            <li><a href="replaceme"></a>replaceme</li>
-            <li><a href="replaceme"></a>replaceme</li>
-            <li><a href="replaceme"></a>replaceme</li>
-            <li><a href="replaceme"></a>replaceme</li>
-        </ul></nav>
-        </header>
-        
-        <div id="main" role="main">
-            {% block content %}{% endblock %}
+     <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="{# url home #}">Brand Name</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li><a href="{# url home #}">Home</a></li>
+              {% if user.is_authenticated %}
+              <li><a href="{# url ___ #}">fill in</a></li>
+              <li><a href="{# /logout/">Logout</a></li>
+              {% else %}
+              <li><a href="{# /login/ #}">Login</a></li>
+              {% endif %}
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-        
-        <footer id="footer">
-        <p id="footer"><a href="#"></a></p>
-        </footer>
-    </div> {# end of #base #}
-
+      </div>
+    </div>
+    <div class="container" role="main">
+    <!--{# {% if messages %}
+      {% for message in messages %}
+      <h4>{{ message }}</h4>
+      {% endfor %}
+    {% endif %} #}-->
     
-    
-    <script> // Change UA-XXXXX-X to be your site's ID
-    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
-    Modernizr.load({
-      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-    });
-    </script>
-    <!--[if lt IE 7 ]>
-        <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-        <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+    <!-- PROMPT IE 6 USERS TO INSTALL CHROME FRAME. REMOVE THIS IF YOU SUPPORT IE 6.
+    chromium.org/developers/how-tos/chrome-frame-getting-started -->
+    <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+    <!--Block Content-->
+    {% block content %}{% endblock %}
+    <!----End Block---->
+        <div class="row">
+        <footer class="center">
+        <hr />
+        <p><a href="{# url home #}">Home</a> | <a href="{# url about #}">About</a> | <a href="{# url contact #}">Contact</a>
+         |{% if user.authenticated %} <a href="#">Log Out</a>{% else %} <a href="#">Login</a>{% endif %}
+         <br />
+         <b>Created by: <a href="#">PTM Technologies</a></b>
+         <br />
+         <b>Powered by: <a href="https://www.djangoproject.com/">Django</a> and <a href="http://twitter.github.com/bootstrap/">Bootstrap</a></b>
+         </footer>
+        </div>
+    </div><!--End of Container-->
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-</body>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../media/js/libs/jquery-1.7.2.min.js"><\/script>')</script>
+    <script src="/media/js/bootstrap.min.js"></script>
+    {% block javascript %}{% endblock %}
+    
+    {# TODO <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script> #}
 
+</body>
 </html>
 
