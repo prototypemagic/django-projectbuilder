@@ -73,4 +73,3 @@ and new H5BP, as well as his own default class's, bootstrap changes, etc.
 ### Later Changes to /media/
 
 Also there 'might' be other options for Zinnia, Django-CMS, etc. Not sure yet.
-
