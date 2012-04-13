@@ -4,10 +4,6 @@
 # Requires virtualenv and virtualenvwrapper
 #
 
-# TODO: Should these be hard-coded?
-GENERIC_SCRIPTS_PATH = 'generic_scripts/'
-EXTRA_FILES_PATH     = 'extra_settings/'
-
 #import pbs
 import commands
 import os
@@ -17,6 +13,9 @@ import string
 import sys
 import argparse
 
+DPB_PATH             = '/'.join(os.path.realpath(__file__).split('/')[:-1]) + '/'
+GENERIC_SCRIPTS_PATH = DPB_PATH + 'generic_scripts/'
+EXTRA_FILES_PATH     = DPB_PATH + 'extra_settings/'
 
 USAGE = 'usage: %s --path PATH [-h] [-v] [--cms | --zinnia] --noswag' \
     % (sys.argv[0])
@@ -195,12 +194,12 @@ for extra in extra_files:
 
 
 print "Copying directories..."
-
+# Add directory names here
 generic_dirs = ['media', 'templates']
+generic_dirs = [DPB_PATH + d for d in generic_dirs]
 
 for dirname in generic_dirs:
     # cp -r media-generic $PROJECT_PATH/media && cp -r templates-generic ...
-    ### FIXME: Assumes script is being run from the directory it's in
     if arguments.zinnia or arguments.cms:
         shutil.copytree(dirname + '-cms', PROJECT_PATH + dirname)
     else:
