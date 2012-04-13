@@ -48,8 +48,6 @@ South, Celery, django-cms, etc), and even HTML5 Boilerplate.
 
 * Create route53builder.py to automatically create new subdomain [NOTE: I'll use the script Jay wrote for Cazooz]
 
-* Integrate Bootstrap
-
 * Integrate LessCSS
 
 
