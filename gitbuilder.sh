@@ -1,6 +1,7 @@
 #!/bin/bash
 # Steve Phillips / elimisteve
-# 2012.02.05
+# Started 2012.02.05
+# Updated 2012.04.27
 
 if [ -z $1 ]; then
     echo Usage: `basename $0` project_name
@@ -8,6 +9,11 @@ if [ -z $1 ]; then
 fi
 
 PROJECT_NAME=$1
+
+# New
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
+THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 echo "Creating $PROJECT_NAME directory and sub-directories"
 echo
@@ -25,7 +31,7 @@ rm $PROJECT_NAME/bare/hooks/*
 (source /usr/local/bin/virtualenvwrapper.sh && cpvirtualenv default $PROJECT_NAME)
 
 # Put our custom hooks in place
-cp server-hooks/* $PROJECT_NAME/bare/hooks/
+cp $THIS_DIR/server-hooks/* $PROJECT_NAME/bare/hooks/
 for file in $PROJECT_NAME/bare/hooks/*; do
     sed -i "s/PROJECT_NAME/$PROJECT_NAME/g" $file
 done
