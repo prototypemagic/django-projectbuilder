@@ -38,5 +38,5 @@ done
 
 echo -e "If you're on a server, run\n\n    sudo bash -c \"./apachebuilder.sh $PROJECT_NAME\"\n\nto create and install an Apache config file, as well as set up sites-enabled and sites-available."
 echo
-echo -e "On your local dev machine, run something like\n\n    python djangobuilder.py --path path/to/$PROJECT_NAME\n\nthen push to (the probably remote) $PROJECT_NAME/bare/ directory"
+echo -e "On your local dev machine, run something like\n\n    python djangobuilder.py --path path/to/$PROJECT_NAME\n\nthen push to the (probably remote) $PROJECT_NAME/bare/ directory"
 #echo "Run proto-new-virtualhost-subdomain.py to manually create a new Apache config file."
