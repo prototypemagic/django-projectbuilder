@@ -8,7 +8,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('ProtoType Magic', 'team@prototypemagic.com'),
+    ('PTM Web Engineering', 'team@builtbyptm.com'),
 )
 
 MANAGERS = ADMINS
