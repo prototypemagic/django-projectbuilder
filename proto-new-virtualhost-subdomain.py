@@ -13,7 +13,9 @@ if len(sys.argv) < 2:
     usage()
     sys.exit(0)
 
-new_host = '''<VirtualHost *:80>
+new_host = '''LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so
+
+<VirtualHost *:80>
 ServerName %(PROJECT_NAME)s.prototypemagic.com
 WSGIScriptAlias / /home/ubuntu/django_projects/%(PROJECT_NAME)s/%(PROJECT_NAME)s_site/apache/django.wsgi
 
