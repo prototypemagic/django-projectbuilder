@@ -2,7 +2,7 @@
  * 
  * CREDITS: 
  * ATTRIBUTE: HTML5 Boilerplate h5bp.com --- Zurb's Foundation http://foundation.zurb.com/
- * AUTHOR & CUSTOMIZED: AJ v Bahnken ajvb @ajvbahnken -- email:aj@prototypemagic.com
+ * AUTHOR & CUSTOMIZED: AJ v Bahnken ajvb @ajvbahnken -- email: aj@prototypemagic.com
  * 
  * /
 /* HTML5 ✰ Boilerplate (slightly customized) */
@@ -96,6 +96,13 @@ padding-bottom:10px;
 .ts5 h1, .ts5 h2,
 .ts5 h3, .ts5 h4,
 .ts5 h5, .ts5 h6{text-shadow: 0.8px -0.8px 1px rgba(0,0,0,.5);}
+
+/*--Error Messages--*/
+.msgs h4{
+    color: #C32020;
+    text-align: center;
+    margin: 10px;
+}
 /* ---- Border Radius ---------*/
 .bord2 {-moz-border-radius: 2px;-webkit-border-radius: 2px;border-radius: 2px;}
 .bord5 {-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;}
@@ -114,6 +121,7 @@ padding-bottom:10px;
         Main Content
 =============================*/
 
+
 .container {
 }
 
@@ -130,6 +138,13 @@ footer a:hover {
 footer b{
     font-weight: normal;
 }
+
+div.ptm{
+    margin-bottom: 8px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.ptm b {font-weight: bolder;padding-left:2px;}
 /*====== Browser Specific ======
  *            And
 ======= Modernizer Classes ==== */

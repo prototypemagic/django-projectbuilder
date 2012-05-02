@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% spaceless %}
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
@@ -47,7 +48,7 @@
               <li><a href="{# url home #}">Home</a></li>
               {% if user.is_authenticated %}
               <li><a href="{# url ___ #}">fill in</a></li>
-              <li><a href="{# /logout/">Logout</a></li>
+              <li><a href="{# /logout/ #}">Logout</a></li>
               {% else %}
               <li><a href="{# /login/ #}">Login</a></li>
               {% endif %}
@@ -58,12 +59,13 @@
       </div>
     </div>
     <div class="container" role="main">
-    <!--{# {% if messages %}
-      {% for message in messages %}
-      <h4>{{ message }}</h4>
-      {% endfor %}
-    {% endif %} #}-->
-    
+    {% if messages %}
+        <div class="span4 center msgs">
+        {% for message in messages %}
+        <h4>{{ message }}</h4>
+        {% endfor %}
+        </div>
+    {% endif %}
     <!-- PROMPT IE 6 USERS TO INSTALL CHROME FRAME. REMOVE THIS IF YOU SUPPORT IE 6.
     chromium.org/developers/how-tos/chrome-frame-getting-started -->
     <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
@@ -74,10 +76,12 @@
         <footer class="center">
         <hr />
         <p><a href="{# url home #}">Home</a> | <a href="{# url about #}">About</a> | <a href="{# url contact #}">Contact</a>
-         |{% if user.authenticated %} <a href="#">Log Out</a>{% else %} <a href="#">Login</a>{% endif %}
-         <br />
-         <b>Created by: <a href="#">PTM Technologies</a></b>
-         <br />
+         |{% if user.is_authenticated %} <a href="#">Log Out</a>{% else %} <a href="#">Login</a>{% endif %}
+         <div class="ptm">
+                <b>Built By</b>
+                <br />
+                <a href="http://builtbyptm.com"><img alt="PTM Web Engineering" src="/media/images/PTM_Logo_Small_Alpha_Web.png" /></a>
+         </div>
          <b>Powered by: <a href="https://www.djangoproject.com/">Django</a> and <a href="http://twitter.github.com/bootstrap/">Bootstrap</a></b>
          </footer>
         </div>
@@ -99,5 +103,6 @@
     </script> #}
 
 </body>
+{% endspaceless %}
 </html>
 
