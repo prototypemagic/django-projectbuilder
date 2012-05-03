@@ -1,10 +1,12 @@
 #!/usr/bin/env python
-
+#
+#   Authors:
+#   Steve Philips / steve@builtbyptm.com
+#   AJ Bahnken    / aj@builtbyptm.com
 #
 # Requires virtualenv and virtualenvwrapper
 #
 
-#import pbs
 import commands
 import os
 import random
@@ -15,9 +17,8 @@ import argparse
 
 DPB_PATH             = '/'.join(os.path.realpath(__file__).split('/')[:-1]) + '/'
 GENERIC_SCRIPTS_PATH = DPB_PATH + 'generic_scripts/'
-EXTRA_FILES_PATH     = DPB_PATH + 'extra_settings/'
 
-USAGE = 'usage: %s --path PATH [-h] [-v] [--cms | --zinnia] --noswag' \
+USAGE = 'usage: %s [-h] [-v] [--path PATH] [--bootstrap]' \
     % (sys.argv[0])
 
 if len(sys.argv) < 2:
@@ -34,29 +35,19 @@ parser.add_argument('--path', action='store', dest='path',
                     should be made, including the project name at the
                     end (e.g. /home/username/code/project_name)'''
                     )
-parser.add_argument('--noswag', action='store_true', default=False,
-                    help='''Prevents " (swag)" from being appended to
-                    every commit message, which is the default (swag)''',
-                    dest='noswag'
-                    )
-
-# This makes it so we don't derp and use --zinnia and --cms
-cms_options = parser.add_mutually_exclusive_group()
-cms_options.add_argument('--cms', action='store_true', default=False,
-                         help='''This will include Django-CMS along with all
-                         typically used packages.''',
-                         dest='cms'
-                         )
-cms_options.add_argument('--zinnia', action='store_true', default=False,
-                         help='''This will include Zinnia (along with
-                         Django-CMS) and all the needed files and
-                         required packages.''',
-                         dest='zinnia'
+parser.add_argument('--bootstrap', action='store_true', default=False,
+                         help='''This will include Bootstrap as the template
+                         base of the project..''',
+                         dest='bootstrap'
                          )
 
 # This allows for ease of checking whether either --zinnia or --cms
 # was used
 arguments = parser.parse_args()
+
+if not arguments.path:
+    sys.exit("You must declare a path!")
+
 
 # FIXME Every file in generic_scripts and *-needed should be listed
 # here... or we can copy entire directories
@@ -81,21 +72,6 @@ pathify = {
 # the extra_files/ directory.
 # TODO: Currently assumes all filenames in extra_files/ unique.
 extra_files = []
-
-#These will check whether the user used --zinnia or --cms and
-#if so will add the needed settings.
-if arguments.cms or arguments.zinnia:
-    pathify.update({'cms_settings.py': [EXTRA_FILES_PATH]})
-    extra_files.append('cms_settings.py')
-
-if arguments.zinnia:
-    pathify.update({'zinnia_settings.py': [EXTRA_FILES_PATH]})
-    extra_files.append('zinnia_settings.py')
-if not arguments.noswag:
-    pathify.update({'prepare-commit-msg': ['.git/hooks/']})
-    extra_files.append('prepare-commit-msg')
-    print "swag"
-
 
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
@@ -128,9 +104,6 @@ replacement_values = {
 # Doing it this way so DPB can add 'extra_settings' on the fly.
 needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s']
 
-if arguments.cms or arguments.zinnia:
-    needed_dirs.append('extra_settings')
-
 print "Creating directories..."
 
 # Let 'git init' create the PROJECT_PATH directory and turn it into a
@@ -147,11 +120,6 @@ for dir_name in needed_dirs:
 generic_files = [x for x in os.listdir(GENERIC_SCRIPTS_PATH)
                  if x.endswith('-needed')]
 
-if arguments.cms or arguments.zinnia:
-    generic_files.remove('urls.py-needed')
-    generic_files += [x for x in os.listdir(GENERIC_SCRIPTS_PATH)
-                      if x.endswith('-cms')]
-
 # Oddly-placed '%' in weird_files screws up our string interpolation,
 # so copy these files verbatim
 weird_files = ['manage.py']
@@ -166,8 +134,6 @@ for filename in generic_files:
     # Replace %(SECRET_KEY)s, etc with new value for new project
     if filename.endswith('-needed'):
         new_filename = filename.replace('-needed', '')
-    if filename.endswith('-cms'):
-        new_filename = filename.replace('-cms', '')
     # Loop through list of locations new_filename should be placed
     for dir in pathify[new_filename]:
         # Path names include '%(PROJECT_NAME)s', etc
@@ -200,8 +166,8 @@ generic_dirs = [DPB_PATH + d for d in generic_dirs]
 
 for dirname in generic_dirs:
     # cp -r media-generic $PROJECT_PATH/media && cp -r templates-generic ...
-    if arguments.zinnia or arguments.cms:
-        shutil.copytree(dirname + '-cms', PROJECT_PATH + dirname)
+    if arguments.bootstrap:
+        shutil.copytree(dirname + '-bootstrap', PROJECT_PATH + dirname)
     else:
         shutil.copytree(dirname + '-generic', PROJECT_PATH + dirname)
 
@@ -233,25 +199,6 @@ _, output = commands.getstatusoutput(cmd)
 print '\n', output, '\n'
 
 # Now virtualenv exists
-
-cmd = ''
-if arguments.zinnia or arguments.cms:
-    print "Installing Django-CMS..."
-    cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon %s' \
-        % PROJECT_NAME
-    cmd += ' && pip install django-cms"'
-    _, output = commands.getstatusoutput(cmd)
-    print '\n', output, '\n'
-
-cmd = ''
-if arguments.zinnia:
-    print "Installing Zinnia..."
-    cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon %s' \
-        % PROJECT_NAME
-    cmd += ' && pip install django-blog-zinnia"'
-    _, output = commands.getstatusoutput(cmd)
-    print '\n', output, '\n'
-
 
 # Run 'cpvirtualenv PROJECT_NAME default' ?
 #if ask_to_copy_default_virtualenv:
