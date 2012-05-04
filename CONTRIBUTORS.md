@@ -1,7 +1,7 @@
 ## Authors
 
-    Steve Phillips / elimisteve / steve@prototypemagic.com
-    AJ Bahnken     / avb_wkyhu  / aj@prototypemagic.com
+    Steve Phillips / elimisteve / steve@builtbyptm.com
+    AJ Bahnken     / ajvb       / aj@builtbyptm.com
 
-(Sponsored by ProtoType Magic, LLC in Santa Barbara, CA)
+Sponsored by PTM Web Engineering, LLC in Santa Barbara, CA
 

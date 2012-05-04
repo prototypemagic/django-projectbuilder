@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 #
 #   Authors:
-#   Steve Philips / steve@builtbyptm.com
-#   AJ Bahnken    / aj@builtbyptm.com
+#   Steve Philips -- steve@builtbyptm.com
+#   AJ v Bahnken  -- aj@builtbyptm.com
 #
 # Requires virtualenv and virtualenvwrapper
 #

@@ -1,9 +1,0 @@
-django-cms==2.2
-Markdown==2.1.0
-cmsplugin-contact==0.9.8
-cmsplugin-filer==0.8.0
--e git://github.com/centralniak/cmsplugin_gallery.git@ea440d9130caed2c32507a78a95a9f925de88837#egg=cmsplugin_gallery-dev
-django-admin-tools==0.4.0
-django-classy-tags==0.3.4.1
-django-debug-toolbar==0.8.5
-django-filer==0.8.5
