@@ -4,11 +4,11 @@ import os
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('PTM Web Engineering', 'team@builtbyptm.com'),
+    ('', ''),
 )
 
 MANAGERS = ADMINS
@@ -139,14 +139,12 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     ####
-    # Stuff we put in
-    ####
     # 'sentry',
     # 'djcelery',
-    'mptt',
-    'raven.contrib.django',
-    'south',
-    'taggit',
+    # 'mptt',
+    # 'raven.contrib.django',
+    # 'south',
+    # 'taggit',
     '%(PROJECT_NAME)s',
 
 )
@@ -189,29 +187,5 @@ except ImportError:
 else:
     try:
         INSTALLED_APPS += LOCAL_INSTALLED_APPS
-    except NameError:
-        pass
-
-# Trying to import Django-CMS and Zinnia
-try:
-    from extra_settings.cms_settings import *
-    try:
-        from extra_settings.zinnia_settings import *
-    except ImportError:
-        import sys
-        sys.stderr.write( "Zinnia Settings not being used\n" )
-except ImportError:
-    import sys
-    sys.stderr.write( "CMS Settings not being used\n" )
-
-else:
-    try:
-        INSTALLED_APPS = INSTALLED_APPS + CMS_INSTALLED_APPS
-        MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + CMS_MIDDLE_CLASSES
-        try:
-            ZINNIA_INSTALLED_APPS = ()
-            INSTALLED_APPS = INSTALLED_APPS + ZINNIA_INSTALLED_APPS
-        except NameError:
-            pass
     except NameError:
         pass

@@ -8,11 +8,10 @@
 import os
 PROJECT_PATH = os.path.dirname(__file__)
 
-DEBUG = True  #TODO set to off for live, staging and preview
-TEMPLATE_DEBUG = True  # Recommended by Sentry
+DEBUG = True
+TEMPLATE_DEBUG = True
 
-#TODO: replace localhost with the domain name of the site
-DEFAULT_FROM_EMAIL = 'noreply@prototypemagic.com'
+DEFAULT_FROM_EMAIL = ''
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 
@@ -34,19 +33,4 @@ DATABASES = {
 
 TIME_ZONE = 'Canada/Eastern'
 
-
 INTERNAL_IPS = ('127.0.0.1', )
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-#MEDIA_URL = '/media/' #TODO: on production (full URL to the media server)
-
-# URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
-#STATIC_URL = '/static/'
-
-#ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
-# Allows for certain Django apps to be installed on a local basis,
-# independent of INSTALLED_APPS in the main settings.py file.

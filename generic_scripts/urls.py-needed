@@ -11,6 +11,10 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
 
+    #App url include
+    url(r'^', include('%(PROJECT_NAME)s.urls')),
+    #url(r'^%(PROJECT_NAME)s/$', include('%(PROJECT_NAME)s.urls')),
+    
     #Static Links
 #    url(r'^', TemplateView.as_view(template_name='home.html'), name='home'),
     

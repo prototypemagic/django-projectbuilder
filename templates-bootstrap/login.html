@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+<div class="span12">
+<h2>Log in!</h2>
+<br />
+</div></div>
+<div class="row">
+<div class="span6">
+<form class="form" action="{% url login %}" method="post">
+    {% csrf_token %}
+    {% form.as_ul %}
+    {% csrf_token %}
+  <input class="btn btn-success" type="submit" value="Log In" />
+</form>
+</div></div>
+{% endblock %}

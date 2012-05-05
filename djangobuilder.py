@@ -15,12 +15,15 @@ import string
 import sys
 import argparse
 
+
 DPB_PATH             = '/'.join(os.path.realpath(__file__).split('/')[:-1]) + '/'
 GENERIC_SCRIPTS_PATH = DPB_PATH + 'generic_scripts/'
 
+# Usage message to be printed for miss use
 USAGE = 'usage: %s [-h] [-v] [--path PATH] [--bootstrap]' \
     % (sys.argv[0])
 
+# Prints the usage message if there are no args
 if len(sys.argv) < 2:
     sys.exit(USAGE)
 
@@ -29,31 +32,35 @@ if len(sys.argv) < 2:
 parser = argparse.ArgumentParser(description='''ProtoType Magic presents
                                   Django Project Builder and so much more...''',
                                   version='djangbuilder.py 0.5')
+
+# Arg to declare the path to where the project will be made
 parser.add_argument('--path', action='store', dest='path',
                     help='''Specifies where the new Django project
                     should be made, including the project name at the
                     end (e.g. /home/username/code/project_name)'''
                     )
+# Arg for using bootstrap rather than generic templates/media
 parser.add_argument('--bootstrap', action='store_true', default=False,
                          help='''This will include Bootstrap as the template
                          base of the project..''',
                          dest='bootstrap'
                          )
 
-# This allows for ease of checking whether either --zinnia or --cms
-# was used
 arguments = parser.parse_args()
 
+# Checks whether a path was declared
 if not arguments.path:
     sys.exit("You must declare a path!")
 
-os.path.abspath(arguements.path)
+# Converts to absolute path
+os.path.abspath(arguments.path)
 
 # FIXME Every file in generic_scripts and *-needed should be listed
 # here... or we can copy entire directories
 pathify = {
     '.gitignore':        [''],
     '__init__.py':       ['', '%(PROJECT_NAME)s/'],
+    'appurls.py':        ['%(PROJECT_NAME)s/'],
     'django.wsgi':       ['apache/'],
     'manage.py':         [''],
     'model_forms.py':    ['%(PROJECT_NAME)s/'],
@@ -62,16 +69,10 @@ pathify = {
     'settings.py':       [''],
     'settings_local.py-local': [''],
     'tests.py':          ['%(PROJECT_NAME)s/'],
-    'urls.py':           ['', '%(PROJECT_NAME)s/],
+    'urls.py':           [''],
     'views.py':          ['%(PROJECT_NAME)s/'],
     'wsgi.py':           [''],
 }
-
-# Files added conditionally, based upon which flags are given at the
-# command line when this file is run. Named as such because they're in
-# the extra_files/ directory.
-# TODO: Currently assumes all filenames in extra_files/ unique.
-extra_files = []
 
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
@@ -116,7 +117,7 @@ print '\n', output, '\n'
 for dir_name in needed_dirs:
     os.mkdir(PROJECT_PATH + dir_name % replacement_values)
 
-
+# Build list of all django-specific files to be copied into new project.
 generic_files = [x for x in os.listdir(GENERIC_SCRIPTS_PATH)
                  if x.endswith('-needed')]
 
@@ -148,15 +149,6 @@ for filename in generic_files:
             new_contents = contents
         f_write.write(new_contents)
         f_write.close()
-
-
-# TODO: Currently assumes all extra_files are copied verbatim, no
-# interpolation necessary
-for extra in extra_files:
-    # Currently handles {cms,zinnia}_settings.py, prepare-commit-msg
-    for destination in pathify[extra]:
-        shutil.copy(EXTRA_FILES_PATH + extra,
-                    PROJECT_PATH + destination % replacement_values)
 
 
 print "Copying directories..."
