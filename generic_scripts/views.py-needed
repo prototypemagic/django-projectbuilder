@@ -14,9 +14,6 @@ from django.views.decorators.csrf import csrf_exempt
 from %(PROJECT_NAME)s_site.%(PROJECT_NAME)s.models import *
 from %(PROJECT_NAME)s_site.%(PROJECT_NAME)s.model_forms import *
 
-from celery.decorators import task
-
-
 
 
 

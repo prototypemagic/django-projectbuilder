@@ -37,14 +37,11 @@ parser = argparse.ArgumentParser(description='''ProtoType Magic presents
 parser.add_argument('--path', action='store', dest='path',
                     help='''Specifies where the new Django project
                     should be made, including the project name at the
-                    end (e.g. /home/username/code/project_name)'''
-                    )
+                    end (e.g. /home/username/code/project_name)''')
 # Arg for using bootstrap rather than generic templates/media
 parser.add_argument('--bootstrap', action='store_true', default=False,
                          help='''This will include Bootstrap as the template
-                         base of the project..''',
-                         dest='bootstrap'
-                         )
+                         base of the project..''', dest='bootstrap')
 
 arguments = parser.parse_args()
 
@@ -159,9 +156,11 @@ generic_dirs = [DPB_PATH + d for d in generic_dirs]
 for dirname in generic_dirs:
     # cp -r media-generic $PROJECT_PATH/media && cp -r templates-generic ...
     if arguments.bootstrap:
-        shutil.copytree(dirname + '-bootstrap', PROJECT_PATH + dirname)
+        shutil.copytree(dirname + '-bootstrap',
+                        PROJECT_PATH + dirname.split('/')[-1])
     else:
-        shutil.copytree(dirname + '-generic', PROJECT_PATH + dirname)
+        shutil.copytree(dirname + '-generic',
+                        PROJECT_PATH + dirname.split('/')[-1])
 
 
 ## Making the virtualenv here
