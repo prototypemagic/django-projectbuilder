@@ -22,8 +22,7 @@ USAGE = 'usage: %s [-h] [-v] [--path PATH] [--bootstrap]' \
     % (sys.argv[0])
 
 if len(sys.argv) < 2:
-    print USAGE
-    sys.exit(0)
+    sys.exit(USAGE)
 
 # These are the arguements for the builder.  We can extent the
 # arguments as we want to add more diversity
@@ -48,6 +47,7 @@ arguments = parser.parse_args()
 if not arguments.path:
     sys.exit("You must declare a path!")
 
+os.path.abspath(arguements.path)
 
 # FIXME Every file in generic_scripts and *-needed should be listed
 # here... or we can copy entire directories
@@ -60,11 +60,11 @@ pathify = {
     'models.py':         ['%(PROJECT_NAME)s/'],
     'requirements.txt':  [''],
     'settings.py':       [''],
-    'settings_local.py': [''],
     'settings_local.py-local': [''],
     'tests.py':          ['%(PROJECT_NAME)s/'],
-    'urls.py':           [''],
+    'urls.py':           ['', '%(PROJECT_NAME)s/],
     'views.py':          ['%(PROJECT_NAME)s/'],
+    'wsgi.py':           [''],
 }
 
 # Files added conditionally, based upon which flags are given at the
