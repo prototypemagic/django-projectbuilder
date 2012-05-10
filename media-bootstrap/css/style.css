@@ -147,7 +147,12 @@ div.ptm{
 .ptm b {font-weight: bolder;padding-left:2px;}
 /*====== Browser Specific ======
  *            And
-======= Modernizer Classes ==== */
+======= Modernizer Classes ==== 
+* 
+* NOTE: The @-moz is the ghetto way. The better way to do cross-browser
+* testing is to you the css_browser_selector.js found in the /media/js 
+* folder of this project. Check out: http://rafael.adm.br/css_browser_selector/
+* */
 @-moz-document url-prefix() {
 
 }
@@ -180,18 +185,29 @@ div.ptm{
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
-/* ==|== media queries ====================================================== */
+/* ==|== media queries ======================================================*/
 @media only screen and (min-width: 480px), only screen and (max-width: 480px), only screen and (max-device-width: 480px){
 
 
 }
-@media only screen and (min-width: 768px), only screen and (max-width: 720px), only screen and (max-device-width: 720px){
+@media only screen and (max-width: 720px), only screen and (max-device-width: 720px){
 
 
 }
+@media (min-width: 768px) and (max-width: 979px) {
+
+
+}
+@media (min-width: 1200px) {
+
+
+}
+
 /* ==|== print styles =======================================================
  * NOTE: Inline css is important for mobile.
- */ 
+ * 
+ * Un-comment to override Bootstrap's defaults.
+ * 
 @media print {
   * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } 
   a, a:visited { text-decoration: underline; }
@@ -206,35 +222,4 @@ div.ptm{
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
-/* -------------------------------------------------- 
-	  Artfully masterminded by ZURB 
-    :: Mobile Visibility Affordances
----------------------------------------------------*/
-
-.show-on-phones { display: none !important; }	
-.show-on-tablets { display: none !important; }
-.show-on-desktops { display: block !important; }
-
-.hide-on-phones { display: block !important; }	
-.hide-on-tablets { display: block !important; }
-.hide-on-desktops { display: none !important; }
-
-/* Modernizr-enabled tablet targeting */
-@media only screen and (max-width: 1280px) and (min-width: 768px) {
-    .touch .hide-on-phones { display: block !important; }
-    .touch .hide-on-tablets { display: none !important; }
-    .touch .hide-on-desktops { display: block !important; }
-    
-    .touch .show-on-phones { display: none !important; }
-    .touch .show-on-tablets { display: block !important; }
-    .touch .show-on-desktops { display: none !important; }
-}
-@media only screen and (max-width: 767px) {
-    .hide-on-phones { display: none !important; }
-    .hide-on-tablets { display: block !important; }
-    .hide-on-desktops { display: block !important; }
-    
-    .show-on-phones { display: block !important; }
-    .show-on-tablets { display: none !important; }
-    .show-on-desktops { display: none !important; }
-}
+*/
