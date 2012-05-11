@@ -8,12 +8,16 @@
  * 
  * /
 /* HTML5 ✰ Boilerplate (slightly customized) */
-html { overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+body { margin: 0; font-size: 1em; line-height: 1.4; }}
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
 svg:not(:root) { overflow: hidden; }
-.chromeframe { margin: 0.2em 0; background: #ccc; color: black; padding: 0.2em 0; }
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
+audio:not([controls]) { display: none; }
+[hidden] { display: none; }
 /* End of HTML5 Boilerplate */
 /*=== Primary ===*/
 a {text-decoration: none; outline: 0;}
@@ -173,6 +177,9 @@ div.ptm{
 * NOTE: The @-moz is the ghetto way. The better way to do cross-browser
 * testing is to you the css_browser_selector.js found in the /media/js 
 * folder of this project. Check out: http://rafael.adm.br/css_browser_selector/
+* 
+* Also, in the generic style.css, Modernizr is disabled by default. Enable it
+* for the use of .ie6, .ie7, .ie8, .no-js, .oldie.
 * */
 .ie6 {
 
@@ -190,9 +197,8 @@ div.ptm{
 
 }
 /* For the pop-up */
-.chromeframe{
+.chromeframe { margin: 0.2em 0; background: #ccc; color: black; padding: 0.2em 0; }
 
-}
 /* ==|== non-semantic helper classes ======================================== */
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .ir br { display: none; }
@@ -226,11 +232,11 @@ div.ptm{
  * NOTE: Inline css is important for mobile.
  */ 
 @media print {
-  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } 
+  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; }
   a, a:visited { text-decoration: underline; }
   a[href]:after { content: " (" attr(href) ")"; }
   abbr[title]:after { content: " (" attr(title) ")"; }
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } 
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
   pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
   thead { display: table-header-group; }
   tr, img { page-break-inside: avoid; }
