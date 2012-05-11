@@ -2,8 +2,6 @@
 - Write Credits
 - Write Quick Start docs
 - Make it so everything can be relative rather than absolute
-- Take out _site
-- Add CSS cross browser JS
 
 FINAL STUFF:
 - Use disutils to make a setup.py
@@ -15,3 +13,4 @@ COMPLETED:
 - Clean up files
 - Organize folders
 - Write Contributors
+- Take out _site

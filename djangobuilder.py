@@ -34,7 +34,7 @@ parser = argparse.ArgumentParser(description='''ProtoType Magic presents
                                   version='djangbuilder.py 0.5')
 
 # Arg to declare the path to where the project will be made
-parser.add_argument('--path', action='store', dest='path',
+parser.add_argument('--path', action='FullPaths', dest='path',
                     help='''Specifies where the new Django project
                     should be made, including the project name at the
                     end (e.g. /home/username/code/project_name)''')
@@ -50,7 +50,7 @@ if not arguments.path:
     sys.exit("You must declare a path!")
 
 # Converts to absolute path
-os.path.abspath(arguments.path)
+os.path.abspath(os.path.expanduser(arguments.path))
 
 # FIXME Every file in generic_scripts and *-needed should be listed
 # here... or we can copy entire directories
@@ -74,8 +74,8 @@ pathify = {
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
 # Trailing / may be included or excluded
-PROJECT_PATH = arguments.path.rstrip('/') + '_site/'
-PROJECT_NAME = PROJECT_PATH.split('/')[-2].split('_')[0] # Before the '_site/'
+PROJECT_PATH = arguments.path.rstrip('/')
+PROJECT_NAME = PROJECT_PATH.split('/')[-1] # Before the '_site/'
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
 # TODO
