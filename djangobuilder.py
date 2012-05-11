@@ -74,8 +74,8 @@ pathify = {
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
 # Trailing / may be included or excluded
-PROJECT_PATH = arguments.path.rstrip('/')
-PROJECT_NAME = PROJECT_PATH.split('/')[-1] # Before the '_site/'
+PROJECT_PATH = arguments.path.rstrip('/') + '_site/'
+PROJECT_NAME = PROJECT_PATH.split('/')[-2].split('_')[0] # Before the '_site/'
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
 # TODO
