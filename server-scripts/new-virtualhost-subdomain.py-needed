@@ -7,7 +7,7 @@ import sys
 def usage():
     this_script = sys.argv[0].split('/')[-1]
     print this_script, "project_name"
-    print "e.g.,", this_script, "cazooz"
+    print "e.g.,", this_script, "djangoprojectbuilder"
 
 if len(sys.argv) < 2:
     usage()
@@ -16,7 +16,7 @@ if len(sys.argv) < 2:
 new_host = '''LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so
 
 <VirtualHost *:80>
-ServerName %(PROJECT_NAME)s.prototypemagic.com
+ServerName %(PROJECT_NAME)s.%(DOMAIN_NAME)s
 WSGIScriptAlias / /home/ubuntu/django_projects/%(PROJECT_NAME)s/%(PROJECT_NAME)s_site/apache/django.wsgi
 
 Alias /admin_media/ /home/ubuntu/.virtualenvs/%(PROJECT_NAME)s/lib/python2.7/site-packages/django/contrib/admin/media/
