@@ -7,7 +7,7 @@ import sys
 def usage():
     this_script = sys.argv[0].split('/')[-1]
     print this_script, "[domain_name] [project_name]"
-    print "e.g.,", this_script, "cazooz.com cazooz"
+    print "e.g.,", this_script, "example.com example"
 
 if len(sys.argv) < 3:
     usage()

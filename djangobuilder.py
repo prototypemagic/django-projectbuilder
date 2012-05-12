@@ -18,7 +18,6 @@ import argparse
 
 DPB_PATH             = '/'.join(os.path.realpath(__file__).split('/')[:-1]) + '/'
 DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
-SERVER_SCRIPTS_PATH  = DPB_PATH + 'server-scripts/'
 
 # Usage message to be printed for miss use
 USAGE = 'usage: %s [-h] [-v] [--path PATH] [--bootstrap]' \
@@ -43,20 +42,12 @@ parser.add_argument('--path', action='store', dest='path',
 parser.add_argument('--bootstrap', action='store_true', default=False,
                          help='''This will include Bootstrap as the template
                          base of the project..''', dest='bootstrap')
-# Arg to declare the domain name for the project, which will be inserted into
-# the server scripts.
-parser.add_argument('--domain', action='store', dest='DOMAIN_NAME',
-                         help='''This domain will be included in the server
-                         scripts. If you are not using one use example.com''')
 
 arguments = parser.parse_args()
 
 # Checks whether a path was declared
 if not arguments.path:
     sys.exit("You must declare a path! (--path /path/to/project)")
-# Checks whether a path was declared
-if not arguments.DOMAIN_NAME:
-    sys.exit("You must declare a domain name! (--domain ___.___)")
 
 # Converts to absolute path
 os.path.abspath(os.path.expanduser(arguments.path))
@@ -107,15 +98,6 @@ django_pathify = {
     'wsgi.py':                      [''],
 }
 
-script_pathify = {
-    'apachebuilder.sh':             ['server-scripts/'],
-    'boilerplate-settings.sh':      ['server-scripts/'],
-    'gitbuilder':                   ['server-scripts/'], 
-    'new-virtualhost.py':           ['server-scripts/'], 
-    'new-virtualhost-subdomain.py': ['server-scripts/'],
-    'prepare-commit-msg':           ['server-scripts/'],
-}
-
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
 # Trailing / may be included or excluded
@@ -137,7 +119,6 @@ PROJECT_PASSWORD = ''.join([ random.choice(string.printable[:67].replace("'", ""
 # evaluates to the value of the `PROJECT_NAME` variable, such as
 #   'my_project_name'
 replacement_values = {
-    'DOMAIN_NAME':      arguments.DOMAIN_NAME,
     'PROJECT_NAME':     PROJECT_NAME,
     'PROJECT_PASSWORD': PROJECT_PASSWORD,
     'BASE_PATH':        BASE_PATH,
@@ -146,7 +127,7 @@ replacement_values = {
 }
 
 # Doing it this way so DPB can add 'extra_settings' on the fly.
-needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s', 'server-scripts']
+needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s']
 
 print "Creating directories..."
 
@@ -163,16 +144,12 @@ for dir_name in needed_dirs:
 # Build list of all django-specific files to be copied into new project.
 django_files = [x for x in os.listdir(DJANGO_FILES_PATH)
                  if x.endswith('-needed')]
-server_scripts = [x for x in os.listdir(SERVER_SCRIPTS_PATH)
-                 if x.endswith('-needed')]
 
 # Oddly-placed '%' in weird_files screws up our string interpolation,
 # so copy these files verbatim
 
 print "Creating django files..."
 copy_files(DJANGO_FILES_PATH, django_files, django_pathify)
-print "Creating server scripts..."
-copy_files(SERVER_SCRIPTS_PATH, server_scripts, script_pathify)
 
 print "Copying directories..."
 # Add directory names here

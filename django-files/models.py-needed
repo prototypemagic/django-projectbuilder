@@ -5,7 +5,8 @@ from django import forms  # ModelForm
 
 from tagging.fields import TagField
 
-import datetime, os
+import datetime
+import os
 
 class Base(models.Model):
     created_at  = models.DateTimeField(auto_now=True)
