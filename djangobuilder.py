@@ -30,10 +30,11 @@ if len(sys.argv) < 2:
 # These are the arguements for the builder.  We can extent the
 # arguments as we want to add more diversity
 parser = argparse.ArgumentParser(description='''ProtoType Magic presents
-                                  Django Project Builder and so much more...''',
-                                  version='djangbuilder.py 0.5')
+                                  Django Project Builder and so much more...''')
 
 # Arg to declare the path to where the project will be made
+parser.add_argument('--version', '-v', action='version',
+                    version='djangobuilder.py 0.1')
 parser.add_argument('--path', action='store', dest='path',
                     help='''Specifies where the new Django project
                     should be made, including the project name at the
