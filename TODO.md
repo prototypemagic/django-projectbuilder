@@ -1,11 +1,9 @@
 ## TODO
 - Write README
-- Write Credits
 - Write Quick Start docs
-- Replace 'prototypemagic.com' in server-scripts/proto-new-virtualhost-subdomain.py with result of --domain
 - Use stdin/out/err pipes to show output during `pip install -r requirements.txt`
 
-## Final Stuff
+## TODO once we have made more improvements
 - Use distutils to make a setup.py
 - Get onto PyPI
 
@@ -16,3 +14,4 @@
 - Clean up files
 - Organize folders
 - Write Contributors
+- Write Credits
