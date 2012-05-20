@@ -2,7 +2,6 @@
 - Write README
 - Write Credits
 - Write Quick Start docs
-- Add '--domain' argparse flag
 - Replace 'prototypemagic.com' in server-scripts/proto-new-virtualhost-subdomain.py with result of --domain
 - Use stdin/out/err pipes to show output during `pip install -r requirements.txt`
 
@@ -17,6 +16,3 @@
 - Clean up files
 - Organize folders
 - Write Contributors
-
-## Possible TODO
-- Take out '_site'

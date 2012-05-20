@@ -7,7 +7,7 @@
  * /
 /* HTML5 ✰ Boilerplate (slightly customized) */
 html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-body { margin: 0; font-size: 1em; line-height: 1.4; }}
+body { margin: 0; line-height: 1.4; }}
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }

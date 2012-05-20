@@ -1,7 +1,7 @@
 Credits and Attributions
 ========================
 
-* Django
+* Django            (djangoproject.com)
 * HTML5 Boilerplate (html5boilerplate.com)
-* Twitter Bootstrap
-* Zurb's Foundation
+* Twitter Bootstrap (twitter.github.com)
+* Zurb's Foundation (foundation.zurb.com)
