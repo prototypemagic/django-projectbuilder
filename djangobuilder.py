@@ -70,13 +70,9 @@ def copy_files(folderPath, file_types, pathify):
             # Path names include '%(PROJECT_NAME)s', etc
             file_path = dir % replacement_values
             f_write = open(PROJECT_PATH + file_path + new_filename, 'a')
-            print new_filename
             new_contents = contents % replacement_values
             f_write.write(new_contents)
             f_write.close()
-
-
-
 
 
 # FIXME Every file in django_files and *-needed should be listed
@@ -196,18 +192,6 @@ _, output = commands.getstatusoutput(cmd)
 print '\n', output, '\n'
 
 # Now virtualenv exists
-
-# Run 'cpvirtualenv PROJECT_NAME default' ?
-#if ask_to_copy_default_virtualenv:
-#    q = "Create a default virtualenv to speed this up next time? " % PROJECT_NAME
-#    answer = raw_input(q)
-#    if answer and answer.lower()[0] == 'y':
-#        print "Copying virtualenv..."
-#        cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon '
-#        cmd += '%(PROJECT_NAME)s && cpvirtualenv %(PROJECT_NAME)s default --no-site-packages"' % \
-#            replacement_values
-#        _, output = commands.getstatusoutput(cmd)
-#        print '\n', output, '\n'
 
 print "Creating git repo..."
 cmd  = 'bash -c "cd %s &&' % PROJECT_PATH
