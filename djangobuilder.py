@@ -34,7 +34,7 @@ parser = argparse.ArgumentParser(description='''ProtoType Magic presents
 
 # Arg to declare the path to where the project will be made
 parser.add_argument('--version', '-v', action='version',
-                    version='djangobuilder.py 0.1')
+                    version='django-projectbuilder 0.1')
 parser.add_argument('--path', action='store', dest='path',
                     help='''Specifies where the new Django project
                     should be made, including the project name at the

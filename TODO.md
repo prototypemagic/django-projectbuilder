@@ -7,6 +7,10 @@
 - Use distutils to make a setup.py
 - Get onto PyPI
 
+## POSSIBLE TODO's
+- Re-write server-scripts using argparse.
+- Combine the server-scripts into one program.
+
 ## Completed
 - Add Bootstrap and Non-Bootstrap options
 - Make it so everything can be relative rather than absolute
