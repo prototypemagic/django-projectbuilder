@@ -6,6 +6,7 @@
 - Add '--domain' argparse flag
 - Replace 'prototypemagic.com' in server-scripts/proto-new-virtualhost-subdomain.py with result of --domain
 - Use stdin/out/err pipes to show output during `pip install -r requirements.txt`
+- Fix `cpvirtualenv` bug in `virtualenvwrapper.sh` or create our own ghetto version
 
 ## Final Stuff
 - Use distutils to make a setup.py
