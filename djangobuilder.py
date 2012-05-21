@@ -1,19 +1,19 @@
 #!/usr/bin/env python
 #
 #   Authors:
-#   Steve Philips -- steve@builtbyptm.com
-#   AJ v Bahnken  -- aj@builtbyptm.com
+#   Steve Phillips -- steve@builtbyptm.com
+#   AJ v Bahnken   -- aj@builtbyptm.com
 #
 # Requires virtualenv and virtualenvwrapper
 #
 
+import argparse
 import commands
 import os
 import random
 import shutil
 import string
 import sys
-import argparse
 
 
 DPB_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),
