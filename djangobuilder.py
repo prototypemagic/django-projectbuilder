@@ -20,8 +20,7 @@ DPB_PATH = os.path.abspath(os.path.dirname(__file__)) + '/'
 DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
 
 # Usage message to be printed for miss use
-USAGE = 'usage: %s [-h] [-v] [--path PATH] [--bootstrap]' \
-    % (sys.argv[0])
+USAGE = 'usage: %s [-h] [-v] [--path PATH] [--bootstrap]' % (sys.argv[0])
 
 # Prints the usage message if there are no args
 if len(sys.argv) < 2:
@@ -180,7 +179,7 @@ print '\n', output, '\n'
 ## will take long, but of course is needed. This allows for making
 ## projects which need only the basic's, and ones that need a lot.
 
-print "Running 'pip install -r requirements.txt'. This could take a while... ",
+print "Running 'pip install -r requirements.txt'. This could take a while...",
 print "(don't press control-c!)"
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon'
