@@ -79,9 +79,6 @@ django_pathify = {
     'wsgi.py':                      ['%(PROJECT_NAME)s/'],
 }
 
-# TODO Use this variable if necessary, otherwise take it out
-HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
-
 # Trailing / may be included or excluded up to this point
 PROJECT_PATH = arguments.path.rstrip('/') + '_site/'
 PROJECT_NAME = PROJECT_PATH.split('/')[-2].split('_')[0] # Before the '_site/'
