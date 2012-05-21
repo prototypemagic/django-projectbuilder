@@ -7,7 +7,7 @@
  * /
 /* HTML5 ✰ Boilerplate (slightly customized) */
 html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-body { margin: 0; font-size: 1em; line-height: 1.4; }}
+body { margin: 0; line-height: 1.4; }}
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
@@ -179,7 +179,7 @@ div.ptm{
 .chromeframe { margin: 0.2em 0; background: #ccc; color: black; padding: 0.2em 0; }
 
 /* ==|== non-semantic helper classes ======================================== */
-.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }
 .ir br { display: none; }
 .hidden { display: none !important; visibility: hidden; }
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
@@ -187,13 +187,15 @@ div.ptm{
 .invisible { visibility: hidden; }
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
-.clearfix { zoom: 1; }
-/* ==|== media queries ======================================================*/
-@media only screen and (min-width: 480px), only screen and (max-width: 480px), only screen and (max-device-width: 480px){
+.clearfix { *zoom: 1; }
+/* ==|== media queries ====================================================== 
+* NOTE: Inline css is important for mobile.
+*/
+@media (max-width: 480px){
 
 
 }
-@media only screen and (max-width: 720px), only screen and (max-device-width: 720px){
+@media (max-width: 720px){
 
 
 }
@@ -201,28 +203,26 @@ div.ptm{
 
 
 }
-@media (min-width: 1200px) {
+@media (min-width: 980px) {
 
 
 }
+@media (min-width: 1200px){
 
-/* ==|== print styles =======================================================
- * NOTE: Inline css is important for mobile.
- * NOTE: Un-comment to override Bootstrap's defaults.
- */
- /*
+
+}
+/* ==|== print styles ======================================================= */ 
 @media print {
-  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; }
+  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } 
   a, a:visited { text-decoration: underline; }
   a[href]:after { content: " (" attr(href) ")"; }
   abbr[title]:after { content: " (" attr(title) ")"; }
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } 
   pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  thead { display: table-header-group; }
+  thead { display: table-header-group; } 
   tr, img { page-break-inside: avoid; }
   img { max-width: 100% !important; }
   @page { margin: 0.5cm; }
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
-*/

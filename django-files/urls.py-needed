@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     #App url include
-    url(r'^', include('%(PROJECT_NAME)s.appurls')),
+    url(r'^', include('%(PROJECT_NAME)s_app.appurls')),
     #url(r'^%(PROJECT_NAME)s/$', include('%(PROJECT_NAME)s.appurls')),
     
     #Static Links

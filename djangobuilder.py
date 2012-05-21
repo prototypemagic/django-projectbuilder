@@ -16,7 +16,8 @@ import sys
 import argparse
 
 
-DPB_PATH             = '/'.join(os.path.realpath(__file__).split('/')[:-1]) + '/'
+DPB_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                        os.pardir)) + '/'
 DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
 
 # Usage message to be printed for miss use
@@ -34,7 +35,7 @@ parser = argparse.ArgumentParser(description='''ProtoType Magic presents
 
 # Arg to declare the path to where the project will be made
 parser.add_argument('--version', '-v', action='version',
-                    version='djangobuilder.py 0.1')
+                    version='django-projectbuilder 0.1')
 parser.add_argument('--path', action='store', dest='path',
                     help='''Specifies where the new Django project
                     should be made, including the project name at the
@@ -80,19 +81,19 @@ def copy_files(folderPath, file_types, pathify):
 
 django_pathify = {
     '.gitignore':                   [''],
-    '__init__.py':                  ['', '%(PROJECT_NAME)s/'],
-    'appurls.py':                   ['%(PROJECT_NAME)s/'],
+    '__init__.py':                  ['%(PROJECT_NAME)s/', '%(APP_NAME)s/'],
+    'appurls.py':                   ['%(APP_NAME)s/'],
     'django.wsgi':                  ['apache/'],
     'manage.py':                    [''],
-    'model_forms.py':               ['%(PROJECT_NAME)s/'],
-    'models.py':                    ['%(PROJECT_NAME)s/'],
+    'model_forms.py':               ['%(APP_NAME)s/'],
+    'models.py':                    ['%(APP_NAME)s/'],
     'requirements.txt':             [''],
-    'settings.py':                  [''],
-    'settings_local.py-local':      [''],
-    'tests.py':                     ['%(PROJECT_NAME)s/'],
-    'urls.py':                      [''],
-    'views.py':                     ['%(PROJECT_NAME)s/'],
-    'wsgi.py':                      [''],
+    'settings.py':                  ['%(PROJECT_NAME)s/'],
+    'settings_local.py':            ['%(PROJECT_NAME)s/'],
+    'tests.py':                     ['%(APP_NAME)s/'],
+    'urls.py':                      ['%(PROJECT_NAME)s/'],
+    'views.py':                     ['%(APP_NAME)s/'],
+    'wsgi.py':                      ['%(PROJECT_NAME)s/'],
 }
 
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
@@ -100,6 +101,7 @@ HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 # Trailing / may be included or excluded
 PROJECT_PATH = arguments.path.rstrip('/') + '_site/'
 PROJECT_NAME = PROJECT_PATH.split('/')[-2].split('_')[0] # Before the '_site/'
+APP_NAME     = PROJECT_PATH.split('/')[-2].split('_')[0] + '_app'
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
 # TODO
@@ -117,6 +119,7 @@ PROJECT_PASSWORD = ''.join([ random.choice(string.printable[:67].replace("'", ""
 #   'my_project_name'
 replacement_values = {
     'PROJECT_NAME':     PROJECT_NAME,
+    'APP_NAME':         APP_NAME,
     'PROJECT_PASSWORD': PROJECT_PASSWORD,
     'BASE_PATH':        BASE_PATH,
     'SECRET_KEY':       SECRET_KEY,
@@ -124,7 +127,7 @@ replacement_values = {
 }
 
 # Doing it this way so DPB can add 'extra_settings' on the fly.
-needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s']
+needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s', '%(APP_NAME)s/']
 
 print "Creating directories..."
 

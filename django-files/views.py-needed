@@ -11,15 +11,8 @@ from django.shortcuts import render_to_response, get_object_or_404, render
 from django.template import loader, RequestContext
 from django.views.decorators.csrf import csrf_exempt
 
-from %(PROJECT_NAME)s_site.%(PROJECT_NAME)s.models import *
-from %(PROJECT_NAME)s_site.%(PROJECT_NAME)s.model_forms import *
+from %(APP_NAME)s.models import *
+from %(APP_NAME)s.model_forms import *
 
-
-
-
-
-
-
-
-
-
+def index(request):
+    return render(request, "index.html", locals())
