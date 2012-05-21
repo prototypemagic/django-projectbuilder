@@ -19,13 +19,6 @@ import sys
 DPB_PATH = os.path.abspath(os.path.dirname(__file__)) + '/'
 DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
 
-# Usage message to be printed for miss use
-USAGE = 'usage: %s [-h] [-v] [--path PATH] [--bootstrap]' % (sys.argv[0])
-
-# Prints the usage message if there are no args
-if len(sys.argv) < 2:
-    sys.exit(USAGE)
-
 # These are the arguments for the builder.  We can extend the
 # arguments as we want to add more functionality
 parser = argparse.ArgumentParser(description='''PTM Web Engineering presents
