@@ -16,7 +16,8 @@ import sys
 import argparse
 
 
-DPB_PATH             = '/'.join(os.path.realpath(__file__).split('/')[:-1]) + '/'
+DPB_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                        os.pardir)) + '/'
 DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
 
 # Usage message to be printed for miss use

@@ -1,7 +1,7 @@
 # Django settings for %(PROJECT_NAME)s project.
 
 import os
-PROJECT_PATH = '/'.join(os.path.realpath(os.path.dirname(__file__)).split('/')[:-1])
+PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 
 
 DEBUG = False
