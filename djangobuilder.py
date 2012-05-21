@@ -49,10 +49,6 @@ arguments = parser.parse_args()
 if not arguments.path:
     sys.exit("You must declare a path! (--path /path/to/new/project)")
 
-# Converts to absolute path
-os.path.abspath(os.path.expanduser(arguments.path))
-
-
 # This is the function used to copy all of the django_files
 # and server_scripts, and replace values.
 def copy_files(folderPath, file_types, pathify):
