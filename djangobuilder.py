@@ -30,26 +30,26 @@ if len(sys.argv) < 2:
 
 # These are the arguements for the builder.  We can extent the
 # arguments as we want to add more diversity
-parser = argparse.ArgumentParser(description='''ProtoType Magic presents
-                                  Django Project Builder and so much more...''')
+parser = argparse.ArgumentParser(description='''PTM Web Engineering presents
+                                 Django Project Builder and so much more...''')
 
 # Arg to declare the path to where the project will be made
 parser.add_argument('--version', '-v', action='version',
-                    version='django-projectbuilder 0.1')
+                    version='Django Project Builder v0.1')
 parser.add_argument('--path', action='store', dest='path',
                     help='''Specifies where the new Django project
                     should be made, including the project name at the
                     end (e.g. /home/username/code/project_name)''')
 # Arg for using bootstrap rather than generic templates/media
 parser.add_argument('--bootstrap', action='store_true', default=False,
-                         help='''This will include Bootstrap as the template
-                         base of the project..''', dest='bootstrap')
+                    help='''This will include Bootstrap as the template
+                    base of the project..''', dest='bootstrap')
 
 arguments = parser.parse_args()
 
 # Checks whether a path was declared
 if not arguments.path:
-    sys.exit("You must declare a path! (--path /path/to/project)")
+    sys.exit("You must declare a path! (--path /path/to/new/project)")
 
 # Converts to absolute path
 os.path.abspath(os.path.expanduser(arguments.path))
@@ -101,7 +101,7 @@ HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 # Trailing / may be included or excluded
 PROJECT_PATH = arguments.path.rstrip('/') + '_site/'
 PROJECT_NAME = PROJECT_PATH.split('/')[-2].split('_')[0] # Before the '_site/'
-APP_NAME     = PROJECT_PATH.split('/')[-2].split('_')[0] + '_app'
+APP_NAME     = PROJECT_NAME + '_app'
 BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
 # TODO
@@ -143,7 +143,7 @@ for dir_name in needed_dirs:
 
 # Build list of all django-specific files to be copied into new project.
 django_files = [x for x in os.listdir(DJANGO_FILES_PATH)
-                 if x.endswith('-needed')]
+                if x.endswith('-needed')]
 
 # Oddly-placed '%' in weird_files screws up our string interpolation,
 # so copy these files verbatim
@@ -158,12 +158,11 @@ generic_dirs = [DPB_PATH + d for d in generic_dirs]
 
 for dirname in generic_dirs:
     # cp -r media-generic $PROJECT_PATH/media && cp -r templates-generic ...
+    new_dir = PROJECT_PATH + dirname.split('/')[-1]
     if arguments.bootstrap:
-        shutil.copytree(dirname + '-bootstrap',
-                        PROJECT_PATH + dirname.split('/')[-1])
+        shutil.copytree(dirname + '-bootstrap', new_dir)
     else:
-        shutil.copytree(dirname + '-generic',
-                        PROJECT_PATH + dirname.split('/')[-1])
+        shutil.copytree(dirname + '-generic', new_dir)
 
 
 ## Making the virtualenv here
@@ -182,8 +181,8 @@ print '\n', output, '\n'
 ## will take long, but of course is needed. This allows for making
 ## projects which need only the basic's, and ones that need a lot.
 
-cmd = ''
-print "Running 'pip install -r requirements.txt'. This could take a while... (don't press control-c!)"
+print "Running 'pip install -r requirements.txt'. This could take a while... ",
+print "(don't press control-c!)"
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon'
 cmd += ' %(PROJECT_NAME)s && cd %(PROJECT_PATH)s' % replacement_values
