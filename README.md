@@ -1,5 +1,5 @@
-ProtoType Magic's Django Project Builder
-========================================
+PTM Web Engineering's Django Project Builder
+============================================
 
 ## Dev Box Usage
 
@@ -15,6 +15,7 @@ If you add the --bootstrap arguement, your project will come with all
 needed bootstrap defaults. In media/css/style.css there are also a lot
 of goodies.
 
+git and virtualenv are required.
 
 ## Server Usage
 
