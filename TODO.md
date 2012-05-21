@@ -2,9 +2,10 @@
 - Write README
 - Write Quick Start docs
 - Use stdin/out/err pipes to show output during `pip install -r requirements.txt`
-- Fix `cpvirtualenv` bug in `virtualenvwrapper.sh` or create our own ghetto version
+- Fix `cpvirtualenv` bug in `virtualenvwrapper.sh` or create our own replacement
 - Ensure the existence of all programs used
   - E.g., pip, virtualenv, virtualenvwrapper, bash, git
+- Create and use the `dpb-default` virtualenv
 
 ## TODO once we have made more improvements
 - Use distutils to make a setup.py
