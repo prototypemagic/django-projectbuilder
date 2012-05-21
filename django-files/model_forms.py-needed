@@ -4,6 +4,6 @@ from django.contrib import admin
 from django import forms
 
 from tagging.fields import TagField
-from %(PROJECT_NAME)s.models import *
+from %(APP_NAME)s.models import *
 
 import datetime, os
