@@ -37,17 +37,14 @@ parser.add_argument('--version', '-v', action='version',
 parser.add_argument('--path', action='store', dest='path',
                     help='''Specifies where the new Django project
                     should be made, including the project name at the
-                    end (e.g. /home/username/code/project_name)''')
+                    end (e.g. /home/username/code/project_name)''',
+                    required=True)
 # Arg for using bootstrap rather than generic templates/media
 parser.add_argument('--bootstrap', action='store_true', default=False,
                     help='''This will include Bootstrap as the template
                     base of the project..''', dest='bootstrap')
 
 arguments = parser.parse_args()
-
-# Checks whether a path was declared
-if not arguments.path:
-    sys.exit("You must declare a path! (--path /path/to/new/project)")
 
 # This is the function used to copy all of the django_files
 # and server_scripts, and replace values.
