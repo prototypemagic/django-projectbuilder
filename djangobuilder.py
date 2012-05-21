@@ -16,8 +16,7 @@ import string
 import sys
 
 
-DPB_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                        os.pardir)) + '/'
+DPB_PATH = os.path.abspath(os.path.dirname(__file__)) + '/'
 DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
 
 # Usage message to be printed for miss use
