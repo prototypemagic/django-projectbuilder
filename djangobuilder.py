@@ -26,8 +26,8 @@ USAGE = 'usage: %s [-h] [-v] [--path PATH] [--bootstrap]' % (sys.argv[0])
 if len(sys.argv) < 2:
     sys.exit(USAGE)
 
-# These are the arguements for the builder.  We can extent the
-# arguments as we want to add more diversity
+# These are the arguments for the builder.  We can extend the
+# arguments as we want to add more functionality
 parser = argparse.ArgumentParser(description='''PTM Web Engineering presents
                                  Django Project Builder and so much more...''')
 
@@ -89,7 +89,7 @@ django_pathify = {
 
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
-# Trailing / may be included or excluded
+# Trailing / may be included or excluded up to this point
 PROJECT_PATH = arguments.path.rstrip('/') + '_site/'
 PROJECT_NAME = PROJECT_PATH.split('/')[-2].split('_')[0] # Before the '_site/'
 APP_NAME     = PROJECT_NAME + '_app'
@@ -136,13 +136,14 @@ for dir_name in needed_dirs:
 django_files = [x for x in os.listdir(DJANGO_FILES_PATH)
                 if x.endswith('-needed')]
 
+print "Creating django files..."
+
 # Oddly-placed '%' in weird_files screws up our string interpolation,
 # so copy these files verbatim
-
-print "Creating django files..."
 copy_files(DJANGO_FILES_PATH, django_files, django_pathify)
 
 print "Copying directories..."
+
 # Add directory names here
 generic_dirs = ['media', 'templates']
 generic_dirs = [DPB_PATH + d for d in generic_dirs]
@@ -159,21 +160,21 @@ for dirname in generic_dirs:
 ## Making the virtualenv here
 
 print "Making virtualenv..."
-cmd = ''
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
-cmd = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh &&'
+cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh &&'
 cmd += ' mkvirtualenv %s --no-site-packages"' % PROJECT_NAME
 
 _, output = commands.getstatusoutput(cmd)
 print '\n', output, '\n'
 
-## The below part is made much fast with a small requirements.txt.
+## The below part is made much faster with a small requirements.txt.
 ## We have the opitions to include more packages, which in turn
 ## will take long, but of course is needed. This allows for making
-## projects which need only the basic's, and ones that need a lot.
+## projects which need only the basics, and ones that need a lot.
 
 print "Running 'pip install -r requirements.txt'. This could take a while...",
 print "(don't press control-c!)"
+
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon'
 cmd += ' %(PROJECT_NAME)s && cd %(PROJECT_PATH)s' % replacement_values
@@ -182,7 +183,7 @@ cmd += ' && pip install -r requirements.txt"'
 _, output = commands.getstatusoutput(cmd)
 print '\n', output, '\n'
 
-# Now virtualenv exists
+# virtualenv now exists
 
 print "Creating git repo..."
 cmd  = 'bash -c "cd %s &&' % PROJECT_PATH
