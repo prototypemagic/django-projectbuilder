@@ -46,12 +46,12 @@ parser.add_argument('--bootstrap', action='store_true', default=False,
 
 arguments = parser.parse_args()
 
-# This is the function used to copy all of the django_files
-# and server_scripts, and replace values.
-def copy_files(folderPath, file_types, pathify):
+def copy_files(folder_path, file_types, pathify):
+    """Copies the contents of django_files and server_scripts, and
+    performs string interpolations (e.g., %(APP_NAME)s => 'myapp')"""
     for filename in file_types:
         # Grab *-needed filenames
-        f_read = open(folderPath + filename, 'r')
+        f_read = open(folder_path + filename, 'r')
         contents = f_read.read()
         f_read.close()
         # Replace %(SECRET_KEY)s, etc with new value for new project
