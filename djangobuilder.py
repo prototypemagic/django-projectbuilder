@@ -157,9 +157,8 @@ for dirname in generic_dirs:
         shutil.copytree(dirname + '-generic', new_dir)
 
 
-## Making the virtualenv here
-
 print "Making virtualenv..."
+
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh &&'
 cmd += ' mkvirtualenv %s --no-site-packages"' % PROJECT_NAME
@@ -186,6 +185,7 @@ print '\n', output, '\n'
 # virtualenv now exists
 
 print "Creating git repo..."
+
 cmd  = 'bash -c "cd %s &&' % PROJECT_PATH
 cmd += ' git add . && git commit -m \'First commit\'"'
 _, output = commands.getstatusoutput(cmd)
