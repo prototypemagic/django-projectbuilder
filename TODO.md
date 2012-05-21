@@ -3,6 +3,8 @@
 - Write Quick Start docs
 - Use stdin/out/err pipes to show output during `pip install -r requirements.txt`
 - Fix `cpvirtualenv` bug in `virtualenvwrapper.sh` or create our own ghetto version
+- Ensure the existence of all programs used
+  - E.g., pip, virtualenv, virtualenvwrapper, bash, git
 
 ## TODO once we have made more improvements
 - Use distutils to make a setup.py
