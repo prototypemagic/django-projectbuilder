@@ -180,7 +180,7 @@ print '\n', output, '\n'
 ## projects which need only the basic's, and ones that need a lot.
 
 cmd = ''
-print "Running 'pip install -r requirements.txt'. This could take a while..."
+print "Running 'pip install -r requirements.txt'. This could take a while... (don't press control-c!)"
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon'
 cmd += ' %(PROJECT_NAME)s && cd %(PROJECT_PATH)s' % replacement_values
