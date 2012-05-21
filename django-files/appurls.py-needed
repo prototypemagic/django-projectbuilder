@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from django.contrib.auth.views import login, logout
 
 urlpatterns = patterns('%(APP_NAME)s.views',
-    url(r'^$', 'index', name='site_index'),
+    url(r'^$', 'index', name='index'),
     url(r'^login/$', login, kwargs=dict(template_name='login.html'),
         name='login'),
     url(r'^logout/$', logout, kwargs=dict(next_page='/'),
