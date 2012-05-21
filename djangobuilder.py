@@ -67,9 +67,8 @@ def copy_files(folder_path, file_types, pathify):
             f_write.close()
 
 
-# FIXME Every file in django_files and *-needed should be listed
-# here... or we can copy entire directories
-
+# Maps cleaned filenames to where each file should be copied relative
+# to PROJECT_PATH
 django_pathify = {
     '.gitignore':                   [''],
     '__init__.py':                  ['%(PROJECT_NAME)s/', '%(APP_NAME)s/'],
@@ -87,6 +86,7 @@ django_pathify = {
     'wsgi.py':                      ['%(PROJECT_NAME)s/'],
 }
 
+# TODO Use this variable if necessary, otherwise take it out
 HOME_DIR = os.path.expandvars('$HOME').rstrip('/') + '/'
 
 # Trailing / may be included or excluded up to this point
@@ -118,7 +118,7 @@ replacement_values = {
 }
 
 # Doing it this way so DPB can add 'extra_settings' on the fly.
-needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s', '%(APP_NAME)s/']
+needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s', '%(APP_NAME)s']
 
 print "Creating directories..."
 
