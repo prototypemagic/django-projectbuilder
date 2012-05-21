@@ -122,8 +122,8 @@ needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s', '%(APP_NAME)s']
 
 print "Creating directories..."
 
-# Let 'git init' create the PROJECT_PATH directory and turn it into a
-# git repo with one command
+# Use 'git init' to create the PROJECT_PATH directory and turn it into
+# a git repo
 cmd = 'bash -c "git init %s"' % PROJECT_PATH
 _, output = commands.getstatusoutput(cmd)
 print '\n', output, '\n'
