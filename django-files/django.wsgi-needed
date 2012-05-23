@@ -19,5 +19,5 @@ for item in new_sys_path:
 sys.path[:0] = new_sys_path
 
 from django.core.handlers.wsgi import WSGIHandler
-os.environ['DJANGO_SETTINGS_MODULE'] = '%(PROJECT_NAME)s_site.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = '%(PROJECT_NAME)s.settings'
 application = WSGIHandler()

@@ -41,6 +41,6 @@ Allow from all
 CustomLog /home/ubuntu/django_projects/%(PROJECT_NAME)s/%(PROJECT_NAME)s_site/apache/access_log combined
 ErrorLog /home/ubuntu/django_projects/%(PROJECT_NAME)s/%(PROJECT_NAME)s_site/apache/error_log
 
-</VirtualHost>''' % {'PROJECT_NAME': sys.argv[1]}
+</VirtualHost>''' % {'PROJECT_NAME': sys.argv[1], 'DOMAIN_NAME': sys.argv[2]}
 
 print new_host
