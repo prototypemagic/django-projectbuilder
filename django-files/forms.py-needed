@@ -4,3 +4,16 @@ from django.utils.encoding import smart_unicode
 from django.utils.translation import ugettext_lazy as _
 
 from %(APP_NAME)s.models import *
+import datetime
+import os
+
+class SignupForm(forms.Form):
+    first_name        = forms.CharField(label='First Name')
+    first_name.widget = forms.TextInput(attrs={'class':'registration'})
+    email             = forms.EmailField(label='Email Address')
+    email.widget      = forms.TextInput(attrs={'class':'registration'})
+    password          = forms.CharField(label='Password')
+    password.widget   = forms.PasswordInput(attrs={'class':'registration'})
+    password2         = forms.CharField(label='Re-type Password')
+    password2.widget  = forms.PasswordInput(attrs={'class':'registration'})
+    terms             = forms.BooleanField(label="I have read and agree to the")

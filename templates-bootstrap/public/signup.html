@@ -1,13 +1,18 @@
 {% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block meta_description %}{% endblock %}
+
+{% block extra_head %}{% endblock %}
+
 {% block content %}
 <div class="row">
 <div class="span12">
-<h2>Log in!</h2>
+<h2>Sign up!</h2>
 <br />
 </div></div>
 <div class="row">
 <div class="span6">
-<form class="form" action="{% url login %}" method="post">
+<form class="form" action="{% url signup %}" method="post">
     {% csrf_token %}
     {% form.as_ul %}
     {% csrf_token %}
@@ -15,3 +20,6 @@
 </form>
 </div></div>
 {% endblock %}
+
+{% block javascript %}{% endblock %}
+

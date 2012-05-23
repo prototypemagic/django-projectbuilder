@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block meta_description %}{% endblock %}
+
+{% block extra_head %}{% endblock %}
+
 {% block content %}
 <form class="form" action="{% url login %}" method="post">
     {% csrf_token %}
@@ -7,3 +12,5 @@
   <input class="" type="submit" value="Log In" />
 </form>
 {% endblock %}
+
+{% block javascript %}{% endblock %}

@@ -11,7 +11,7 @@ PROJECT_PATH = os.path.dirname(__file__)
 DEBUG = True
 TEMPLATE_DEBUG = True
 
-DEFAULT_FROM_EMAIL = ''
+DEFAULT_FROM_EMAIL = 'noreply@builtbyptm.com'
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 
