@@ -9,7 +9,7 @@
 - Add `python manage.py migrate` to server's git hooks
 - Server should use something like `lynx -dump checkip.dyndns.org 2>&1 | awk '{print $4}' | grep ^[0-9]` in place of the generic `my-django-powered-site.com`
 - Create `postgresbuilder.sh` or equivalent
-
+- Use fixtures to createsuperuser
 
 # TODO once we have made more improvements
 - Use distutils to make a setup.py
