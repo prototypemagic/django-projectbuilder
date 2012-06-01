@@ -67,6 +67,7 @@ django_pathify = {
     '__init__.py':                  ['%(PROJECT_NAME)s/', '%(APP_NAME)s/'],
     'appurls.py':                   ['%(APP_NAME)s/'],
     'django.wsgi':                  ['apache/'],
+    'forms.py':                     ['%(APP_NAME)s/'],
     'manage.py':                    [''],
     'model_forms.py':               ['%(APP_NAME)s/'],
     'models.py':                    ['%(APP_NAME)s/'],
