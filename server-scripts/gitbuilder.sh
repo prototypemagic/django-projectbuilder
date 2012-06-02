@@ -39,7 +39,7 @@ done
 echo -e "If you're on a server, run\n\n    sudo bash -c \"./apachebuilder.sh $PROJECT_NAME\"\n\nto create and install an Apache config file, as well as set up sites-enabled and sites-available.\n"
 echo -e "On your local dev machine, run something like\n\n    python djangobuilder.py --path path/to/$PROJECT_NAME\n"
 echo -e "then push to the (probably remote) $PROJECT_NAME/bare/ directory.  Tell your local machine where to push to with\n"
-echo -e "    git remote add origin ubuntu@my-django-powerde-site.com:/home/ubuntu/django_projects/$PROJECT_NAME/bare/\n"
+echo -e "    git remote add origin ubuntu@my-django-powered-site.com:/home/ubuntu/django_projects/$PROJECT_NAME/bare/\n"
 echo -e "Then you can run something like the familiar\n"
 echo -e "    git push origin master\n"
 echo "to automatically deploy to this server! Just make sure to have Apache + mod_wsgi + Postgres installed."
