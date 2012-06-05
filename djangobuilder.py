@@ -26,7 +26,7 @@ parser = argparse.ArgumentParser(description='''PTM Web Engineering presents
 
 # Arg to declare the path to where the project will be made
 parser.add_argument('--version', '-v', action='version',
-                    version='Django Project Builder v0.2')
+                    version='Django Project Builder v0.1')
 parser.add_argument('--path', action='store', dest='path',
                     help='''Specifies where the new Django project
                     should be made, including the project name at the
