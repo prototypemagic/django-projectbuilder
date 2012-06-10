@@ -13,7 +13,7 @@
 - Use fixtures to createsuperuser
 =======
 - Tell user _not_ to create virtualenv (we do it for them!)
-- If user is in a virtualenv, get out of it before executing `djangobuilder.sh`
+- If user is in a virtualenv, get out of it before executing `djangobuilder.py`
 
 >>>>>>> master
 
