@@ -2,12 +2,23 @@ from django.conf.urls.defaults import *
 from django.contrib.auth.views import login, logout
 
 urlpatterns = patterns('%(APP_NAME)s.views',
+    # Static
     url(r'^$', 'index', name='index'),
     url(r'^about/$', 'about_us', name='about_us'),
     url(r'^tos/$', 'tos', name='tos'),
+    
+    # Log In/Out, Signup, Password Reset
     url(r'^login/$', login, kwargs=dict(template_name='public/login.html'),
         name='login'),
     url(r'^logout/$', logout, kwargs=dict(next_page='/'),
         name='logout'),
     url(r'^signup/$', 'signup', name='signup'),
+    
+    url(r'^password/reset/$', password_reset, 
+    kwargs={'template_name': 'public/password_reset.html', 'email_template_name': 'public/password_reset_email.html'}, 
+        name='password_reset'),
+    url(r'^password/reset/done/$', password_reset_done, kwargs={'template_name': 'public/password_reset_done.html'}, name="password_reset_done"),
+    url(r'^reset/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', password_reset_confirm, kwargs={'template_name': 'public/password_reset_confirm.html'}),
+    url(r'^password/reset/complete/$', password_reset_complete, kwargs={'template_name': 'public/password_reset_complete.html'}),
+
 )
