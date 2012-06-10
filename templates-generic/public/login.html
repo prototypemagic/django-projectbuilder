@@ -11,6 +11,7 @@
     {% csrf_token %}
   <input class="" type="submit" value="Log In" />
 </form>
+<p><a href="{% url password_reset %}">Forget your password?</a></p>
 {% endblock %}
 
 {% block javascript %}{% endblock %}
