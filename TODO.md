@@ -9,6 +9,8 @@
 - Add `python manage.py migrate` to server's git hooks
 - Server should use something like `lynx -dump checkip.dyndns.org 2>&1 | awk '{print $4}' | grep ^[0-9]` in place of the generic `my-django-powered-site.com`
 - Create `postgresbuilder.sh` or equivalent
+- Tell user _not_ to create virtualenv (we do it for them!)
+- If user is in a virtualenv, get out of it before executing `djangobuilder.sh`
 
 
 # TODO once we have made more improvements
@@ -16,7 +18,7 @@
 - Get onto PyPI
 
 
-# POSSIBLE TODO's
+# POSSIBLE TODOs
 - Re-write server scripts using argparse
 - Combine the server scripts into one program
 
