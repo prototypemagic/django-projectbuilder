@@ -132,7 +132,7 @@ INSTALLED_APPS = (
     # 'mptt',
     # 'raven.contrib.django',
     'south',
-    '%(PROJECT_NAME)s',
+    '%(APP_NAME)s',
 
 )
 

@@ -19,7 +19,7 @@ new Django project!
   to worry about that, do you?)
 
 
-## Non-features
+## What this does for you.
 
 * Tediously editing config files before anything works, even though
   you use the same defaults every single time
