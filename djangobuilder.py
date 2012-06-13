@@ -18,7 +18,7 @@ import sys
 
 # If user is in a virtualenv, tell them to get out first
 if hasattr(sys, 'real_prefix'):
-    print "You're already in a virtualenv! Type\n"
+    print "You're already in a virtualenv. Type\n"
     print "    deactivate\n"
     print "to leave, then run this script again."
     sys.exit(1)
@@ -30,7 +30,7 @@ DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
 # These are the arguments for the builder.  We can extend the
 # arguments as we want to add more functionality
 parser = argparse.ArgumentParser(description='''PTM Web Engineering presents
-                                 Django Project Builder and so much more...''')
+                                 Django Project Builder''')
 
 # Arg to declare the path to where the project will be made
 parser.add_argument('--version', '-v', action='version',
