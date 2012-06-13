@@ -5,9 +5,8 @@
 - Add `python manage.py migrate` to server's git hooks
 - Server should use something like `lynx -dump checkip.dyndns.org 2>&1 | awk '{print $4}' | grep ^[0-9]` in place of the generic `my-django-powered-site.com`
 - Create `postgresbuilder.sh` or equivalent
-- Tell user _not_ to create virtualenv (we do it for them!)
 - Rewrite DPB to either use Django itelf, or at least generate new projects the way Django does
-  - E.g., render something like `{{ project_name }}` instead of using `%(PROJECT_NAME)s`
+- E.g., render something like `{{ project_name }}` instead of using `%(PROJECT_NAME)s`
 - Fix `cpvirtualenv` bug in `virtualenvwrapper.sh` or create our own replacement
 - Create and use the `dpb-default` virtualenv
 
@@ -28,5 +27,6 @@
 - Write Contributors
 - Write Credits
 - If user is in a virtualenv, get out of it (or tell them to) before executing `djangobuilder.py`
+- Tell user _not_ to create virtualenv (we do it for them!)
 - Write README
 - Write Quick Start docs
