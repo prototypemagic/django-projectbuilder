@@ -16,6 +16,14 @@ import string
 import sys
 
 
+# If user is in a virtualenv, tell them to get out first
+if hasattr(sys, 'real_prefix'):
+    print "You're already in a virtualenv! Type\n"
+    print "    deactivate\n"
+    print "to leave, then run this script again."
+    sys.exit(1)
+
+
 DPB_PATH = os.path.abspath(os.path.dirname(__file__)) + '/'
 DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
 
