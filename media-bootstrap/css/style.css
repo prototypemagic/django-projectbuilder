@@ -27,7 +27,7 @@ a:hover, a:active{text-decoration: none;}
 /*========= Form ============
  * TODO: Make variants of this. Test more.
  */
-.form {display:block;padding-left:10px}
+.form {display:block;}
 .form ul, .form li{
 border:0; margin:0; padding:0; list-style:none;
 }

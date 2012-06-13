@@ -35,6 +35,8 @@ new Django project!
 
 ### Dev Box Usage
 
+####Make sure to _exit out of_ the virtualenv you might be in.
+
 After cloning this repo, `cd` into it and run
 
     python djangobuilder.py --path /path/to/newproject [--bootstrap]
