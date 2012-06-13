@@ -10,7 +10,8 @@
 - Server should use something like `lynx -dump checkip.dyndns.org 2>&1 | awk '{print $4}' | grep ^[0-9]` in place of the generic `my-django-powered-site.com`
 - Create `postgresbuilder.sh` or equivalent
 - Tell user _not_ to create virtualenv (we do it for them!)
-- If user is in a virtualenv, get out of it before executing `djangobuilder.py`
+- Rewrite DPB to either use Django itelf, or at least generate new projects the way Django does
+  - E.g., render something like `{{ project_name }}` instead of using `%(PROJECT_NAME)s`
 
 
 # TODO once we have made more improvements
@@ -31,3 +32,4 @@
 - Organize folders
 - Write Contributors
 - Write Credits
+- If user is in a virtualenv, get out of it (or tell them to) before executing `djangobuilder.py`
