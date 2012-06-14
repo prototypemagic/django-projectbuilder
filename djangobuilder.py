@@ -19,7 +19,7 @@ VIRTUALENV_WRAPPER_PATH = '/usr/local/bin/virtualenvwrapper.sh'
 
 # If user is in a virtualenv, tell them to get out first
 if hasattr(sys, 'real_prefix'):
-    print "You're already in a virtualenv! Type\n"
+    print "You're already in a virtualenv. Type\n"
     print "    deactivate\n"
     print "to leave, then run this script again."
     sys.exit(1)
@@ -40,7 +40,7 @@ DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
 # These are the arguments for the builder.  We can extend the
 # arguments as we want to add more functionality
 parser = argparse.ArgumentParser(description='''PTM Web Engineering presents
-                                 Django Project Builder and so much more...''')
+                                 Django Project Builder''')
 
 # Arg to declare the path to where the project will be made
 parser.add_argument('--version', '-v', action='version',
@@ -54,6 +54,11 @@ parser.add_argument('--path', action='store', dest='path',
 parser.add_argument('--bootstrap', action='store_true', default=False,
                     help='''This will include Bootstrap as the template
                     base of the project..''', dest='bootstrap')
+# Simple ones
+parser.add_argument('-q', '--quiet', action='store_true', default=False,
+                    help='''Quiets all output except the finish message''',
+                    dest='quiet')
+
 
 arguments = parser.parse_args()
 
@@ -129,13 +134,16 @@ replacement_values = {
 # Doing it this way so DPB can add 'extra_settings' on the fly.
 needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s', '%(APP_NAME)s']
 
-print "Creating directories..."
+if not arguments.quiet:
+    print "Creating directories..."
 
 # Use 'git init' to create the PROJECT_PATH directory and turn it into
 # a git repo
 cmd = 'bash -c "git init %s"' % PROJECT_PATH
 _, output = commands.getstatusoutput(cmd)
-print '\n', output, '\n'
+
+if not arguments.quiet:
+    print '\n', output, '\n'
 
 # Create all other dirs (each a sub-(sub-?)directory) of PROJECT_PATH
 for dir_name in needed_dirs:
@@ -145,13 +153,15 @@ for dir_name in needed_dirs:
 django_files = [x for x in os.listdir(DJANGO_FILES_PATH)
                 if x.endswith('-needed')]
 
-print "Creating django files..."
+if not arguments.quiet:
+    print "Creating django files..."
 
 # Oddly-placed '%' in weird_files screws up our string interpolation,
 # so copy these files verbatim
 copy_files(DJANGO_FILES_PATH, django_files, django_pathify)
 
-print "Copying directories..."
+if not arguments.quiet:
+    print "Copying directories..."
 
 # Add directory names here
 generic_dirs = ['media', 'templates']
@@ -165,23 +175,26 @@ for dirname in generic_dirs:
     else:
         shutil.copytree(dirname + '-generic', new_dir)
 
-
-print "Making virtualenv..."
+if not arguments.quiet:
+    print "Making virtualenv..."
 
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh &&'
 cmd += ' mkvirtualenv %s --no-site-packages"' % PROJECT_NAME
 
 _, output = commands.getstatusoutput(cmd)
-print '\n', output, '\n'
+
+if not arguments.quiet:
+    print '\n', output, '\n'
 
 ## The below part is made much faster with a small requirements.txt.
 ## We have the opitions to include more packages, which in turn
 ## will take long, but of course is needed. This allows for making
 ## projects which need only the basics, and ones that need a lot.
 
-print "Running 'pip install -r requirements.txt'. This could take a while...",
-print "(don't press control-c!)"
+if not arguments.quiet:
+    print "Running 'pip install -r requirements.txt'. This could take a while...",
+    print "(don't press control-c!)"
 
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
 cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon'
@@ -189,17 +202,22 @@ cmd += ' %(PROJECT_NAME)s && cd %(PROJECT_PATH)s' % replacement_values
 cmd += ' && pip install -r requirements.txt"'
 
 _, output = commands.getstatusoutput(cmd)
-print '\n', output, '\n'
+
+if not arguments.quiet:
+    print '\n', output, '\n'
 
 # virtualenv now exists
 
-print "Creating git repo..."
+if not arguments.quiet:
+    print "Creating git repo..."
 
 cmd  = 'bash -c "cd %s &&' % PROJECT_PATH
 cmd += ' git add . && git commit -m \'First commit\'"'
 _, output = commands.getstatusoutput(cmd)
-print '\n', output, '\n'
 
-print "Done! Now run\n"
+if not arguments.quiet:
+    print '\n', output, '\n'
+
+print "\nDone! Now run\n"
 print "    cd %(PROJECT_PATH)s && workon %(PROJECT_NAME)s &&" % replacement_values,
-print "python manage.py syncdb\n\nGet to work!"
+print "python manage.py syncdb\n"
