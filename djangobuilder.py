@@ -4,7 +4,7 @@
 #   Steve Phillips -- steve@builtbyptm.com
 #   AJ v Bahnken   -- aj@builtbyptm.com
 #
-# Requires virtualenv and virtualenvwrapper
+# Requires virtualenv, virtualenvwrapper, and git
 #
 
 import argparse
@@ -15,6 +15,7 @@ import shutil
 import string
 import sys
 
+VIRTUALENV_WRAPPER_PATH = '/usr/local/bin/virtualenvwrapper.sh'
 
 # If user is in a virtualenv, tell them to get out first
 if hasattr(sys, 'real_prefix'):
@@ -22,6 +23,15 @@ if hasattr(sys, 'real_prefix'):
     print "    deactivate\n"
     print "to leave, then run this script again."
     sys.exit(1)
+
+if not os.path.isfile(VIRTUALENV_WRAPPER_PATH):
+    print "Please install virtualenvwrapper with\n"
+    print "    sudo pip install virtualenvwrapper\n"
+    print "then run this script again."
+    sys.exit(1)
+
+
+# We have what we need! Let's do this...
 
 
 DPB_PATH = os.path.abspath(os.path.dirname(__file__)) + '/'
