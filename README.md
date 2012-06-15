@@ -51,15 +51,15 @@ for what's on the horizon, and for what you may want to help out with.
 After cloning this repo to your local machine, `cd` into it and run
 something like
 
-    python djangobuilder.py --path ~/newproject
+    python djangobuilder.py --path ~/new_project
 
-to create the `~/newproject_site` directory, which contains _tons_ of
+to create the `~/new_project_site` directory, which contains _tons_ of
 Django boilerplate -- common imports, virtualenv creation, a new git
 repo, and more!
 
 If you add the optional `--bootstrap` argument
 
-    python djangobuilder.py --path ~/newproject --bootstrap
+    python djangobuilder.py --path ~/new_project --bootstrap
 
 your project will come with all needed bootstrap defaults. In
 `media/css/style.css` you will find lots more goodies :-).
@@ -73,7 +73,7 @@ recommended. Django is awesome.
 After cloning this repo to one of your many servers, `cd` into it and
 run
 
-    bash gitbuilder.sh ~/newproject
+    bash gitbuilder.sh ~/new_project
 
 to create the top-level project directory, bare git repo, and empty
 ${PROJECT_NAME}_site directory for the soon-to-exist Django project.
