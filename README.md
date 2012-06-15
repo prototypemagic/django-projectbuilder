@@ -31,36 +31,51 @@ new Django project!
   coding
 
 
-## Usage
+## Who is DPB for?
+
+Django programmers looking to do more coding and less config.
+
+For those looking to enjoy convenient server deployments, note that
+the server scripts currently assume you're using Bash + virtualenv +
+virtualenvwrapper + Ubuntu + Apache.  We're working on reducing the
+number of dependencies.
+
+[See our TODO](https://github.com/prototypemagic/django-projectbuilder/blob/master/TODO.md)
+for what's on the horizon, and for what you may want to help out with.
+
+
+## So... how do I use it?
 
 ### Dev Box Usage
 
-After cloning this repo, `cd` into it and run something like
+After cloning this repo to your local machine, `cd` into it and run
+something like
 
-    python djangobuilder.py --path /home/username/newproject
+    python djangobuilder.py --path ~/newproject
 
-to create the /home/username/newproject_site directory, which contains
-_tons_ of Django boilerplate -- common imports, virtualenv creation,
-new git repo, and more!
+to create the `~/newproject_site` directory, which contains _tons_ of
+Django boilerplate -- common imports, virtualenv creation, a new git
+repo, and more!
 
 If you add the optional `--bootstrap` argument
 
-    python djangobuilder.py --path /home/username/newproject --bootstrap
+    python djangobuilder.py --path ~/newproject --bootstrap
 
 your project will come with all needed bootstrap defaults. In
 `media/css/style.css` you will find lots more goodies :-).
 
 `virtualenv` and `virtualenvwrapper` are required. `git` is
-recommended.
+recommended. Django is awesome.
 
 
 ### Server Usage
 
-After cloning this repo, `cd` into it and run
+After cloning this repo to one of your many servers, `cd` into it and
+run
 
-    bash gitbuilder.sh /home/server/newproject
+    bash gitbuilder.sh ~/newproject
 
-to create the "top-level" directory, bare git repo, and empty
+to create the top-level project directory, bare git repo, and empty
 ${PROJECT_NAME}_site directory for the soon-to-exist Django project.
-Follow the instructions provided, which include using
+Follow the instructions echoed to the screen, which include using
 `apachebuilder.sh` to generate your project's Apache config.
