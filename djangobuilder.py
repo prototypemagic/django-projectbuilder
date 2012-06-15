@@ -3,19 +3,25 @@
 #   Authors:
 #   Steve Phillips -- steve@builtbyptm.com
 #   AJ v Bahnken   -- aj@builtbyptm.com
+
 #
 # Requires virtualenv, virtualenvwrapper, and git
 #
 
-import argparse
 import commands
 import os
 import random
 import shutil
 import string
 import sys
+try:
+    import argparse
+except ImportError:
+    print "argparse not installed. Please install with\n"
+    print "    sudo pip install python-pip\n"
+    print "then re-run this script."
+    sys.exit(1)
 
-VIRTUALENV_WRAPPER_PATH = '/usr/local/bin/virtualenvwrapper.sh'
 
 # If user is in a virtualenv, tell them to get out first
 if hasattr(sys, 'real_prefix'):
@@ -24,6 +30,8 @@ if hasattr(sys, 'real_prefix'):
     print "to leave, then run this script again."
     sys.exit(1)
 
+
+VIRTUALENV_WRAPPER_PATH = '/usr/local/bin/virtualenvwrapper.sh'
 if not os.path.isfile(VIRTUALENV_WRAPPER_PATH):
     print "Please install virtualenvwrapper with\n"
     print "    sudo pip install virtualenvwrapper\n"
