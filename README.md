@@ -79,3 +79,5 @@ to create the top-level project directory, bare git repo, and empty
 ${PROJECT_NAME}_site directory for the soon-to-exist Django project.
 Follow the instructions echoed to the screen, which include using
 `apachebuilder.sh` to generate your project's Apache config.
+
+Enjoy!
