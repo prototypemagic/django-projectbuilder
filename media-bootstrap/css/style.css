@@ -27,7 +27,7 @@ a:hover, a:active{text-decoration: none;}
 /*========= Form ============
  * TODO: Make variants of this. Test more.
  */
-.form {display:block;padding-left:10px}
+.form {display:block;padding-left:10px;}
 .form ul, .form li{
 border:0; margin:0; padding:0; list-style:none;
 }
@@ -102,7 +102,8 @@ padding-bottom:10px;
 .ts5 h5, .ts5 h6{text-shadow: 0.8px -0.8px 1px rgba(0,0,0,.5);}
 
 /*--Error Messages--*/
-.msgs h4{
+.msgs h4,
+.errorlist {
     color: #C32020;
     text-align: center;
     margin: 10px;

@@ -7,7 +7,7 @@ Django Project Builder is the fastest, easiest way to, well... build a
 new Django project!
 
 
-## Features
+## Features and Benefits
 
 * Create a new Django project, git repo, virtualenv, and Django app
   with sane defaults _all_ with a single command
@@ -19,7 +19,7 @@ new Django project!
   to worry about that, do you?)
 
 
-## What this does for you.
+## What you don't have to dread anymore
 
 * Tediously editing config files before anything works, even though
   you use the same defaults every single time
@@ -35,28 +35,32 @@ new Django project!
 
 ### Dev Box Usage
 
-After cloning this repo, `cd` into it and run
+After cloning this repo, `cd` into it and run something like
 
-    python djangobuilder.py --path /path/to/newproject [--bootstrap]
+    python djangobuilder.py --path /home/username/newproject
 
-to create the /path/to/newproject_site directory, which contains
+to create the /home/username/newproject_site directory, which contains
 _tons_ of Django boilerplate -- common imports, virtualenv creation,
 new git repo, and more!
 
-If you add the `--bootstrap` argument, your project will come with all
-needed bootstrap defaults. In `media/css/style.css` you will find lots
-more goodies :-).
+If you add the optional `--bootstrap` argument
 
-git, virtualenv, virtualenvwrapper, and bash are required.
+    python djangobuilder.py --path /home/username/newproject --bootstrap
+
+your project will come with all needed bootstrap defaults. In
+`media/css/style.css` you will find lots more goodies :-).
+
+`virtualenv` and `virtualenvwrapper` are required. `git` is
+recommended.
 
 
 ### Server Usage
 
 After cloning this repo, `cd` into it and run
 
-    bash gitbuilder.sh /path/to/new_project
+    bash gitbuilder.sh /home/server/newproject
 
 to create the "top-level" directory, bare git repo, and empty
 ${PROJECT_NAME}_site directory for the soon-to-exist Django project.
-Follow the instructions provided, which include using `apachebuilder.sh`
-to generate your project's Apache config.
+Follow the instructions provided, which include using
+`apachebuilder.sh` to generate your project's Apache config.
