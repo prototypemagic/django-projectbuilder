@@ -36,7 +36,7 @@ new Django project!
 Django programmers using a Unix-based OS looking to do more coding and less config.
 
 For those looking to enjoy convenient server deployments, note that
-the _server scripts_ currently assume you're using Bash + virtualenv +
+the __server scripts__ currently assume you're using Bash + virtualenv +
 virtualenvwrapper + Ubuntu + Apache.  We're working on reducing the
 number of dependencies.
 
