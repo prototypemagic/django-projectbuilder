@@ -95,7 +95,7 @@ To install `psycopg2`, Django's Postgres driver, run
 
     pip install psycopg2
 
-If you get the following error when trying to install Postgres
+If you get the following error when trying to install `psycopg2`
 
     ./psycopg/psycopg.h:30:20: fatal error: Python.h: No such file or directory
     compilation terminated.
