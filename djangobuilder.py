@@ -60,10 +60,10 @@ parser.add_argument('--path', action='store', dest='path',
 # Arg for using bootstrap rather than generic templates/media
 parser.add_argument('--bootstrap', action='store_true', default=False,
                     help='''This will include Bootstrap as the template
-                    base of the project..''', dest='bootstrap')
+                    and media base of the project.''', dest='bootstrap')
 # Simple ones
 parser.add_argument('-q', '--quiet', action='store_true', default=False,
-                    help='''Quiets all output except the finish message''',
+                    help='''Quiets all output except the finish message.''',
                     dest='quiet')
 
 
