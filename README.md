@@ -57,12 +57,10 @@ to create the `~/new_project_site` directory, which contains _tons_ of
 Django boilerplate -- common imports, virtualenv creation, a new git
 repo, and more!
 
-If you add the optional `--bootstrap` argument
+If you add the optional `--bootstrap` argument, your project will be created
+using all Bootstrap defaults for the front-end.
 
     python djangobuilder.py --path ~/new_project --bootstrap
-
-your project will come with all needed bootstrap defaults. In
-`media/css/style.css` you will find lots more goodies :-).
 
 `virtualenv` and `virtualenvwrapper` are required. `git` is
 recommended. Django is awesome.
