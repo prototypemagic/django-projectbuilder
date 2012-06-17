@@ -85,15 +85,24 @@ Enjoy!
 
 ## Troubleshooting
 
-### Deployment
+### Postgres
 
-When you're trying to deploy to install Postgres to deploy a Django app, if you get the following error
+On Ubuntu, install Postgres with
+
+    sudo apt-get install postgresql-server-dev-all
+
+To install `psycopg2`, Django's Postgres driver, run
+
+    pip install psycopg2
+
+If you get the following error when trying to install Postgres
 
     ./psycopg/psycopg.h:30:20: fatal error: Python.h: No such file or directory
     compilation terminated.
     error: command 'gcc' failed with exit status 1
 
-that means you haven't installed all the necessary header (*.h) files to compile additional Python modules.  On Ubuntu, run
+that means you haven't installed all the necessary header (*.h) files
+to compile additional Python modules/Django apps.  On Ubuntu, run
 
     sudo apt-get install python-dev
 
@@ -101,10 +110,10 @@ to fix this issue, then again try running
 
     pip install psycopg2
 
-from within your project's virtualenv.
+from within your project's virtualenv to install `psycopg2`.
 
 
-#### Heroku
+#### Postgres + Heroku
 
 Heroku requires that you use Postgres as your database.  To install
 Postgres, run
