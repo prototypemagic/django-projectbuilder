@@ -17,9 +17,8 @@ import sys
 try:
     import argparse
 except ImportError:
-    print "argparse not installed. Please install with\n"
-    print "    sudo pip install python-pip\n"
-    print "then re-run this script."
+    print "argparse not installed. Please install it through\n"
+    print "your favored package manager then re-run this script.\n"
     sys.exit(1)
 
 
