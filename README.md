@@ -12,7 +12,7 @@ new Django project!
 * Create a new Django project, git repo, virtualenv, and Django app
   with sane defaults _all_ with a single command
 
-* Prepare your server to be deployed to with a couple more commands
+* Prepare your server for deployment with a couple more commands
 
 * Auto-deploy your shiny new Django app to your server with a simple
   `git push`!  (Uses git hooks behind the scenes... but you don't need
@@ -81,3 +81,50 @@ Follow the instructions echoed to the screen, which include using
 `apachebuilder.sh` to generate your project's Apache config.
 
 Enjoy!
+
+
+## Troubleshooting
+
+### Deployment
+
+When you're trying to deploy to install Postgres to deploy a Django app, if you get the following error
+
+    ./psycopg/psycopg.h:30:20: fatal error: Python.h: No such file or directory
+    compilation terminated.
+    error: command 'gcc' failed with exit status 1
+
+that means you haven't installed all the necessary header (*.h) files to compile additional Python modules.  On Ubuntu, run
+
+    sudo apt-get install python-dev
+
+to fix this issue, then again try running
+
+    pip install psycopg2
+
+from within your project's virtualenv.
+
+
+#### Heroku
+
+Heroku requires that you use Postgres as your database.  To install
+Postgres, run
+
+    pip install psycopg2
+
+then add `psycopg2` and every other Python module and Django app in
+your virtualenv to `requirements.txt` with
+
+    pip freeze > requirements.txt
+
+You'll now want to add `requirements.txt` to your git repo, then
+redeploy with
+
+    git add requirements.txt
+    git commit -m "Updated requirements.txt"
+    git push heroku master
+
+See
+[Getting Started with Django on Heroku/Cedar](https://devcenter.heroku.com/articles/django)
+with more on deploying to Heroku.
+
+If you run into any other issues, please let us know!
