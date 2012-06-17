@@ -7,7 +7,16 @@ GIT_WORK_TREE=$SITE_PATH git checkout -f
 chmod 666 $SITE_PATH/db.sql
 source /usr/local/bin/virtualenvwrapper.sh && workon $PROJECT && pip install -r $SITE_PATH/requirements.txt
 sudo apache2ctl graceful
-#git push redmine master
 
-# ptm-gobot IRC bot listens for project names on port 6666
-echo -n "$PROJECT" | nc localhost 6666 -q 0
+# ptm-gobot (our IRC bot -- see
+# https://github.com/prototypemagic/go-helpers/blob/master/ptm-gobot.go)
+# listens for project names on port 6666, then echoes the repo name,
+# author, and commit message of all pushes to those repos into your
+# IRC channel.
+#
+# Uncomment the last line below to enable this behavior... but first
+# install the original `nc` (netcat) command with
+
+#    sudo apt-get install netcat-traditional
+
+#echo -n "$PROJECT" | nc localhost 6666 -q 0
