@@ -17,8 +17,9 @@ import sys
 try:
     import argparse
 except ImportError:
-    print "argparse not installed. Please install it through\n"
-    print "your favored package manager then re-run this script.\n"
+    print "argparse not installed. Please install with\n"
+    print "    sudo pip install argparse\n"
+    print "then re-run this script."
     sys.exit(1)
 
 
@@ -227,4 +228,4 @@ if not arguments.quiet:
 
 print "\nDone! Now run\n"
 print "    cd %(PROJECT_PATH)s && workon %(PROJECT_NAME)s &&" % replacement_values,
-print "python manage.py syncdb\n"
+print "python manage.py syncdb\n\nGet to work!"
