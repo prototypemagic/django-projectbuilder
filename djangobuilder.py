@@ -39,14 +39,14 @@ if not os.path.isfile(VIRTUALENV_WRAPPER_PATH):
     if output:
         VIRTUALENV_WRAPPER_PATH = output
     else:
-        print "Please install virtualenvwrapper with\n"
-        print "    sudo pip install virtualenvwrapper\n"
-        print "then run this script again."
+        print "We can not seem to find virtualenvwrapper\n"
+        print "Either install it through pip\n"
+        print "     sudo pip install virtualenvwrapper\n"
+        print "or set $VIRTUALENV_WRAPPER_PATH to the location of\n"
+        print "virtualenvwrapper on your machine."
         sys.exit(1)
 
-
 # We have what we need! Let's do this...
-
 
 DPB_PATH = os.path.abspath(os.path.dirname(__file__)) + '/'
 DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
