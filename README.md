@@ -1,5 +1,5 @@
-PTM Web Engineering's Django Project Builder
-============================================
+[Django Project Builder](http://builtbyptm.com/blog/announcing-django-project-builder-v01/ "Announcing Django Project Builder v0.1")
+======================
 
 ## Intro
 
