@@ -8,12 +8,14 @@
 # Requires virtualenv, virtualenvwrapper, and git
 #
 
-import commands
 import os
 import random
 import shutil
 import string
 import sys
+
+from subprocess import Popen, call, STDOUT, PIPE
+
 try:
     import argparse
 except ImportError:
@@ -33,7 +35,7 @@ if hasattr(sys, 'real_prefix'):
 VIRTUALENV_WRAPPER_PATH = '/usr/local/bin/virtualenvwrapper.sh'
 if not os.path.isfile(VIRTUALENV_WRAPPER_PATH):
     cmd = 'echo $VIRTUALENV_WRAPPER_PATH'
-    _, output = commands.getstatusoutput(cmd)
+    output = call(cmd, shell=True)
     if output:
         VIRTUALENV_WRAPPER_PATH = output
     else:
@@ -94,6 +96,8 @@ def copy_files(folder_path, file_types, pathify):
             f_write.write(new_contents)
             f_write.close()
 
+def sh(cmd):
+    return Popen(cmd,shell=True,stdout=PIPE,stderr=PIPE).communicate()[0]
 
 # Maps cleaned filenames to where each file should be copied relative
 # to PROJECT_PATH
@@ -152,7 +156,7 @@ if not arguments.quiet:
 # Use 'git init' to create the PROJECT_PATH directory and turn it into
 # a git repo
 cmd = 'bash -c "git init %s"' % PROJECT_PATH
-_, output = commands.getstatusoutput(cmd)
+output = sh(cmd)
 
 if not arguments.quiet:
     print '\n', output, '\n'
@@ -193,7 +197,7 @@ if not arguments.quiet:
 cmd  = 'bash -c "source %s &&' % VIRTUALENV_WRAPPER_PATH
 cmd += ' mkvirtualenv %s --no-site-packages"' % PROJECT_NAME
 
-_, output = commands.getstatusoutput(cmd)
+output = sh(cmd)
 
 if not arguments.quiet:
     print '\n', output, '\n'
@@ -212,7 +216,7 @@ cmd  = 'bash -c "source %s && workon' % VIRTUALENV_WRAPPER_PATH
 cmd += ' %(PROJECT_NAME)s && cd %(PROJECT_PATH)s' % replacement_values
 cmd += ' && pip install -r requirements.txt"'
 
-_, output = commands.getstatusoutput(cmd)
+output = sh(cmd)
 
 if not arguments.quiet:
     print '\n', output, '\n'
@@ -224,7 +228,7 @@ if not arguments.quiet:
 
 cmd  = 'bash -c "cd %s &&' % PROJECT_PATH
 cmd += ' git add . && git commit -m \'First commit\'"'
-_, output = commands.getstatusoutput(cmd)
+output = sh(cmd)
 
 if not arguments.quiet:
     print '\n', output, '\n'
