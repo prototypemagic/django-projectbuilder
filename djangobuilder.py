@@ -30,13 +30,17 @@ if hasattr(sys, 'real_prefix'):
     print "to leave, then run this script again."
     sys.exit(1)
 
-
 VIRTUALENV_WRAPPER_PATH = '/usr/local/bin/virtualenvwrapper.sh'
 if not os.path.isfile(VIRTUALENV_WRAPPER_PATH):
-    print "Please install virtualenvwrapper with\n"
-    print "    sudo pip install virtualenvwrapper\n"
-    print "then run this script again."
-    sys.exit(1)
+    cmd = 'echo $VIRTUALENV_WRAPPER_PATH'
+    _, output = commands.getstatusoutput(cmd)
+    if output:
+        VIRTUALENV_WRAPPER_PATH = output
+    else:
+        print "Please install virtualenvwrapper with\n"
+        print "    sudo pip install virtualenvwrapper\n"
+        print "then run this script again."
+        sys.exit(1)
 
 
 # We have what we need! Let's do this...
