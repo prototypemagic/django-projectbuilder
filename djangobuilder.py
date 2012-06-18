@@ -186,8 +186,7 @@ for dirname in generic_dirs:
 if not arguments.quiet:
     print "Making virtualenv..."
 
-# FIXME Shouldn't assume the location of virtualenvwrapper.sh
-cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh &&'
+cmd  = 'bash -c "source %s &&' % VIRTUALENV_WRAPPER_PATH
 cmd += ' mkvirtualenv %s --no-site-packages"' % PROJECT_NAME
 
 _, output = commands.getstatusoutput(cmd)
@@ -205,7 +204,7 @@ if not arguments.quiet:
     print "(don't press control-c!)"
 
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
-cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon'
+cmd  = 'bash -c "source %s && workon' % VIRTUALENV_WRAPPER_PATH
 cmd += ' %(PROJECT_NAME)s && cd %(PROJECT_PATH)s' % replacement_values
 cmd += ' && pip install -r requirements.txt"'
 
