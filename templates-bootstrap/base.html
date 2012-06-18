@@ -77,11 +77,6 @@
         <hr />
         <p><a href="{% url index %}">Home</a> | <a href="{# url about #}">About</a> | <a href="{# url contact #}">Contact</a>
          |{% if user.is_authenticated %} <a href="{% url logout %}">Log Out</a>{% else %}<a href="{% url login %}">Login</a>{% endif %}
-         <div class="ptm">
-                <b>Built By</b>
-                <br />
-                <a href="http://builtbyptm.com"><img alt="PTM Web Engineering" src="/media/images/PTM_Logo_Small_Alpha_Web.png" /></a>
-         </div>
          <b>Powered by: <a href="https://www.djangoproject.com/">Django</a> and <a href="http://twitter.github.com/bootstrap/">Bootstrap</a></b>
          </footer>
         </div>
