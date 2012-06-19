@@ -10,6 +10,7 @@
 
 import os
 import random
+import re
 import shutil
 import string
 import sys
@@ -75,6 +76,17 @@ parser.add_argument('-q', '--quiet', action='store_true', default=False,
 
 
 arguments = parser.parse_args()
+
+def check_projectname():
+    if not re.search(r'^[_a-zA-Z]\w*$', PROJECT_NAME):
+        message = 'Error: \'%s\' is not a valid project name. Please ' %  PROJECT_NAME
+        if not re.search(r'^[_a-zA-Z]', PROJECT_NAME):
+            message += ('make sure the name begins '
+                       'with a letter or underscore.')
+        else:
+            message += 'use only numbers, letters and underscores.'
+
+    sys.exit(message)
 
 def copy_files(folder_path, file_types, pathify):
     """Copies the contents of django_files and server_scripts, and
@@ -149,6 +161,9 @@ replacement_values = {
 
 # Doing it this way so DPB can add 'extra_settings' on the fly.
 needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s', '%(APP_NAME)s']
+
+# Make sure PROJECT_NAME follows Django's restrictions
+check_projectname()
 
 if not arguments.quiet:
     print "Creating directories..."
