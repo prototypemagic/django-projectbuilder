@@ -17,6 +17,23 @@ import sys
 
 from subprocess import Popen, call, STDOUT, PIPE
 
+def which(program):
+    import os
+    def is_exe(fpath):
+        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+
+    fpath, fname = os.path.split(program)
+    if fpath:
+        if is_exe(program):
+            return program
+    else:
+        for path in os.environ["PATH"].split(os.pathsep):
+            exe_file = os.path.join(path, program)
+            if is_exe(exe_file):
+                return exe_file
+
+    return None
+
 try:
     import argparse
 except ImportError:
@@ -33,7 +50,10 @@ if hasattr(sys, 'real_prefix'):
     print "to leave, then run this script again."
     sys.exit(1)
 
-VIRTUALENV_WRAPPER_PATH = '/usr/local/bin/virtualenvwrapper.sh'
+VIRTUALENV_WRAPPER_PATH = which('virtualenvwrapper.sh')
+if VIRTUALENV_WRAPPER_PATH is None:
+    VIRTUALENV_WRAPPER_PATH = '/usr/local/bin/virtualenvwrapper.sh'
+
 if not os.path.isfile(VIRTUALENV_WRAPPER_PATH):
     cmd = 'echo $VIRTUALENV_WRAPPER_PATH'
     output = call(cmd, shell=True)
@@ -86,7 +106,7 @@ def check_projectname():
         else:
             message += 'use only numbers, letters and underscores.'
 
-    sys.exit(message)
+        sys.exit(message)
 
 def copy_files(folder_path, file_types, pathify):
     """Copies the contents of django_files and server_scripts, and
