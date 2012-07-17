@@ -8,12 +8,32 @@
 # Requires virtualenv, virtualenvwrapper, and git
 #
 
-import commands
 import os
 import random
+import re
 import shutil
 import string
 import sys
+
+from subprocess import Popen, call, STDOUT, PIPE
+
+def which(program):
+    import os
+    def is_exe(fpath):
+        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+
+    fpath, fname = os.path.split(program)
+    if fpath:
+        if is_exe(program):
+            return program
+    else:
+        for path in os.environ["PATH"].split(os.pathsep):
+            exe_file = os.path.join(path, program)
+            if is_exe(exe_file):
+                return exe_file
+
+    return None
+
 try:
     import argparse
 except ImportError:
@@ -30,17 +50,24 @@ if hasattr(sys, 'real_prefix'):
     print "to leave, then run this script again."
     sys.exit(1)
 
+VIRTUALENV_WRAPPER_PATH = which('virtualenvwrapper.sh')
+if VIRTUALENV_WRAPPER_PATH is None:
+    VIRTUALENV_WRAPPER_PATH = '/usr/local/bin/virtualenvwrapper.sh'
 
-VIRTUALENV_WRAPPER_PATH = '/usr/local/bin/virtualenvwrapper.sh'
 if not os.path.isfile(VIRTUALENV_WRAPPER_PATH):
-    print "Please install virtualenvwrapper with\n"
-    print "    sudo pip install virtualenvwrapper\n"
-    print "then run this script again."
-    sys.exit(1)
-
+    cmd = 'echo $VIRTUALENV_WRAPPER_PATH'
+    output = call(cmd, shell=True)
+    if output:
+        VIRTUALENV_WRAPPER_PATH = output
+    else:
+        print "We can not seem to find virtualenvwrapper\n"
+        print "Either install it through pip\n"
+        print "     sudo pip install virtualenvwrapper\n"
+        print "or set $VIRTUALENV_WRAPPER_PATH to the location of\n"
+        print "virtualenvwrapper on your machine."
+        sys.exit(1)
 
 # We have what we need! Let's do this...
-
 
 DPB_PATH = os.path.abspath(os.path.dirname(__file__)) + '/'
 DJANGO_FILES_PATH = DPB_PATH + 'django-files/'
@@ -70,6 +97,17 @@ parser.add_argument('-q', '--quiet', action='store_true', default=False,
 
 arguments = parser.parse_args()
 
+def check_projectname():
+    if not re.search(r'^[_a-zA-Z]\w*$', PROJECT_NAME):
+        message = 'Error: \'%s\' is not a valid project name. Please ' %  PROJECT_NAME
+        if not re.search(r'^[_a-zA-Z]', PROJECT_NAME):
+            message += ('make sure the name begins '
+                       'with a letter or underscore.')
+        else:
+            message += 'use only numbers, letters and underscores.'
+
+        sys.exit(message)
+
 def copy_files(folder_path, file_types, pathify):
     """Copies the contents of django_files and server_scripts, and
     performs string interpolations (e.g., %(APP_NAME)s => 'myapp')"""
@@ -90,6 +128,8 @@ def copy_files(folder_path, file_types, pathify):
             f_write.write(new_contents)
             f_write.close()
 
+def sh(cmd):
+    return Popen(cmd,shell=True,stdout=PIPE,stderr=PIPE).communicate()[0]
 
 # Maps cleaned filenames to where each file should be copied relative
 # to PROJECT_PATH
@@ -142,13 +182,16 @@ replacement_values = {
 # Doing it this way so DPB can add 'extra_settings' on the fly.
 needed_dirs = ['static', 'apache', '%(PROJECT_NAME)s', '%(APP_NAME)s']
 
+# Make sure PROJECT_NAME follows Django's restrictions
+check_projectname()
+
 if not arguments.quiet:
     print "Creating directories..."
 
 # Use 'git init' to create the PROJECT_PATH directory and turn it into
 # a git repo
 cmd = 'bash -c "git init %s"' % PROJECT_PATH
-_, output = commands.getstatusoutput(cmd)
+output = sh(cmd)
 
 if not arguments.quiet:
     print '\n', output, '\n'
@@ -186,11 +229,10 @@ for dirname in generic_dirs:
 if not arguments.quiet:
     print "Making virtualenv..."
 
-# FIXME Shouldn't assume the location of virtualenvwrapper.sh
-cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh &&'
+cmd  = 'bash -c "source %s &&' % VIRTUALENV_WRAPPER_PATH
 cmd += ' mkvirtualenv %s --no-site-packages"' % PROJECT_NAME
 
-_, output = commands.getstatusoutput(cmd)
+output = sh(cmd)
 
 if not arguments.quiet:
     print '\n', output, '\n'
@@ -205,11 +247,11 @@ if not arguments.quiet:
     print "(don't press control-c!)"
 
 # FIXME Shouldn't assume the location of virtualenvwrapper.sh
-cmd  = 'bash -c "source /usr/local/bin/virtualenvwrapper.sh && workon'
+cmd  = 'bash -c "source %s && workon' % VIRTUALENV_WRAPPER_PATH
 cmd += ' %(PROJECT_NAME)s && cd %(PROJECT_PATH)s' % replacement_values
 cmd += ' && pip install -r requirements.txt"'
 
-_, output = commands.getstatusoutput(cmd)
+output = sh(cmd)
 
 if not arguments.quiet:
     print '\n', output, '\n'
@@ -221,7 +263,7 @@ if not arguments.quiet:
 
 cmd  = 'bash -c "cd %s &&' % PROJECT_PATH
 cmd += ' git add . && git commit -m \'First commit\'"'
-_, output = commands.getstatusoutput(cmd)
+output = sh(cmd)
 
 if not arguments.quiet:
     print '\n', output, '\n'
