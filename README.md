@@ -64,6 +64,11 @@ using all Bootstrap defaults for the front-end.
 
     python djangobuilder.py --path ~/new_project --bootstrap
 
+If you add the optional `--foundation` argument, your project will be created
+using all Foundation 3 defaults for the front-end.
+
+    python djangobuilder.py --path ~/new_project --foundation
+
 `virtualenv` and `virtualenvwrapper` are required. `git` is
 recommended. Django is awesome.
 
