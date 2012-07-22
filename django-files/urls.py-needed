@@ -6,24 +6,22 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('', 
-    
-    #Admin
+    ## Admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
 
-    #App url include
+    ## App URL include
     url(r'^', include('%(PROJECT_NAME)s_app.appurls')),
     #url(r'^%(PROJECT_NAME)s/$', include('%(PROJECT_NAME)s.appurls')),
     
-    #Static Links
-#    url(r'^', TemplateView.as_view(template_name='home.html'), name='home'),
+    ## Static Links
+    #url(r'^', TemplateView.as_view(template_name='home.html'), name='home'),
     
 )
 
 #urlpatterns += patterns('%(PROJECT_NAME)s_site.%(PROJECT_NAME)s.views',
-#   url(r'^%(PROJECT_NAME)s/$', '%(PROJECT_NAME)s_view', name='%(PROJECT_NAME)s'),
+#    url(r'^%(PROJECT_NAME)s/$', '%(PROJECT_NAME)s_view', name='%(PROJECT_NAME)s'),
 #)
-
 
 if settings.DEBUG:
     urlpatterns = patterns('',
@@ -31,4 +29,3 @@ if settings.DEBUG:
         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
     url(r'', include('django.contrib.staticfiles.urls')),
 ) + urlpatterns
-
