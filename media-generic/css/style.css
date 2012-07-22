@@ -302,35 +302,3 @@ div.ptm{
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
-/* -------------------------------------------------- 
-	  Artfully masterminded by ZURB 
-    :: Mobile Visibility Affordances
----------------------------------------------------*/
-
-.show-on-phones { display: none !important; }	
-.show-on-tablets { display: none !important; }
-.show-on-desktops { display: block !important; }
-
-.hide-on-phones { display: block !important; }	
-.hide-on-tablets { display: block !important; }
-.hide-on-desktops { display: none !important; }
-
-/* Modernizr-enabled tablet targeting */
-@media only screen and (max-width: 1280px) and (min-width: 768px) {
-    .touch .hide-on-phones { display: block !important; }
-    .touch .hide-on-tablets { display: none !important; }
-    .touch .hide-on-desktops { display: block !important; }
-    
-    .touch .show-on-phones { display: none !important; }
-    .touch .show-on-tablets { display: block !important; }
-    .touch .show-on-desktops { display: none !important; }
-}
-@media only screen and (max-width: 767px) {
-    .hide-on-phones { display: none !important; }
-    .hide-on-tablets { display: block !important; }
-    .hide-on-desktops { display: block !important; }
-    
-    .show-on-phones { display: block !important; }
-    .show-on-tablets { display: none !important; }
-    .show-on-desktops { display: none !important; }
-}
