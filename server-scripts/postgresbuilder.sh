@@ -16,7 +16,7 @@ db_name=$project_name
 # NOTE: $username definition assumes settings.py-needed still defined
 # 'USER' as  %(PROJECT_NAME)s_user
 username=${project_name}_user
-
+password=$2
 
 sudo -u postgres psql -a -U postgres -d template1 -c "CREATE USER $username WITH PASSWORD '$password';"
 sudo -u postgres psql -a -U postgres -d template1 -c "CREATE DATABASE $db_name OWNER $username ENCODING 'UTF8';"
