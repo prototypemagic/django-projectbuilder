@@ -11,8 +11,6 @@
 - Ensure the existence of all required programs
   - E.g., pip, virtualenv, virtualenvwrapper, bash, and preferably git
 - Add `python manage.py migrate` to server's git hooks
-- Server should use something like `lynx -dump checkip.dyndns.org 2>&1 | awk '{print $4}' | grep ^[0-9]` in place of the generic `my-django-powered-site.com`
-- Create `postgresbuilder.sh` or equivalent
 - Fix `cpvirtualenv` bug in `virtualenvwrapper.sh` or create our own replacement
   - Create the `dpb-default` virtualenv, then copy it when creating new projects
     - `cp -r ~/.virtualenvs/dpb-default ~/.virtualenvs/NEW_PROJECT_NAME`
@@ -28,6 +26,8 @@
 - Deploy DPB to PyPI
 
 # Completed
+- Server should use something like `lynx -dump checkip.dyndns.org 2>&1 | awk '{print $4}' | grep ^[0-9]` in place of the generic `my-django-powered-site.com`
+- Create `postgresbuilder.sh` or equivalent
 - Add Bootstrap and non-Bootstrap options
 - Make it so everything can be relative rather than absolute
 - Make more files generic
