@@ -163,7 +163,7 @@ BASE_PATH    = '/'.join(PROJECT_PATH.split('/')[:-2]) + '/'
 
 SECRET_KEY = ''.join([ random.choice(string.printable[:94].replace("'", ""))
                        for _ in range(50) ])
-PROJECT_PASSWORD = ''.join([ random.choice(string.printable[:67].replace("'", ""))
+PROJECT_PASSWORD = ''.join([ random.choice(string.printable[:62])
                              for _ in range(30) ])
 
 # Defines key: value pairs so that
