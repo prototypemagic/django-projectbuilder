@@ -89,6 +89,10 @@ parser.add_argument('--path', action='store', dest='path',
 parser.add_argument('--bootstrap', action='store_true', default=False,
                     help='''This will include Bootstrap as the template
                     and media base of the project.''', dest='bootstrap')
+# Arg for using foundation rather than generic templates/media
+parser.add_argument('--foundation', action='store_true', default=False,
+                    help='''This will include Foundation 3 as the template
+                    and media base of the project.''', dest='foundation')
 # Simple ones
 parser.add_argument('-q', '--quiet', action='store_true', default=False,
                     help='''Quiets all output except the finish message.''',
@@ -223,6 +227,8 @@ for dirname in generic_dirs:
     new_dir = PROJECT_PATH + dirname.split('/')[-1]
     if arguments.bootstrap:
         shutil.copytree(dirname + '-bootstrap', new_dir)
+    elif arguments.foundation:
+        shutil.copytree(dirname + '-foundation', new_dir)
     else:
         shutil.copytree(dirname + '-generic', new_dir)
 
