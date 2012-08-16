@@ -12,16 +12,11 @@ urlpatterns = patterns('',
 
     ## App URL include
     url(r'^', include('%(PROJECT_NAME)s_app.appurls')),
-    #url(r'^%(PROJECT_NAME)s/$', include('%(PROJECT_NAME)s.appurls')),
     
     ## Static Links
     #url(r'^', TemplateView.as_view(template_name='home.html'), name='home'),
     
 )
-
-#urlpatterns += patterns('%(PROJECT_NAME)s_site.%(PROJECT_NAME)s.views',
-#    url(r'^%(PROJECT_NAME)s/$', '%(PROJECT_NAME)s_view', name='%(PROJECT_NAME)s'),
-#)
 
 if settings.DEBUG:
     urlpatterns = patterns('',
