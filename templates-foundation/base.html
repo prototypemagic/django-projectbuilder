@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{% endblock %}" />
+    <meta name="author" content="{% block meta_author %}{% endblock %}" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    {# TODO: <link rel="shortcut icon" href="/media/images/favicon.ico" /> #}
+    {# TODO: <link rel="apple-touch-icon" href="/media/images/apple-touch-icon.png" /> #}
+    <link rel="stylesheet" href="/media/css/foundation.css" />
+    <link rel="stylesheet" href="/media/css/app.css" />
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" href="/media/css/ie.css">
+    <![endif]-->
+    <!--[if gte IE 9]>
+        <style type="text/css">
+            .gradient {
+                filter: none;
+            }
+        </style>
+    <![endif]-->
+    {% block extra_head %}{% endblock %}
+    <script src="/media/js/modernizr.foundation.js"></script>
+    <!-- IE Fix for HTML5 Tags -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body class="body">
+    {# Content #}
+    <div class="row">
+        <div class="twelve columns">
+              <h2>Welcome to Foundation</h2>
+              <p>This is version 3.0.5 released on July   10, 2012.</p>
+              <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="twelve columns">
+            <header id="banner">
+            </header>
+        
+            <div class="main" role="main">
+            <!-- PROMPT IE 6 USERS TO INSTALL CHROME FRAME. REMOVE THIS IF YOU SUPPORT IE 6.
+            chromium.org/developers/how-tos/chrome-frame-getting-started -->
+            <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+            <!--Block Content -->
+            {% block content %}{% endblock %}
+            <!-- End Block -->
+            </div>
+        
+            <footer class="footer">
+            </footer>
+        </div>
+    </div>
+    {# End Content #}
+    
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery.min.js"><\/script>')</script>
+
+    <!-- Included JS Files -->
+    <script src="/media/js/jquery.reveal.js"></script>
+    <script src="/media/js/jquery.orbit-1.4.0.js"></script>
+    <script src="/media/js/jquery.customforms.js"></script>
+    <script src="/media/js/jquery.placeholder.min.js"></script>
+    <script src="/media/js/jquery.tooltips.js"></script>
+    <script src="/media/js/app.js"></script>
+
+    {% block javascript %}{% endblock %}
+    
+    <!-- <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script> -->
+
+</body>
+</html>
+

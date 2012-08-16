@@ -1,5 +1,5 @@
-PTM Web Engineering's Django Project Builder
-============================================
+[Django Project Builder](http://builtbyptm.com/blog/announcing-django-project-builder-v01/ "Announcing Django Project Builder v0.1")
+======================
 
 ## Intro
 
@@ -18,6 +18,8 @@ new Django project!
   `git push`!  (Uses git hooks behind the scenes... but you don't need
   to worry about that, do you?)
 
+* Two Front-end options, both with CSS Stylesheets and HTML Templates with a lot of swag.
+
 
 ## What you don't have to dread anymore
 
@@ -33,10 +35,10 @@ new Django project!
 
 ## Who is DPB for?
 
-Django programmers looking to do more coding and less config.
+Django programmers using a Unix-based OS looking to do more coding and less config.
 
 For those looking to enjoy convenient server deployments, note that
-the server scripts currently assume you're using Bash + virtualenv +
+the __server scripts__ currently assume you're using Bash + virtualenv +
 virtualenvwrapper + Ubuntu + Apache.  We're working on reducing the
 number of dependencies.
 
@@ -57,12 +59,15 @@ to create the `~/new_project_site` directory, which contains _tons_ of
 Django boilerplate -- common imports, virtualenv creation, a new git
 repo, and more!
 
-If you add the optional `--bootstrap` argument
+If you add the optional `--bootstrap` argument, your project will be created
+using all Bootstrap defaults for the front-end.
 
     python djangobuilder.py --path ~/new_project --bootstrap
 
-your project will come with all needed bootstrap defaults. In
-`media/css/style.css` you will find lots more goodies :-).
+If you add the optional `--foundation` argument, your project will be created
+using all Foundation 3 defaults for the front-end.
+
+    python djangobuilder.py --path ~/new_project --foundation
 
 `virtualenv` and `virtualenvwrapper` are required. `git` is
 recommended. Django is awesome.
