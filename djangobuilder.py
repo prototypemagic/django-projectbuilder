@@ -140,6 +140,7 @@ def sh(cmd):
 django_pathify = {
     '.gitignore':                   [''],
     '__init__.py':                  ['%(PROJECT_NAME)s/', '%(APP_NAME)s/'],
+    'admin.py':                     ['%(APP_NAME)s/'],
     'appurls.py':                   ['%(APP_NAME)s/'],
     'django.wsgi':                  ['apache/'],
     'forms.py':                     ['%(APP_NAME)s/'],
