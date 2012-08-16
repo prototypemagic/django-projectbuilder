@@ -236,7 +236,7 @@ if not arguments.quiet:
     print "Making virtualenv..."
 
 cmd  = 'bash -c "source %s &&' % VIRTUALENV_WRAPPER_PATH
-cmd += ' mkvirtualenv %s"' % PROJECT_NAME
+cmd += ' mkvirtualenv %s --no-site-packages"' % PROJECT_NAME
 
 output = sh(cmd)
 
