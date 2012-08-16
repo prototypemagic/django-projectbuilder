@@ -87,6 +87,18 @@ Follow the instructions echoed to the screen, which include using
 
 Enjoy!
 
+###For Extras
+
+After you have cloned the project, e.g.
+
+    git clone git://github.com/prototypemagic/django-projectbuilder.git
+
+run
+
+    git fetch && git checkout extras
+
+This branch includes some extra stuff that did not 'make the cut' for master,
+such as a complete password reset collection (templates, views, urls).
 
 ## Troubleshooting
 
