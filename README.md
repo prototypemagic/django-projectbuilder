@@ -72,6 +72,13 @@ using all Foundation 3 defaults for the front-end.
 `virtualenv` and `virtualenvwrapper` are required. `git` is
 recommended. Django is awesome.
 
+### Installing Dependencies
+
+If you're on a Mac (only been tested with OSX Lion so far) and are missing
+some dependencies like `pip`, `django`, `virtualenv`, or `virtualenvwrapper`
+then `cd` into the repo and run
+
+    bash install_dependencies.sh
 
 ### Server Usage
 
